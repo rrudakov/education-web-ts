@@ -5,7 +5,7 @@ interface ChatHistoryProps {
   messages: Message[];
 }
 
-const ChatHistory: React.SFC<ChatHistoryProps> = ({ messages }) => {
+const ChatHistory: React.FC<ChatHistoryProps> = ({ messages }) => {
   return (
     <div className="chat-history">
       {messages.map(message => (

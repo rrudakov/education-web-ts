@@ -1,12 +1,10 @@
 import React from 'react';
-import Interface from './containers/chat/Interface';
-import History from './containers/chat/History';
+import { Interfaces } from './modules/interface';
 
 function App() {
   return (
     <div>
-      <History />
-      <Interface />
+      <Interfaces />
     </div>
   );
 }
