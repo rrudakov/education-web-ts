@@ -1,18 +1,22 @@
-import { Reducer } from "react";
-import { UPDATE_MESSAGE, SEND_MESSAGE, DELETE_MESSAGE } from "./constants/reducer-constants";
-import { Message } from "../../store/chat/types";
+import { UPDATE_MESSAGE, SEND_MESSAGE, DELETE_MESSAGE, ChatActionTypes } from "./constants/reducer-constants";
 
-export interface InterfacesReducerState {
+export interface Message {
+    user: string;
+    message: string;
+    timestamp: number;
+}
+
+export interface ChatReducerState {
     message: string;
     messages: Message[];
 }
 
-const initialState: InterfacesReducerState = {
+const initialState: ChatReducerState = {
     message: 'Hello',
     messages: []
 }
 
-export const InterfacesReducer: Reducer<InterfacesReducerState, any> = (state = initialState, action) => {
+export const chatReducer = (state: ChatReducerState = initialState, action: ChatActionTypes): ChatReducerState => {
     switch (action.type) {
         case UPDATE_MESSAGE:
             return {

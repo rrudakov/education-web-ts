@@ -4,9 +4,9 @@ export interface SystemState {
     userName: string;
 }
 
-export const UPDATE_SESSION = 'UPDATE_SESSION';
+export const UPDATE_SESSION = 'UPDATE_SESSION/SYSTEM';
 
-interface UpdateSessionAction {
+export interface UpdateSessionAction {
     type: typeof UPDATE_SESSION;
     payload: SystemState;
 }

@@ -1,6 +1,7 @@
 import { Selector } from "react-redux";
-import { AppStoreState } from "../../store";
-import { Message } from "../../store/chat/types";
+import { Message } from "./reducer";
+import { AppStoreState } from "../../core/store";
 
-export const getChatMessage: Selector<AppStoreState, string> = ({ interfaces }) => interfaces.message;
-export const getChatMessages: Selector<AppStoreState, Message[]> = ({ interfaces }) => interfaces.messages;
+export const getChatMessage: Selector<AppStoreState, string> = ({ chat }) => chat.message;
+
+export const getChatMessages: Selector<AppStoreState, Message[]> = ({ chat }) => chat.messages;

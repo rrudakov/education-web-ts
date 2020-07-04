@@ -1,12 +1,10 @@
 import React from 'react';
-import { Interfaces } from './modules/interface';
+import { Chat } from './modules/interface';
 
-function App() {
+export const App = () => {
   return (
     <div>
-      <Interfaces />
+      <Chat />
     </div>
   );
 }
-
-export default App;
