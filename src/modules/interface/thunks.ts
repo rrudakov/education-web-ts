@@ -4,7 +4,7 @@ import { AppStoreState } from "../../core/store";
 import { sendChatMessage } from "./actions";
 import { ChatActionTypes } from "./constants/reducer-constants";
 
-export const thunkGetArticles = (): ThunkAction<void, AppStoreState, null, ChatActionTypes> => async dispatch => {
+export const thunkGetArticles = (): ThunkAction<void, AppStoreState, null, ChatActionTypes> => dispatch => {
     request.get('http://educationapp-api.herokuapp.com/api/articles')
         .then(response => {
             dispatch(sendChatMessage({

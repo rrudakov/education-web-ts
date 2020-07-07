@@ -1,17 +1,18 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { getChatMessage } from '../selector';
 import { sendChatMessage, updateChatMessage } from '../actions';
-import { useAction } from '../../../core/hooks/useAction';
 import { thunkGetArticles } from '../thunks';
 import { getUserName } from '../../../core/selector';
+import { Message } from '../reducer';
 
 export const ChatInterface: React.FC = () => {
+  const dispatch = useDispatch();
   const message = useSelector(getChatMessage);
   const userName = useSelector(getUserName);
-  const sendMessage = useAction(sendChatMessage);
-  const updateMessage = useAction(updateChatMessage);
-  const fetchArticles = useAction(thunkGetArticles);
+  const sendMessage = (message: Message) => dispatch(sendChatMessage(message));
+  const updateMessage = (message: string) => dispatch(updateChatMessage(message));
+  const fetchArticles = useCallback(() => dispatch(thunkGetArticles()), [dispatch]);
 
   const send = () => {
     sendMessage({
@@ -25,7 +26,7 @@ export const ChatInterface: React.FC = () => {
     updateMessage(e.currentTarget.value);
   }
 
-  const keyPress = (e: React.KeyboardEvent<any>) => {
+  const keyPress = (e: React.KeyboardEvent<Element>) => {
     if (e.key === 'Enter') {
       send();
     }

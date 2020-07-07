@@ -1,4 +1,11 @@
-import { SEND_MESSAGE, DELETE_MESSAGE, UPDATE_MESSAGE, SendMessageAction, DeleteMessageAction, UpdateMessageAction } from "./constants/reducer-constants"
+import {
+    SEND_MESSAGE,
+    DELETE_MESSAGE,
+    UPDATE_MESSAGE,
+    SendMessageAction,
+    DeleteMessageAction,
+    UpdateMessageAction
+} from "./constants/reducer-constants"
 import { Message } from "./reducer"
 
 export const sendChatMessage = (newMessage: Message): SendMessageAction => ({

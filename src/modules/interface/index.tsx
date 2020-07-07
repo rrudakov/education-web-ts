@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { ChatHistory } from './components/ChatHistory';
 import { ChatInterface } from './components/ChatInterface';
 import { thunkGetArticles } from './thunks';
-import { useAction } from '../../core/hooks/useAction';
 
 export const Chat: React.FC = () => {
-  const thunk = useAction(thunkGetArticles);
+  const dispatch = useDispatch();
+  const thunk = useCallback(() => dispatch(thunkGetArticles()), [dispatch]);
 
   useEffect(() => {
     thunk();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Chat } from './modules/interface';
 
-export const App = () => {
+export const App: React.FC = () => {
   return (
     <div>
       <Chat />

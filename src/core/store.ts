@@ -1,4 +1,4 @@
-import { combineReducers, createStore, applyMiddleware } from "redux";
+import { combineReducers, createStore, applyMiddleware, Store, CombinedState, AnyAction } from "redux";
 import { systemReducer } from "./reducer";
 import { chatReducer, ChatReducerState } from "../modules/interface/reducer";
 import { SystemState } from "./constants/core-constants";
@@ -14,4 +14,4 @@ const rootReducer = combineReducers({
     chat: chatReducer,
 });
 
-export const configureStore = () => createStore(rootReducer, applyMiddleware(thunk));
+export const configureStore = (): Store<CombinedState<AppStoreState>, AnyAction> => createStore(rootReducer, applyMiddleware(thunk));

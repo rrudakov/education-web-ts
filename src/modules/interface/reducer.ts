@@ -1,4 +1,4 @@
-import { UPDATE_MESSAGE, SEND_MESSAGE, DELETE_MESSAGE, ChatActionTypes } from "./constants/reducer-constants";
+import { UPDATE_MESSAGE, SEND_MESSAGE, DELETE_MESSAGE, ChatActionTypes } from "./constants/reducer-constants"
 
 export interface Message {
     user: string;
@@ -37,5 +37,5 @@ export const chatReducer = (state: ChatReducerState = initialState, action: Chat
             };
         default:
             return state;
-    };
+    }
 }
