@@ -5,12 +5,17 @@ import { App } from './App';
 import * as serviceWorker from './serviceWorker';
 import { configureStore, AppStoreState } from './core/store';
 import { Store, CombinedState, AnyAction } from 'redux';
+import { ThemeProvider, CssBaseline } from '@material-ui/core';
+import { theme } from './core/theme';
 
 const store: Store<CombinedState<AppStoreState>, AnyAction> = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root') as HTMLElement
 );

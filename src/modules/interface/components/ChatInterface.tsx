@@ -3,13 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getChatMessage } from '../selector';
 import { sendChatMessage, updateChatMessage } from '../actions';
 import { thunkGetArticles } from '../thunks';
-import { getUserName } from '../../../core/selector';
 import { Message } from '../reducer';
 
 export const ChatInterface: React.FC = () => {
   const dispatch = useDispatch();
   const message = useSelector(getChatMessage);
-  const userName = useSelector(getUserName);
+  const userName = "Romka";
   const sendMessage = (message: Message) => dispatch(sendChatMessage(message));
   const updateMessage = (message: string) => dispatch(updateChatMessage(message));
   const fetchArticles = useCallback(() => dispatch(thunkGetArticles()), [dispatch]);
