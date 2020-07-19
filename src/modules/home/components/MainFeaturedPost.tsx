@@ -42,7 +42,7 @@ export const MainFeaturedPost: React.FC = () => {
 
   useEffect(() => {
     fetchMainFeatured()
-  }, []);
+  }, [fetchMainFeatured]);
 
   return (
     <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${mainFeaturedPost.featured_image})` }}>

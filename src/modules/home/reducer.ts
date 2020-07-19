@@ -1,4 +1,4 @@
-import { HomeActionTypes, UPDATE_MAIN_FEATURED } from "./types"
+import { HomeActionTypes, UPDATE_FEATURED, UPDATE_FULL_POSTS, UPDATE_MAIN_FEATURED } from "./types";
 
 export interface FeaturedPost {
     id: number;
@@ -46,6 +46,16 @@ export const homeReducer = (state: HomeState = initialState, action: HomeActionT
                 ...state,
                 main_featured_post: action.payload,
             };
+        case UPDATE_FEATURED:
+            return {
+                ...state,
+                featured_posts: action.payload,
+            }
+        case UPDATE_FULL_POSTS:
+            return {
+                ...state,
+                latest_posts: action.payload,
+            }
         default:
             return state;
     }

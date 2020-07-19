@@ -1,7 +1,17 @@
-import { FeaturedPost } from "./reducer";
-import { UpdateMainFeaturedAction, UPDATE_MAIN_FEATURED } from "./types";
+import { FeaturedPost, FullPost } from "./reducer";
+import { UpdateFeaturedAction, UpdateFullPostsAction, UpdateMainFeaturedAction, UPDATE_FEATURED, UPDATE_FULL_POSTS, UPDATE_MAIN_FEATURED } from "./types";
 
 export const updateMainFeaturedArticle = (featuredPost: FeaturedPost): UpdateMainFeaturedAction => ({
-    type: UPDATE_MAIN_FEATURED,
-    payload: featuredPost,
+  type: UPDATE_MAIN_FEATURED,
+  payload: featuredPost,
+})
+
+export const updateFeaturedArticles = (featuredPosts: FeaturedPost[]): UpdateFeaturedAction => ({
+  type: UPDATE_FEATURED,
+  payload: featuredPosts,
+})
+
+export const updateLatestArticles = (latestFullPosts: FullPost[]): UpdateFullPostsAction => ({
+  type: UPDATE_FULL_POSTS,
+  payload: latestFullPosts,
 })
