@@ -2,3 +2,6 @@ import { Selector } from "react-redux";
 import { AppStoreState } from "./store";
 
 export const getFetching: Selector<AppStoreState, boolean> = ({ system }) => system.fetching > 0;
+export const getAuthOpen: Selector<AppStoreState, boolean> = ({ system }) => system.authOpen;
+export const getSignInUsername: Selector<AppStoreState, string> = ({ system }) => system.signInState.username;
+export const getSignInPassword: Selector<AppStoreState, string> = ({ system }) => system.signInState.password;

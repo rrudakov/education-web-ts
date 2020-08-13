@@ -1,6 +1,8 @@
-import { createStyles, makeStyles, Theme, Toolbar, Button, Typography, IconButton, Link } from '@material-ui/core';
+import { Button, createStyles, IconButton, Link, makeStyles, Theme, Toolbar, Typography } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { OPEN_AUTH } from '../types';
 
 const useStyles = makeStyles(({ palette, spacing }: Theme) =>
   createStyles({
@@ -33,6 +35,8 @@ export interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const openAuth = useCallback(() => dispatch({ type: OPEN_AUTH }), [dispatch]);
 
   return (
     <React.Fragment>
@@ -44,7 +48,7 @@ export const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <Button variant="outlined" size="small">
+        <Button variant="outlined" size="small" onClick={openAuth}>
           Sign up
         </Button>
       </Toolbar>
