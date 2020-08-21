@@ -1,10 +1,13 @@
+import { UserState } from "./reducer";
+
 export const INCREASE_FETCHING = 'UPDATE_FETCHING/SYSTEM';
 export const DECREASE_FETCHING = 'DECREASE_FETCHING/SYSTEM';
 export const OPEN_AUTH = 'OPEN_AUTH/SYSTEM';
 export const CLOSE_AUTH = 'CLOSE_AUTH/SYSTEM';
 export const UPDATE_SIGN_IN_USERNAME = 'UPDATE_USERNAME/SYSTEM/SIGN_IN';
 export const UPDATE_SIGN_IN_PASSWORD = 'UPDATE_PASSWORD/SYSTEM/SIGN_IN';
-export const UPDATE_LOGGED_IN = 'UPDATE_LOGGED_IN/SYSTEM';
+export const SUCCESSFUL_LOGIN = 'SUCCESSFUL_LOGIN/SYSTEM';
+export const LOGOUT = 'LOGOUT/SYSTEM';
 
 export interface IncreaseFetchingAction {
     type: typeof INCREASE_FETCHING;
@@ -32,9 +35,13 @@ export interface UpdateSignInPasswordAction {
     payload: string;
 }
 
-export interface UpdateLoggedInAction {
-    type: typeof UPDATE_LOGGED_IN;
-    payload: boolean;
+export interface SuccessfulLoginAction {
+    type: typeof SUCCESSFUL_LOGIN;
+    payload: UserState;
+}
+
+export interface LogoutAction {
+    type: typeof LOGOUT;
 }
 
 export type SystemActionTypes =
@@ -44,4 +51,5 @@ export type SystemActionTypes =
     | CloseAuthModalAction
     | UpdateSignInUsernameAction
     | UpdateSignInPasswordAction
-    | UpdateLoggedInAction;
+    | SuccessfulLoginAction
+    | LogoutAction;

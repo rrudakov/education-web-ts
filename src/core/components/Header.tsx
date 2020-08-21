@@ -1,8 +1,11 @@
 import { Button, createStyles, IconButton, Link, makeStyles, Theme, Toolbar, Typography } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { getLoggedIn } from '../selector';
 import { OPEN_AUTH } from '../types';
+import { thunkLogout } from '../thunks';
 
 const useStyles = makeStyles(({ palette, spacing }: Theme) =>
   createStyles({
@@ -35,22 +38,27 @@ export interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const classes = useStyles();
+  const loggedIn = useSelector(getLoggedIn);
   const dispatch = useDispatch();
   const openAuth = useCallback(() => dispatch({ type: OPEN_AUTH }), [dispatch]);
+  const logout = useCallback(() => dispatch(thunkLogout()), [dispatch]);
+  const location = useLocation();
 
+  console.log(loggedIn);
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-        <Button size="small">Subscribe</Button>
+        {location.pathname !== "/" &&
+          <Button size="small">Back</Button>}
         <Typography component="h2" variant="h5" color="inherit" align="center" noWrap={true} className={classes.toolbarTitle}>
           {props.title}
         </Typography>
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <Button variant="outlined" size="small" onClick={openAuth}>
-          Sign up
-        </Button>
+        {loggedIn
+          ? <Button variant="outlined" size="small" onClick={logout}>Log out</Button>
+          : <Button variant="outlined" size="small" onClick={openAuth}>Log in</Button>}
       </Toolbar>
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
         {props.sections.map((section) => (

@@ -1,12 +1,13 @@
 import { Backdrop, CircularProgress, Container, createStyles, makeStyles, Theme } from '@material-ui/core';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { SignInDialog } from './core/components/Auth';
 import { Footer } from './core/components/Footer';
 import { Header, HeaderSection } from './core/components/Header';
 import { getFetching } from './core/selector';
 import { Home } from './modules/home';
+import { thunkCheckLogin } from './core/thunks';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,6 +29,12 @@ const sections: HeaderSection[] = [
 export const App: React.FC = () => {
   const classes = useStyles();
   const fetching = useSelector(getFetching);
+  const dispatch = useDispatch();
+  const checkToken = useCallback(() => dispatch(thunkCheckLogin()), [dispatch]);
+
+  useEffect(() => {
+    checkToken()
+  }, [checkToken]);
 
   return (
     <BrowserRouter>

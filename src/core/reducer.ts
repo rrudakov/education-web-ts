@@ -1,20 +1,28 @@
-import { CLOSE_AUTH, DECREASE_FETCHING, INCREASE_FETCHING, OPEN_AUTH, SystemActionTypes, UPDATE_LOGGED_IN, UPDATE_SIGN_IN_PASSWORD, UPDATE_SIGN_IN_USERNAME } from "./types";
+import { CLOSE_AUTH, DECREASE_FETCHING, INCREASE_FETCHING, LOGOUT, OPEN_AUTH, SUCCESSFUL_LOGIN, SystemActionTypes, UPDATE_SIGN_IN_PASSWORD, UPDATE_SIGN_IN_USERNAME } from "./types";
 
 export interface SignInState {
   username: string;
   password: string;
 }
 
+export interface UserState {
+  id: number;
+  username: string;
+  email: string;
+  roles: string[];
+  created_on: string;
+  updated_on: string;
+}
+
 export interface SystemState {
   fetching: number;
-  loggedIn: boolean;
+  user?: UserState;
   authOpen: boolean;
   signInState: SignInState;
 }
 
 const initialState: SystemState = {
   fetching: 0,
-  loggedIn: false,
   authOpen: false,
   signInState: {
     username: '',
@@ -48,8 +56,10 @@ export const systemReducer = (state: SystemState = initialState, action: SystemA
           password: action.payload,
         }
       };
-    case UPDATE_LOGGED_IN:
-      return { ...state, loggedIn: action.payload };
+    case SUCCESSFUL_LOGIN:
+      return { ...state, user: action.payload };
+    case LOGOUT:
+      return { ...state, user: undefined };
     default:
       return state;
   }

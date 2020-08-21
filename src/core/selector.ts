@@ -5,3 +5,4 @@ export const getFetching: Selector<AppStoreState, boolean> = ({ system }) => sys
 export const getAuthOpen: Selector<AppStoreState, boolean> = ({ system }) => system.authOpen;
 export const getSignInUsername: Selector<AppStoreState, string> = ({ system }) => system.signInState.username;
 export const getSignInPassword: Selector<AppStoreState, string> = ({ system }) => system.signInState.password;
+export const getLoggedIn: Selector<AppStoreState, boolean> = ({ system }) => system.user !== undefined;
