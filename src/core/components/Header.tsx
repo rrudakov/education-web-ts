@@ -1,6 +1,8 @@
 import { Button, createStyles, IconButton, Link, makeStyles, Theme, Toolbar, Typography } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import React, { useCallback } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { getLoggedIn } from '../selector';
@@ -49,7 +51,14 @@ export const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
         {location.pathname !== "/" &&
-          <Button size="small">Back</Button>}
+          <Button
+            size="small"
+            startIcon={<NavigateBeforeIcon />}
+            component={RouterLink}
+            to="/"
+          >
+            Home
+         </Button>}
         <Typography component="h2" variant="h5" color="inherit" align="center" noWrap={true} className={classes.toolbarTitle}>
           {props.title}
         </Typography>

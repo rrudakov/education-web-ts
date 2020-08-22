@@ -1,6 +1,7 @@
 import { Card, CardActionArea, CardContent, CardMedia, createStyles, Grid, Hidden, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { FeaturedPost } from '../reducer';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(
   createStyles({
@@ -24,7 +25,7 @@ export const FeaturedPostComponent: React.FC<FeaturedPostProps> = ({ post }: Fea
 
   return (
     <Grid item={true} xs={12} md={6}>
-      <CardActionArea component="a" href="#">
+      <CardActionArea component={Link} to={`/posts/${post.id}`}>
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>

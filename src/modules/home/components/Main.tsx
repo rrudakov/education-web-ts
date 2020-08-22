@@ -1,11 +1,10 @@
-import { createStyles, Grid, makeStyles, Theme, Typography, Divider } from '@material-ui/core';
+import { createStyles, Divider, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { toEditorState } from '../../../core/utils/editor';
+import { PostBody } from '../../../core/components/Post';
 import { getFullPosts } from '../selectors';
 import { thunkFetchLatestFullPosts } from '../thunks';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { Editor } from 'react-draft-wysiwyg';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -35,13 +34,10 @@ export const Main: React.FC<MainProps> = ({ title }: MainProps) => {
       </Typography>
       <Divider />
       {latestPosts.map((post) => (
-        <Editor
-          key={post.id}
-          editorState={toEditorState(post.body)}
-          wrapperClassName={classes.post}
-          toolbarHidden={true}
-          readOnly={true}
-        />
+        <div key={post.id} className={classes.post}>
+          <Typography variant="h4">{post.title}</Typography>
+          <PostBody body={post.body} />
+        </div>
       ))}
     </Grid >
   )

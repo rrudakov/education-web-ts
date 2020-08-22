@@ -1,16 +1,13 @@
 import React from 'react';
-import { Editor, EditorState } from 'react-draft-wysiwyg';
-import Typography from '@material-ui/core/Typography';
+import { Editor } from 'react-draft-wysiwyg';
+import { toEditorState } from '../utils/editor';
 
-export interface PostProps {
-  editorState: EditorState;
+interface PostProps {
+  body: string;
 }
 
-export const Post: React.FC<PostProps> = (props: PostProps) => {
+export const PostBody: React.FC<PostProps> = (props: PostProps) => {
   return (
-    <div>
-      <Typography variant="h1" />
-      <Editor toolbarHidden={true} readOnly={true} editorState={props.editorState} />
-    </div>
+    <Editor toolbarHidden={true} readOnly={true} editorState={toEditorState(props.body)} />
   )
 }

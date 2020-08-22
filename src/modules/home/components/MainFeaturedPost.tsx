@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { makeStyles, Theme, createStyles, Paper, Grid, Typography, Link } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
 import { getMainFeaturedPost } from '../selectors';
 import { thunkFetchMainFeaturedPost } from '../thunks';
 
@@ -57,7 +58,7 @@ export const MainFeaturedPost: React.FC = () => {
             <Typography variant="h5" color="inherit" paragraph={true}>
               {mainFeaturedPost.description}
             </Typography>
-            <Link variant="subtitle1" href="#">
+            <Link variant="subtitle1" component={RouterLink} to={`/posts/${mainFeaturedPost.id}`}>
               Continue reading...
             </Link>
           </div>

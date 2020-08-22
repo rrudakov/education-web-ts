@@ -8,6 +8,7 @@ import { Header, HeaderSection } from './core/components/Header';
 import { getFetching } from './core/selector';
 import { Home } from './modules/home';
 import { thunkCheckLogin } from './core/thunks';
+import { SinglePost } from './modules/post';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,8 +47,11 @@ export const App: React.FC = () => {
         <Header title="Education portal" sections={sections} />
         <main>
           <Switch>
-            <Route path="/" strict={true}>
+            <Route path="/" exact={true}>
               <Home />
+            </Route>
+            <Route path="/posts/:id" exact={true}>
+              <SinglePost />
             </Route>
           </Switch>
         </main>
