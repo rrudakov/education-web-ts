@@ -5,6 +5,8 @@ import { DECREASE_FETCHING, INCREASE_FETCHING, SystemActionTypes } from "../../c
 import { updateFeaturedArticles, updateLatestArticles, updateMainFeaturedArticle } from "./actions";
 import { HomeActionTypes } from "./types";
 import { BASE_URL } from "../../core/constants";
+import { updateErrorMessage } from "../../core/actions";
+import { ErrorResponse } from "../../core/reducer";
 
 export const thunkFetchMainFeaturedPost = (): ThunkAction<void, AppStoreState, null, SystemActionTypes | HomeActionTypes> => dispatch => {
   dispatch({ type: INCREASE_FETCHING });
@@ -15,7 +17,7 @@ export const thunkFetchMainFeaturedPost = (): ThunkAction<void, AppStoreState, n
     })
     .catch(err => {
       dispatch({ type: DECREASE_FETCHING });
-      console.error(err);
+      dispatch(updateErrorMessage((err as ErrorResponse).message));
     });
 }
 
@@ -29,7 +31,7 @@ export const thunkFetchFeaturedPosts = (): ThunkAction<void, AppStoreState, null
     })
     .catch(err => {
       dispatch({ type: DECREASE_FETCHING });
-      console.error(err);
+      dispatch(updateErrorMessage((err as ErrorResponse).message));
     });
 }
 
@@ -43,6 +45,6 @@ export const thunkFetchLatestFullPosts = (): ThunkAction<void, AppStoreState, nu
     })
     .catch(err => {
       dispatch({ type: DECREASE_FETCHING });
-      console.error(err);
+      dispatch(updateErrorMessage((err as ErrorResponse).message));
     });
 }

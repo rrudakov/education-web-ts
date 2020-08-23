@@ -8,6 +8,8 @@ export const UPDATE_SIGN_IN_USERNAME = 'UPDATE_USERNAME/SYSTEM/SIGN_IN';
 export const UPDATE_SIGN_IN_PASSWORD = 'UPDATE_PASSWORD/SYSTEM/SIGN_IN';
 export const SUCCESSFUL_LOGIN = 'SUCCESSFUL_LOGIN/SYSTEM';
 export const LOGOUT = 'LOGOUT/SYSTEM';
+export const UPDATE_ERROR_MESSAGE = 'UPDATE_ERROR_MESSAGE/SYSTEM';
+export const UPDATE_SUCCESS_MESSAGE = 'UPDATE_SUCCESS_MESSAGE/SYSTEM';
 
 export interface IncreaseFetchingAction {
     type: typeof INCREASE_FETCHING;
@@ -44,6 +46,16 @@ export interface LogoutAction {
     type: typeof LOGOUT;
 }
 
+export interface UpdateErrorMessageAction {
+    type: typeof UPDATE_ERROR_MESSAGE;
+    payload?: string;
+}
+
+export interface UpdateSuccessMessageAction {
+    type: typeof UPDATE_SUCCESS_MESSAGE;
+    payload?: string;
+}
+
 export type SystemActionTypes =
     IncreaseFetchingAction
     | DecreaseFetchingAction
@@ -52,4 +64,6 @@ export type SystemActionTypes =
     | UpdateSignInUsernameAction
     | UpdateSignInPasswordAction
     | SuccessfulLoginAction
-    | LogoutAction;
+    | LogoutAction
+    | UpdateErrorMessageAction
+    | UpdateSuccessMessageAction;

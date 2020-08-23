@@ -9,6 +9,7 @@ import { getFetching } from './core/selector';
 import { Home } from './modules/home';
 import { thunkCheckLogin } from './core/thunks';
 import { SinglePost } from './modules/post';
+import { ErrorMessage, SuccessMessage } from './core/components/Message';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,6 +43,8 @@ export const App: React.FC = () => {
       <Backdrop className={classes.backdrop} open={fetching}>
         <CircularProgress color="inherit" />
       </Backdrop>
+      <ErrorMessage />
+      <SuccessMessage />
       <SignInDialog />
       <Container maxWidth="lg">
         <Header title="Education portal" sections={sections} />

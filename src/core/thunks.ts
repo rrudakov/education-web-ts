@@ -1,11 +1,12 @@
 import jwt_decode from "jwt-decode";
 import { ThunkAction } from "redux-thunk";
 import request from "superagent";
-import { UserState } from "./reducer";
+import { UserState, ErrorResponse } from "./reducer";
 import { AppStoreState } from "./store";
 import { CLOSE_AUTH, DECREASE_FETCHING, INCREASE_FETCHING, LOGOUT, SUCCESSFUL_LOGIN, SystemActionTypes } from "./types";
 import { deleteToken, getToken, saveToken } from "./utils/storage";
 import { BASE_URL } from "./constants";
+import { updateErrorMessage, updateSuccessMessage } from "./actions";
 
 interface SignInResponse {
     token: string;
@@ -32,10 +33,11 @@ export const thunkLogin = (): ThunkAction<void, AppStoreState, null, SystemActio
             dispatch({ type: SUCCESSFUL_LOGIN, payload: auth.user })
             dispatch({ type: DECREASE_FETCHING });
             dispatch({ type: CLOSE_AUTH });
+            dispatch(updateSuccessMessage('Successful login'));
         })
         .catch(error => {
             dispatch({ type: DECREASE_FETCHING });
-            console.error(error);
+            dispatch(updateErrorMessage((error as ErrorResponse).message));
         });
 }
 

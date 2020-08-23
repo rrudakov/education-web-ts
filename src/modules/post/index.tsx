@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkFetchPostById } from './thunks';
-import { getPost } from './selectors';
+import { useParams } from 'react-router-dom';
 import { PostBody } from '../../core/components/Post';
+import { updatePost } from './actions';
+import { getPost } from './selectors';
+import { thunkFetchPostById } from './thunks';
 
 interface PathParams {
   id?: string;
@@ -18,7 +19,10 @@ export const SinglePost: React.FC = () => {
 
   useEffect(() => {
     fetchPostById(id);
-  }, [id, fetchPostById]);
+    return () => {
+      dispatch(updatePost(undefined));
+    }
+  }, [id, fetchPostById, dispatch]);
 
   if (post === undefined) {
     return (

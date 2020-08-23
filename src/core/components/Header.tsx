@@ -46,7 +46,6 @@ export const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const logout = useCallback(() => dispatch(thunkLogout()), [dispatch]);
   const location = useLocation();
 
-  console.log(loggedIn);
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
