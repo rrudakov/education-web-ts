@@ -1,15 +1,16 @@
 import { Backdrop, CircularProgress, Container, createStyles, makeStyles, Theme } from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { SignInDialog } from './core/components/Auth';
-import { Footer } from './core/components/Footer';
-import { Header, HeaderSection } from './core/components/Header';
+import { SignInDialog } from './core/components/auth';
+import { Footer } from './core/components/footer';
+import { Header } from './core/components/header';
+import { ErrorMessage, SuccessMessage } from './core/components/message';
 import { getFetching } from './core/selector';
-import { Home } from './modules/home';
 import { thunkCheckLogin } from './core/thunks';
+import { Home } from './modules/home';
+import { NewPost } from './modules/newpost';
 import { SinglePost } from './modules/post';
-import { ErrorMessage, SuccessMessage } from './core/components/Message';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,14 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 )
-
-const sections: HeaderSection[] = [
-  { title: "Education", url: "#" },
-  { title: "Children", url: "#" },
-  { title: "Parents", url: "#" },
-  { title: "Material", url: "#" },
-  { title: "About me", url: "#" },
-]
 
 export const App: React.FC = () => {
   const classes = useStyles();
@@ -47,15 +40,19 @@ export const App: React.FC = () => {
       <SuccessMessage />
       <SignInDialog />
       <Container maxWidth="lg">
-        <Header title="Education portal" sections={sections} />
+        <Header />
         <main>
           <Switch>
             <Route path="/" exact={true}>
               <Home />
             </Route>
+            <Route path="/posts/new" exact={true}>
+              <NewPost />
+            </Route>
             <Route path="/posts/:id" exact={true}>
               <SinglePost />
             </Route>
+
           </Switch>
         </main>
       </Container>

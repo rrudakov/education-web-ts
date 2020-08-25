@@ -1,5 +1,6 @@
 import { Selector } from "react-redux";
 import { AppStoreState } from "./store";
+import { UserState } from "./reducer";
 
 export const getFetching: Selector<AppStoreState, boolean> = ({ system }) => system.fetching > 0;
 export const getAuthOpen: Selector<AppStoreState, boolean> = ({ system }) => system.authOpen;
@@ -8,3 +9,4 @@ export const getSignInPassword: Selector<AppStoreState, string> = ({ system }) =
 export const getLoggedIn: Selector<AppStoreState, boolean> = ({ system }) => system.user !== undefined;
 export const getErrorMessage: Selector<AppStoreState, string | undefined> = ({ system }) => system.errorMessage;
 export const getSuccessMessage: Selector<AppStoreState, string | undefined> = ({ system }) => system.successMessage;
+export const getUser: Selector<AppStoreState, UserState | undefined> = ({ system }) => system.user;

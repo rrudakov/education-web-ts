@@ -1,17 +1,26 @@
+import { createStyles, Grid, Link, makeStyles, Theme, Toolbar } from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
-import { MainFeaturedPost } from './components/MainFeaturedPost';
-import { Grid, makeStyles, Theme, createStyles } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
+import { FeaturedPostComponent } from './components/featured-post';
+import { Main } from './components/main';
+import { MainFeaturedPost } from './components/main-featured-post';
+import { Sidebar } from './components/sidebar';
+import { getFeaturedPosts, getTopTags } from './selectors';
 import { thunkFetchFeaturedPosts } from './thunks';
-import { getFeaturedPosts } from './selectors';
-import { FeaturedPostComponent } from './components/FeaturedPost';
-import { Main } from './components/Main';
-import { Sidebar } from './components/Sidebar';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
     mainGrid: {
       marginTop: spacing(3),
+    },
+    toolbarSecondary: {
+      justifyContent: 'space-between',
+      overflowX: 'auto',
+    },
+    toolbarLink: {
+      padding: spacing(1),
+      flexShrink: 0,
     }
   }));
 
@@ -20,6 +29,7 @@ export const Home: React.FC = () => {
   const featuredPosts = useSelector(getFeaturedPosts);
   const dispatch = useDispatch();
   const fetchFeaturedPosts = useCallback(() => dispatch(thunkFetchFeaturedPosts()), [dispatch]);
+  const topTags = useSelector(getTopTags);
 
   useEffect(() => {
     fetchFeaturedPosts()
@@ -27,6 +37,21 @@ export const Home: React.FC = () => {
 
   return (
     <React.Fragment>
+      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+        {topTags.map((tag) => (
+          <Link
+            className={classes.toolbarLink}
+            color="inherit"
+            noWrap={true}
+            key={tag}
+            variant="body2"
+            component={RouterLink}
+            to={`/search?tag=${tag}`}
+          >
+            {tag}
+          </Link>
+        ))}
+      </Toolbar>
       <MainFeaturedPost />
       <Grid container={true} spacing={4}>
         {featuredPosts.map((post) => (

@@ -2,6 +2,7 @@ import { Card, CardActionArea, CardContent, CardMedia, createStyles, Grid, Hidde
 import React from 'react';
 import { FeaturedPost } from '../reducer';
 import { Link } from 'react-router-dom';
+import { formatDateTime, toDateTime } from '../../../core/utils/datetime';
 
 const useStyles = makeStyles(
   createStyles({
@@ -22,6 +23,7 @@ export interface FeaturedPostProps {
 
 export const FeaturedPostComponent: React.FC<FeaturedPostProps> = ({ post }: FeaturedPostProps) => {
   const classes = useStyles();
+  const updated = formatDateTime(toDateTime(post.updated_on));
 
   return (
     <Grid item={true} xs={12} md={6}>
@@ -33,7 +35,7 @@ export const FeaturedPostComponent: React.FC<FeaturedPostProps> = ({ post }: Fea
                 {post.title}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                {post.updated_on}
+                {updated}
               </Typography>
               <Typography variant="subtitle1" paragraph={true}>
                 {post.description}

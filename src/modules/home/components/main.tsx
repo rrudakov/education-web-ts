@@ -2,9 +2,10 @@ import { createStyles, Divider, Grid, makeStyles, Theme, Typography } from '@mat
 import React, { useCallback, useEffect } from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { PostBody } from '../../../core/components/Post';
+import { PostBody } from '../../../core/components/post';
 import { getFullPosts } from '../selectors';
 import { thunkFetchLatestFullPosts } from '../thunks';
+import { formatRelativeDateTime, toDateTime } from '../../../core/utils/datetime';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -35,7 +36,10 @@ export const Main: React.FC<MainProps> = ({ title }: MainProps) => {
       <Divider />
       {latestPosts.map((post) => (
         <div key={post.id} className={classes.post}>
-          <Typography variant="h4">{post.title}</Typography>
+          <Typography variant="h5">{post.title}</Typography>
+          <Typography variant="caption" color="textSecondary">
+            {formatRelativeDateTime(toDateTime(post.updated_on))}
+          </Typography>
           <PostBody body={post.body} />
         </div>
       ))}

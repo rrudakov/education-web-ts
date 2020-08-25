@@ -24,6 +24,7 @@ export interface HomeState {
     main_featured_post: FeaturedPost;
     featured_posts: FeaturedPost[];
     latest_posts: FullPost[];
+    top_tags: string[];
 }
 
 const initialState: HomeState = {
@@ -37,6 +38,7 @@ const initialState: HomeState = {
     },
     featured_posts: [],
     latest_posts: [],
+    top_tags: ['education', 'parents', 'children'],
 }
 
 export const homeReducer = (state: HomeState = initialState, action: HomeActionTypes): HomeState => {

@@ -24,7 +24,7 @@ export const thunkFetchMainFeaturedPost = (): ThunkAction<void, AppStoreState, n
 export const thunkFetchFeaturedPosts = (): ThunkAction<void, AppStoreState, null, SystemActionTypes | HomeActionTypes> => dispatch => {
   dispatch({ type: INCREASE_FETCHING });
   request.get(`${BASE_URL}/articles/featured/latest`)
-    .query({ limit: 4 })
+    .query({ limit: 2 })
     .then(response => {
       dispatch(updateFeaturedArticles(response.body));
       dispatch({ type: DECREASE_FETCHING });
