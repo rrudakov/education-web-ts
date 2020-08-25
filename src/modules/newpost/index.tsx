@@ -3,11 +3,12 @@ import { EditorState } from 'draft-js';
 import React, { useCallback } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePostBodyActionCreator } from './actions';
-import { getPostBody } from './selectors';
-import { NewPostForm } from './components/new-post-form';
-import { thunkCreatePost } from './thunks';
 import { useHistory } from 'react-router-dom';
+import { updatePostBodyActionCreator } from './actions';
+import { NewPostForm } from './components/new-post-form';
+import { getPostBody } from './selectors';
+import { thunkCreatePost } from './thunks';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 export const NewPost: React.FC = () => {
   const history = useHistory();
