@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { SignInDialog } from './core/components/auth';
 import { Footer } from './core/components/footer';
-import { Header } from './core/components/header';
 import { ErrorMessage, SuccessMessage } from './core/components/message';
+import { NewPostFab } from './core/components/new-post-button';
+import { TopBar } from './core/components/topbar';
 import { getFetching } from './core/selector';
 import { thunkCheckLogin } from './core/thunks';
 import { Home } from './modules/home';
@@ -39,8 +40,9 @@ export const App: React.FC = () => {
       <ErrorMessage />
       <SuccessMessage />
       <SignInDialog />
+      <TopBar />
+      <NewPostFab />
       <Container maxWidth="lg">
-        <Header />
         <main>
           <Switch>
             <Route path="/" exact={true}>
