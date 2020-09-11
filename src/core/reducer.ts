@@ -9,7 +9,8 @@ import {
   UPDATE_ERROR_MESSAGE,
   UPDATE_SIGN_IN_PASSWORD,
   UPDATE_SIGN_IN_USERNAME,
-  UPDATE_SUCCESS_MESSAGE
+  UPDATE_SUCCESS_MESSAGE,
+  TOGGLE_MENU_DRAWER
 } from "./types";
 
 export interface ErrorResponse {
@@ -30,6 +31,11 @@ export interface UserState {
   updated_on: string;
 }
 
+export interface MenuItem {
+  name: string;
+  url: string;
+}
+
 export interface SystemState {
   fetching: number;
   user?: UserState;
@@ -37,6 +43,8 @@ export interface SystemState {
   signInState: SignInState;
   errorMessage?: string;
   successMessage?: string;
+  menuItems: MenuItem[];
+  menuDrawerOpen: boolean;
 }
 
 const initialState: SystemState = {
@@ -45,7 +53,17 @@ const initialState: SystemState = {
   signInState: {
     username: '',
     password: '',
-  }
+  },
+  menuItems: [
+    { name: 'Видео-уроки', url: '#' },
+    { name: 'Онлайн и оффлайн уроки', url: '#' },
+    { name: 'Играем с мамой', url: '#' },
+    { name: 'Детские дни рождения', url: '#' },
+    { name: 'Сказочные встречи', url: '#' },
+    { name: 'Прокат детских платьев', url: '#' },
+    { name: 'Контакты', url: '#' },
+  ],
+  menuDrawerOpen: false,
 }
 
 export const systemReducer = (state: SystemState = initialState, action: SystemActionTypes): SystemState => {
@@ -82,6 +100,8 @@ export const systemReducer = (state: SystemState = initialState, action: SystemA
       return { ...state, errorMessage: action.payload };
     case UPDATE_SUCCESS_MESSAGE:
       return { ...state, successMessage: action.payload };
+    case TOGGLE_MENU_DRAWER:
+      return { ...state, menuDrawerOpen: !state.menuDrawerOpen };
     default:
       return state;
   }

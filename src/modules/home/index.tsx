@@ -1,15 +1,15 @@
-import { createStyles, Grid, Link, makeStyles, Theme, Toolbar } from '@material-ui/core';
+import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
 import { FeaturedPostComponent } from './components/featured-post';
 import { Main } from './components/main';
 import { MainFeaturedPost } from './components/main-featured-post';
 import { Sidebar } from './components/sidebar';
-import { getFeaturedPosts, getTopTags } from './selectors';
+import { getFeaturedPosts } from './selectors';
 import { thunkFetchFeaturedPosts } from './thunks';
+import { AboutComponent } from './components/about';
 
-const useStyles = makeStyles(({ spacing }: Theme) =>
+const useStyles = makeStyles(({ spacing, palette }: Theme) =>
   createStyles({
     mainGrid: {
       marginTop: spacing(3),
@@ -17,6 +17,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
     toolbarSecondary: {
       justifyContent: 'space-between',
       overflowX: 'auto',
+      background: palette.secondary.main,
     },
     toolbarLink: {
       padding: spacing(1),
@@ -29,7 +30,6 @@ export const Home: React.FC = () => {
   const featuredPosts = useSelector(getFeaturedPosts);
   const dispatch = useDispatch();
   const fetchFeaturedPosts = useCallback(() => dispatch(thunkFetchFeaturedPosts()), [dispatch]);
-  const topTags = useSelector(getTopTags);
 
   useEffect(() => {
     fetchFeaturedPosts()
@@ -37,31 +37,20 @@ export const Home: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-        {topTags.map((tag) => (
-          <Link
-            className={classes.toolbarLink}
-            color="inherit"
-            noWrap={true}
-            key={tag}
-            variant="body2"
-            component={RouterLink}
-            to={`/search?tag=${tag}`}
-          >
-            {tag}
-          </Link>
-        ))}
-      </Toolbar>
-      <MainFeaturedPost />
-      <Grid container={true} spacing={4}>
-        {featuredPosts.map((post) => (
+      <Grid container direction="row" justify="center" alignItems="center">
+        <AboutComponent />
+      </Grid>
+
+      {/* <MainFeaturedPost />
+          <Grid container={true} spacing={4}>
+          {featuredPosts.map((post) => (
           <FeaturedPostComponent key={post.id} post={post} />
-        ))}
-      </Grid>
-      <Grid container={true} spacing={5} className={classes.mainGrid}>
-        <Main title="From the firehouse" />
-        <Sidebar title="About" description="Some valuable description for sidebar" />
-      </Grid>
+          ))}
+          </Grid>
+          <Grid container={true} spacing={5} className={classes.mainGrid}>
+          <Main title="From the firehouse" />
+          <Sidebar title="About" description="Some valuable description for sidebar" />
+          </Grid> */}
     </React.Fragment>
   )
 }

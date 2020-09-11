@@ -21,14 +21,13 @@ export interface FullPost {
 }
 
 export interface HomeState {
-    main_featured_post: FeaturedPost;
-    featured_posts: FeaturedPost[];
-    latest_posts: FullPost[];
-    top_tags: string[];
+    mainFeaturedPost: FeaturedPost;
+    featuredPosts: FeaturedPost[];
+    latestPosts: FullPost[];
 }
 
 const initialState: HomeState = {
-    main_featured_post: {
+    mainFeaturedPost: {
         id: 0,
         user_id: 0,
         title: '',
@@ -36,9 +35,8 @@ const initialState: HomeState = {
         updated_on: '',
         description: '',
     },
-    featured_posts: [],
-    latest_posts: [],
-    top_tags: ['education', 'parents', 'children'],
+    featuredPosts: [],
+    latestPosts: [],
 }
 
 export const homeReducer = (state: HomeState = initialState, action: HomeActionTypes): HomeState => {
@@ -46,17 +44,17 @@ export const homeReducer = (state: HomeState = initialState, action: HomeActionT
         case UPDATE_MAIN_FEATURED:
             return {
                 ...state,
-                main_featured_post: action.payload,
+                mainFeaturedPost: action.payload,
             };
         case UPDATE_FEATURED:
             return {
                 ...state,
-                featured_posts: action.payload,
+                featuredPosts: action.payload,
             }
         case UPDATE_FULL_POSTS:
             return {
                 ...state,
-                latest_posts: action.payload,
+                latestPosts: action.payload,
             }
         default:
             return state;

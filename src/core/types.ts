@@ -10,6 +10,7 @@ export const SUCCESSFUL_LOGIN = 'SUCCESSFUL_LOGIN/SYSTEM';
 export const LOGOUT = 'LOGOUT/SYSTEM';
 export const UPDATE_ERROR_MESSAGE = 'UPDATE_ERROR_MESSAGE/SYSTEM';
 export const UPDATE_SUCCESS_MESSAGE = 'UPDATE_SUCCESS_MESSAGE/SYSTEM';
+export const TOGGLE_MENU_DRAWER = 'TOGGLE_MENU_DRAWER/SYSTEM';
 
 export interface IncreaseFetchingAction {
     type: typeof INCREASE_FETCHING;
@@ -56,6 +57,10 @@ export interface UpdateSuccessMessageAction {
     payload?: string;
 }
 
+export interface ToggleMenuDrawerAction {
+    type: typeof TOGGLE_MENU_DRAWER;
+}
+
 export type SystemActionTypes =
     IncreaseFetchingAction
     | DecreaseFetchingAction
@@ -66,4 +71,5 @@ export type SystemActionTypes =
     | SuccessfulLoginAction
     | LogoutAction
     | UpdateErrorMessageAction
-    | UpdateSuccessMessageAction;
+    | UpdateSuccessMessageAction
+    | ToggleMenuDrawerAction;

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { SignInDialog } from './core/components/auth';
 import { Footer } from './core/components/footer';
+import { MenuDrawer } from './core/components/menu-drawer';
 import { ErrorMessage, SuccessMessage } from './core/components/message';
 import { NewPostFab } from './core/components/new-post-button';
 import { TopBar } from './core/components/topbar';
@@ -41,6 +42,7 @@ export const App: React.FC = () => {
       <SuccessMessage />
       <SignInDialog />
       <TopBar />
+      <MenuDrawer />
       <NewPostFab />
       <Container maxWidth="lg">
         <main>
