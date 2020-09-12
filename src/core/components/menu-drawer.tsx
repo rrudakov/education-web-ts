@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Drawer, ListItem, ListItemText, makeStyles, createStyles, Theme } from '@material-ui/core';
+import { Drawer, ListItem, ListItemText, makeStyles, createStyles, Theme, Divider } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { getMenuItems, getMenuDrawerOpen } from '../selector';
 import { TOGGLE_MENU_DRAWER } from '../types';
@@ -26,9 +26,12 @@ export const MenuDrawer: React.FC = () => {
     <Drawer classes={{ paper: classes.drawer }} anchor="left" open={menuDrawerOpen} onClose={toggleMenuDrawer}>
       <div className={classes.list} role="presentation" >
         {menuItems.map((item) => (
-          <ListItem button key={item.name}>
-            <ListItemText primary={item.name} primaryTypographyProps={{ variant: "button" }} />
-          </ListItem>
+          <div key={item.name}>
+            <ListItem button>
+              <ListItemText primary={item.name} primaryTypographyProps={{ variant: "button" }} />
+            </ListItem>
+            <Divider />
+          </div>
         ))}
       </div>
     </Drawer>

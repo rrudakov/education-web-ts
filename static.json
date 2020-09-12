@@ -6,7 +6,7 @@
     "https_only": true,
     "proxies": {
         "/api/": {
-            "origin": "https://educationapp-api.herokuapp.com"
+            "origin": "https://educationapp-api.herokuapp.com/api"
         }
   }
 }
