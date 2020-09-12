@@ -1,6 +1,6 @@
 import { Avatar, Card, CardActionArea, CardContent, createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import React from 'react';
-import about from '../img/about_cropped.png';
+import about from '../img/about.png';
 
 const useStyles = makeStyles(({ spacing }: Theme) => createStyles({
   root: {

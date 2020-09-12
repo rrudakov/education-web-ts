@@ -13,6 +13,7 @@ import { thunkCheckLogin } from './core/thunks';
 import { Home } from './modules/home';
 import { NewPost } from './modules/newpost';
 import { SinglePost } from './modules/post';
+import { HomeBanner } from './modules/home/components/banner';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,6 +45,11 @@ export const App: React.FC = () => {
       <TopBar />
       <MenuDrawer />
       <NewPostFab />
+      <Switch>
+        <Route path="/" exact={true}>
+          <HomeBanner />
+        </Route>
+      </Switch>
       <Container maxWidth="lg">
         <main>
           <Switch>

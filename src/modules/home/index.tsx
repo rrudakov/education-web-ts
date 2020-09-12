@@ -1,13 +1,13 @@
 import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AboutComponent } from './components/about';
 import { FeaturedPostComponent } from './components/featured-post';
 import { Main } from './components/main';
 import { MainFeaturedPost } from './components/main-featured-post';
 import { Sidebar } from './components/sidebar';
 import { getFeaturedPosts } from './selectors';
 import { thunkFetchFeaturedPosts } from './thunks';
-import { AboutComponent } from './components/about';
 
 const useStyles = makeStyles(({ spacing, palette }: Theme) =>
   createStyles({
