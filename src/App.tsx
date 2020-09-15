@@ -14,6 +14,7 @@ import { Home } from './modules/home';
 import { NewPost } from './modules/newpost';
 import { SinglePost } from './modules/post';
 import { HomeBanner } from './modules/home/components/banner';
+import { AboutPage } from './modules/about';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,6 +56,9 @@ export const App: React.FC = () => {
           <Switch>
             <Route path="/" exact={true}>
               <Home />
+            </Route>
+            <Route path="/about" exact={true}>
+              <AboutPage />
             </Route>
             <Route path="/posts/new" exact={true}>
               <NewPost />

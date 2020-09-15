@@ -55,6 +55,7 @@ const initialState: SystemState = {
     password: '',
   },
   menuItems: [
+    { name: 'Обо мне', url: '/about' },
     { name: 'Видео-уроки', url: '#' },
     { name: 'Онлайн и оффлайн уроки', url: '#' },
     { name: 'Играем с мамой', url: '#' },

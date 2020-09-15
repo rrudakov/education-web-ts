@@ -1,12 +1,12 @@
-import { AppBar, Button, createStyles, Hidden, IconButton, makeStyles, Theme, Toolbar, Typography, Link } from '@material-ui/core';
+import { AppBar, Button, createStyles, Hidden, IconButton, Link, makeStyles, Theme, Toolbar } from '@material-ui/core';
 import ChildCareIcon from '@material-ui/icons/ChildCare';
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
 import { getLoggedIn, getMenuItems } from '../selector';
 import { thunkLogout } from '../thunks';
 import { OPEN_AUTH, TOGGLE_MENU_DRAWER } from '../types';
-import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles(({ spacing, palette }: Theme) =>
   createStyles({
@@ -56,9 +56,16 @@ export const TopBar: React.FC = () => {
             </IconButton>
           </Hidden>
           <ChildCareIcon />
-          <Typography variant="h6" className={classes.title}>
+          <Link
+            variant="h6"
+            style={{ textDecoration: 'none' }}
+            color="textPrimary"
+            className={classes.title}
+            component={RouterLink}
+            to="/"
+          >
             Аленкина сказка
-          </Typography>
+          </Link>
           {loggedIn
             ? <Button color="inherit" onClick={logout}>Выход</Button>
             : <Button color="inherit" onClick={openAuth}>Вход</Button>}
