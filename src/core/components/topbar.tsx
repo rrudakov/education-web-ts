@@ -1,9 +1,10 @@
-import { AppBar, Button, createStyles, Hidden, IconButton, Link, makeStyles, Theme, Toolbar } from '@material-ui/core';
+import { AppBar, Button, createStyles, Hidden, IconButton, Link, makeStyles, Menu, MenuItem, MenuProps, Theme, Toolbar, withStyles } from '@material-ui/core';
 import ChildCareIcon from '@material-ui/icons/ChildCare';
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
+import { SiteMenuItem } from '../reducer';
 import { getLoggedIn, getMenuItems } from '../selector';
 import { thunkLogout } from '../thunks';
 import { OPEN_AUTH, TOGGLE_MENU_DRAWER } from '../types';
@@ -34,6 +35,10 @@ const useStyles = makeStyles(({ spacing, palette }: Theme) =>
       padding: spacing(1),
       flexShrink: 0,
     },
+    menuItemLink: {
+      textDecoration: 'none',
+      color: palette.text.primary,
+    }
   }),
 );
 
@@ -74,22 +79,94 @@ export const TopBar: React.FC = () => {
       <Hidden mdDown>
         <AppBar position="static" className={classes.appBarSecondary}>
           <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-            {menuItems.map((menuItem) => (
-              <Link
-                className={classes.toolbarLink}
-                color="inherit"
-                noWrap={true}
-                key={menuItem.name}
-                variant="button"
-                component={RouterLink}
-                to={menuItem.url}
-              >
-                {menuItem.name}
-              </Link>
+            {menuItems.map((menuItem, i) => (
+              <DropdownMenuComponent key={i} item={menuItem} idx={i} />
             ))}
           </Toolbar>
         </AppBar>
       </Hidden>
     </div>
   );
+}
+
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+  },
+})((props: MenuProps) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    '&:hover': {
+      backgroundColor: theme.palette.primary.main,
+      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+        color: theme.palette.primary.light,
+      },
+    },
+  },
+}))(MenuItem);
+
+interface DropdownMenuProps {
+  item: SiteMenuItem;
+  idx: number;
+}
+
+const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({ item, idx }: DropdownMenuProps) => {
+  const classes = useStyles();
+  const [anchorEl, setAnchorE1] = React.useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorE1(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorE1(null);
+  };
+
+  if (item.url === undefined && item.subitems !== undefined) {
+    return (
+      <div>
+        <Button aria-controls={`menuItem${idx}`} aria-haspopup="true" onClick={handleClick}>
+          {item.name}
+        </Button>
+        <StyledMenu id={`menuItem${idx}`} anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+          {item.subitems.map((subitem, i) => (
+            subitem.url !== undefined &&
+            <StyledMenuItem key={i} onClick={handleClose}>
+              <RouterLink to={subitem.url} className={classes.menuItemLink}>
+                {subitem.name}
+              </RouterLink>
+            </StyledMenuItem>
+          ))}
+        </StyledMenu>
+      </div>
+    );
+  } else if (item.url !== undefined && item.subitems === undefined) {
+    return (
+      <Button
+        className={classes.toolbarLink}
+        color="inherit"
+        component={RouterLink}
+        to={item.url}
+      >
+        {item.name}
+      </Button>
+    );
+  } else {
+    return <div />
+  }
 }

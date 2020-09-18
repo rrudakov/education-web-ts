@@ -31,9 +31,10 @@ export interface UserState {
   updated_on: string;
 }
 
-export interface MenuItem {
+export interface SiteMenuItem {
   name: string;
-  url: string;
+  url?: string;
+  subitems?: SiteMenuItem[];
 }
 
 export interface SystemState {
@@ -43,7 +44,7 @@ export interface SystemState {
   signInState: SignInState;
   errorMessage?: string;
   successMessage?: string;
-  menuItems: MenuItem[];
+  menuItems: SiteMenuItem[];
   menuDrawerOpen: boolean;
 }
 
@@ -56,11 +57,31 @@ const initialState: SystemState = {
   },
   menuItems: [
     { name: 'Обо мне', url: '/about' },
-    { name: 'Видео-уроки', url: '#' },
-    { name: 'Онлайн и оффлайн уроки', url: '#' },
-    { name: 'Играем с мамой', url: '#' },
-    { name: 'Детские дни рождения', url: '#' },
-    { name: 'Сказочные встречи', url: '#' },
+    {
+      name: 'Уроки',
+      subitems: [
+        { name: 'Видео-уроки', url: '#' },
+        { name: 'Онлайн и оффлайн уроки', url: '#' },
+      ]
+    },
+    {
+      name: 'Играем с мамой',
+      subitems: [
+        { name: 'Пальчиковая гимнастика', url: '#' },
+        { name: 'Артикуляционная гимнастика', url: '#' },
+        { name: 'Дыхательная гимнастика', url: '#' },
+        { name: 'Физкультурная минутка', url: '#' },
+        { name: 'Кинезиологические упражнения', url: '#' },
+        { name: 'Аудиосказки', url: '#' },
+      ]
+    },
+    {
+      name: 'Мероприятия',
+      subitems: [
+        { name: 'Дни рождения', url: '#' },
+        { name: 'Сказочные встречи', url: '#' },
+      ]
+    },
     { name: 'Прокат детских платьев', url: '#' },
     { name: 'Контакты', url: '#' },
   ],
