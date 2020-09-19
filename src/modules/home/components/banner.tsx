@@ -8,8 +8,8 @@ const useStyles = makeStyles({
   img: {
     width: '100%',
     maxHeight: '400px',
-  }
-})
+  },
+});
 
 export const HomeBanner: React.FC = () => {
   const classes = useStyles();
@@ -19,9 +19,13 @@ export const HomeBanner: React.FC = () => {
     <Carousel interval={10000}>
       {bannerImages.map((image, i) => (
         <Card key={i} variant="outlined" square>
-          <CardMedia classes={{ media: classes.img }} component="img" image={image} />
+          <CardMedia
+            classes={{ media: classes.img }}
+            component="img"
+            image={image}
+          />
         </Card>
       ))}
     </Carousel>
   );
-}
+};

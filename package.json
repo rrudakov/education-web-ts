@@ -19,7 +19,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
     "@types/superagent": "^4.1.8",
-    "draft-js": "^0.11.6",
+    "draft-js": "^0.11.7",
     "jwt-decode": "^2.2.0",
     "moment": "^2.27.0",
     "react": "^16.13.1",
@@ -58,6 +58,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.6.0",
     "@typescript-eslint/parser": "^3.6.0",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-react-hooks": "^4.0.5",
     "typescript": "^3.9.7"
   }

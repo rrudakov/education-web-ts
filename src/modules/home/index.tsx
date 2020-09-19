@@ -1,4 +1,4 @@
-import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, Grid, makeStyles, Theme, Button } from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AboutComponent } from './components/about';
@@ -8,6 +8,8 @@ import { MainFeaturedPost } from './components/main-featured-post';
 import { Sidebar } from './components/sidebar';
 import { getFeaturedPosts } from './selectors';
 import { thunkFetchFeaturedPosts } from './thunks';
+import { updateCertificatesModalOpen } from './actions';
+import { CertificatesModal } from './components/certificates-modal';
 
 const useStyles = makeStyles(({ spacing, palette }: Theme) =>
   createStyles({
@@ -37,6 +39,7 @@ export const Home: React.FC = () => {
 
   return (
     <React.Fragment>
+      <CertificatesModal />
       <Grid container direction="row" justify="center" alignItems="center">
         <AboutComponent />
       </Grid>

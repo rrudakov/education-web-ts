@@ -1,4 +1,11 @@
-import { Backdrop, CircularProgress, Container, createStyles, makeStyles, Theme } from '@material-ui/core';
+import {
+  Backdrop,
+  CircularProgress,
+  Container,
+  createStyles,
+  makeStyles,
+  Theme,
+} from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -14,7 +21,6 @@ import { Home } from './modules/home';
 import { NewPost } from './modules/newpost';
 import { SinglePost } from './modules/post';
 import { HomeBanner } from './modules/home/components/banner';
-import { AboutPage } from './modules/about';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,8 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
       zIndex: theme.zIndex.drawer + 1,
       color: '#fff',
     },
-  }),
-)
+  })
+);
 
 export const App: React.FC = () => {
   const classes = useStyles();
@@ -32,7 +38,7 @@ export const App: React.FC = () => {
   const checkToken = useCallback(() => dispatch(thunkCheckLogin()), [dispatch]);
 
   useEffect(() => {
-    checkToken()
+    checkToken();
   }, [checkToken]);
 
   return (
@@ -57,20 +63,19 @@ export const App: React.FC = () => {
             <Route path="/" exact={true}>
               <Home />
             </Route>
-            <Route path="/about" exact={true}>
-              <AboutPage />
-            </Route>
             <Route path="/posts/new" exact={true}>
               <NewPost />
             </Route>
             <Route path="/posts/:id" exact={true}>
               <SinglePost />
             </Route>
-
           </Switch>
         </main>
       </Container>
-      <Footer title="All rights protected" description="This site developed using React and TypeScript" />
+      <Footer
+        title="All rights protected"
+        description="This site developed using React and TypeScript"
+      />
     </BrowserRouter>
   );
-}
+};

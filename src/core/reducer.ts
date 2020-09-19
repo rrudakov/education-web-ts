@@ -10,8 +10,8 @@ import {
   UPDATE_SIGN_IN_PASSWORD,
   UPDATE_SIGN_IN_USERNAME,
   UPDATE_SUCCESS_MESSAGE,
-  TOGGLE_MENU_DRAWER
-} from "./types";
+  TOGGLE_MENU_DRAWER,
+} from './types';
 
 export interface ErrorResponse {
   message: string;
@@ -56,13 +56,12 @@ const initialState: SystemState = {
     password: '',
   },
   menuItems: [
-    { name: 'Обо мне', url: '/about' },
     {
       name: 'Уроки',
       subitems: [
         { name: 'Видео-уроки', url: '#' },
         { name: 'Онлайн и оффлайн уроки', url: '#' },
-      ]
+      ],
     },
     {
       name: 'Играем с мамой',
@@ -73,22 +72,25 @@ const initialState: SystemState = {
         { name: 'Физкультурная минутка', url: '#' },
         { name: 'Кинезиологические упражнения', url: '#' },
         { name: 'Аудиосказки', url: '#' },
-      ]
+      ],
     },
     {
       name: 'Мероприятия',
       subitems: [
         { name: 'Дни рождения', url: '#' },
         { name: 'Сказочные встречи', url: '#' },
-      ]
+      ],
     },
     { name: 'Прокат детских платьев', url: '#' },
     { name: 'Контакты', url: '#' },
   ],
   menuDrawerOpen: false,
-}
+};
 
-export const systemReducer = (state: SystemState = initialState, action: SystemActionTypes): SystemState => {
+export const systemReducer = (
+  state: SystemState = initialState,
+  action: SystemActionTypes
+): SystemState => {
   switch (action.type) {
     case INCREASE_FETCHING:
       return { ...state, fetching: state.fetching + 1 };
@@ -103,8 +105,8 @@ export const systemReducer = (state: SystemState = initialState, action: SystemA
         ...state,
         signInState: {
           ...state.signInState,
-          username: action.payload
-        }
+          username: action.payload,
+        },
       };
     case UPDATE_SIGN_IN_PASSWORD:
       return {
@@ -112,7 +114,7 @@ export const systemReducer = (state: SystemState = initialState, action: SystemA
         signInState: {
           ...state.signInState,
           password: action.payload,
-        }
+        },
       };
     case SUCCESSFUL_LOGIN:
       return { ...state, user: action.payload };
@@ -127,4 +129,4 @@ export const systemReducer = (state: SystemState = initialState, action: SystemA
     default:
       return state;
   }
-}
+};

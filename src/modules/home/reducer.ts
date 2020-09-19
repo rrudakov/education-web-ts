@@ -1,4 +1,10 @@
-import { HomeActionTypes, UPDATE_FEATURED, UPDATE_FULL_POSTS, UPDATE_MAIN_FEATURED } from "./types";
+import {
+    HomeActionTypes,
+    UPDATE_FEATURED,
+    UPDATE_FULL_POSTS,
+    UPDATE_MAIN_FEATURED,
+    UPDATE_CERTIFICATES_MODAL_OPEN,
+} from "./types";
 
 export interface FeaturedPost {
     id: number;
@@ -24,22 +30,27 @@ export interface HomeState {
     mainFeaturedPost: FeaturedPost;
     featuredPosts: FeaturedPost[];
     latestPosts: FullPost[];
+    certificatesModalOpen: boolean;
 }
 
 const initialState: HomeState = {
     mainFeaturedPost: {
         id: 0,
         user_id: 0,
-        title: '',
-        featured_image: '',
-        updated_on: '',
-        description: '',
+        title: "",
+        featured_image: "",
+        updated_on: "",
+        description: "",
     },
     featuredPosts: [],
     latestPosts: [],
-}
+    certificatesModalOpen: false,
+};
 
-export const homeReducer = (state: HomeState = initialState, action: HomeActionTypes): HomeState => {
+export const homeReducer = (
+    state: HomeState = initialState,
+    action: HomeActionTypes
+): HomeState => {
     switch (action.type) {
         case UPDATE_MAIN_FEATURED:
             return {
@@ -50,13 +61,18 @@ export const homeReducer = (state: HomeState = initialState, action: HomeActionT
             return {
                 ...state,
                 featuredPosts: action.payload,
-            }
+            };
         case UPDATE_FULL_POSTS:
             return {
                 ...state,
                 latestPosts: action.payload,
-            }
+            };
+        case UPDATE_CERTIFICATES_MODAL_OPEN:
+            return {
+                ...state,
+                certificatesModalOpen: action.payload,
+            };
         default:
             return state;
     }
-}
+};
