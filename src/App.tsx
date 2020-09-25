@@ -21,6 +21,11 @@ import { Home } from './modules/home';
 import { NewPost } from './modules/newpost';
 import { SinglePost } from './modules/post';
 import { HomeBanner } from './modules/home/components/banner';
+import { VideoLessonsPage } from './modules/video-lessons';
+import { OnlineOfflineLessonsPage } from './modules/online-offline-lessons';
+import { BirthdaysPage } from './modules/birthdays';
+import { FairytailEvents } from './modules/fairytail-events';
+import { DressesPage } from './modules/dresses';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,6 +67,21 @@ export const App: React.FC = () => {
           <Switch>
             <Route path="/" exact={true}>
               <Home />
+            </Route>
+            <Route path="/video-lessons" exact={true}>
+              <VideoLessonsPage />
+            </Route>
+            <Route path="/online-offline-lessons" exact={true}>
+              <OnlineOfflineLessonsPage />
+            </Route>
+            <Route path="/birthdays" exact={true}>
+              <BirthdaysPage />
+            </Route>
+            <Route path="/events" exact={true}>
+              <FairytailEvents />
+            </Route>
+            <Route path="/dresses" exact={true}>
+              <DressesPage />
             </Route>
             <Route path="/posts/new" exact={true}>
               <NewPost />

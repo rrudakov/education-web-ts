@@ -22,7 +22,6 @@ const useStyles = makeStyles({
   img: {
     maxWidth: '997',
     maxHeight: '747',
-    /* height: '100' */
   },
 });
 
@@ -47,7 +46,7 @@ export const CertificatesModal: React.FC = () => {
     >
       <DialogTitle id="my-certificates-modal">Мои дипломы</DialogTitle>
       <DialogContent>
-        <Carousel>
+        <Carousel indicators={false} navButtonsAlwaysVisible={true}>
           {certs.map((cert, i) => (
             <Card key={i} variant="outlined" square>
               <CardMedia

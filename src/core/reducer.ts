@@ -59,8 +59,8 @@ const initialState: SystemState = {
     {
       name: 'Уроки',
       subitems: [
-        { name: 'Видео-уроки', url: '#' },
-        { name: 'Онлайн и оффлайн уроки', url: '#' },
+        { name: 'Видео-уроки', url: '/video-lessons' },
+        { name: 'Онлайн и оффлайн уроки', url: '/online-offline-lessons' },
       ],
     },
     {
@@ -77,11 +77,11 @@ const initialState: SystemState = {
     {
       name: 'Мероприятия',
       subitems: [
-        { name: 'Дни рождения', url: '#' },
-        { name: 'Сказочные встречи', url: '#' },
+        { name: 'Дни рождения', url: '/birthdays' },
+        { name: 'Сказочные встречи', url: '/events' },
       ],
     },
-    { name: 'Прокат детских платьев', url: '#' },
+    { name: 'Прокат детских платьев', url: '/dresses' },
     { name: 'Контакты', url: '#' },
   ],
   menuDrawerOpen: false,

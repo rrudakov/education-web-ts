@@ -1,26 +1,27 @@
 import {
   Avatar,
+  Button,
   Card,
-  CardActionArea,
+  CardActions,
   CardContent,
   createStyles,
   Grid,
   makeStyles,
   Theme,
   Typography,
-  CardActions,
-  Button,
 } from '@material-ui/core';
 import React, { useCallback } from 'react';
-import about from '../img/about.png';
 import { useDispatch } from 'react-redux';
 import { updateCertificatesModalOpen } from '../actions';
+import about from '../img/about.png';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
     root: {
       maxWidth: 500,
       marginTop: 20,
+      marginBottom: 20,
+      paddingBottom: 20,
     },
     avatar: {
       marginTop: 30,
@@ -72,9 +73,15 @@ export const AboutComponent: React.FC = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary" onClick={openCertificatesModal}>
-          Мои дипломы
-        </Button>
+        <Grid container item justify="center">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={openCertificatesModal}
+          >
+            Мои дипломы
+          </Button>
+        </Grid>
       </CardActions>
     </Card>
   );
