@@ -46,7 +46,11 @@ export const CertificatesModal: React.FC = () => {
     >
       <DialogTitle id="my-certificates-modal">Мои дипломы</DialogTitle>
       <DialogContent>
-        <Carousel indicators={false} navButtonsAlwaysVisible={true}>
+        <Carousel
+          indicators={false}
+          navButtonsAlwaysVisible={true}
+          autoPlay={false}
+        >
           {certs.map((cert, i) => (
             <Card key={i} variant="outlined" square>
               <CardMedia
