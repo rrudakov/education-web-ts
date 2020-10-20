@@ -8,6 +8,9 @@ module.exports = {
         tsconfigRootDir: __dirname,
         project: ['./tsconfig.json'],
     },
+    rules: {
+        'react/display-name': [false],
+    },
     extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',

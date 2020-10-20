@@ -15,30 +15,36 @@ interface PathParams {
 export const SinglePost: React.FC = () => {
   const { id }: PathParams = useParams();
   const dispatch = useDispatch();
-  const fetchPostById = useCallback((postId) => dispatch(thunkFetchPostById(postId)), [dispatch]);
+  const fetchPostById = useCallback(
+    (postId) => dispatch(thunkFetchPostById(postId)),
+    [dispatch]
+  );
   const post = useSelector(getPost);
 
   useEffect(() => {
     fetchPostById(id);
     return () => {
       dispatch(updatePost(undefined));
-    }
+    };
   }, [id, fetchPostById, dispatch]);
 
   if (post === undefined) {
-    return (
-      <div />
-    );
+    return <div />;
   } else {
     const publishedDate = formatRelativeDateTime(toDateTime(post.created_on));
     const published = `Опубликовано ${publishedDate}`;
     return (
       <React.Fragment>
         <Typography variant="h2">{post.title}</Typography>
-        <Typography variant="subtitle1" gutterBottom={true} color="textSecondary">{published}</Typography>
+        <Typography
+          variant="subtitle1"
+          gutterBottom={true}
+          color="textSecondary"
+        >
+          {published}
+        </Typography>
         <PostBody body={post.body} />
       </React.Fragment>
     );
   }
-
-}
+};

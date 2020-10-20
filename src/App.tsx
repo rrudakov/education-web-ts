@@ -26,6 +26,7 @@ import { OnlineOfflineLessonsPage } from './modules/online-offline-lessons';
 import { BirthdaysPage } from './modules/birthdays';
 import { FairytailEvents } from './modules/fairytail-events';
 import { DressesPage } from './modules/dresses';
+import { NewVideoLessonPage } from './modules/new-video-lesson';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,7 +57,7 @@ export const App: React.FC = () => {
       <SignInDialog />
       <TopBar />
       <MenuDrawer />
-      <NewPostFab />
+      {/* <NewPostFab /> */}
       <Switch>
         <Route path="/" exact={true}>
           <HomeBanner />
@@ -70,6 +71,9 @@ export const App: React.FC = () => {
             </Route>
             <Route path="/video-lessons" exact={true}>
               <VideoLessonsPage />
+            </Route>
+            <Route path="/video-lessons/new" exact={true}>
+              <NewVideoLessonPage />
             </Route>
             <Route path="/online-offline-lessons" exact={true}>
               <OnlineOfflineLessonsPage />
