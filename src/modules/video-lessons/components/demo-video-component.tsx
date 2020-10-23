@@ -59,19 +59,7 @@ export const DemoVideoComponent: React.FC = () => {
           моим ученикам, с которыми я уже занимаюсь. Каждый урок включает в себя
           много составляющих:
         </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton
-          className={clsx(classes.expand, { [classes.expandOpen]: expanded })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
           <List>
             <BulletListItem>
               Это и беседы на разные темы, которые раскрывает персонаж из
@@ -129,8 +117,18 @@ export const DemoVideoComponent: React.FC = () => {
               несомненно захватывает малышей и вызывает интерес.
             </BulletListItem>
           </List>
-        </CardContent>
-      </Collapse>
+        </Collapse>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton
+          className={clsx(classes.expand, { [classes.expandOpen]: expanded })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </CardActions>
     </Card>
   );
 };

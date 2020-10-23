@@ -50,9 +50,9 @@ export const thunkUploadScreenshots = (
   });
 };
 
-interface CreateVideoLessonResponse {
-  id: number;
-}
+// interface CreateVideoLessonResponse {
+//   id: number;
+// }
 
 export const thunkSubmitNewVideoLesson = (
   history: History<History.UnknownFacade>
@@ -78,9 +78,9 @@ export const thunkSubmitNewVideoLesson = (
         screenshots: newVideoLesson.screenshots,
         price: newVideoLesson.price,
       })
-      .then((response) => {
+      .then((_) => {
         dispatch({ type: DECREASE_FETCHING });
-        const lessonId = (response.body as CreateVideoLessonResponse).id;
+        // const lessonId = (response.body as CreateVideoLessonResponse).id;
         history.push(`/video-lessons`);
         dispatch(updateSuccessMessage('Video lesson was added successfully'));
       })
