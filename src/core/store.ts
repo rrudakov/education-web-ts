@@ -8,19 +8,24 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import { homeReducer, HomeState } from '../modules/home/reducer';
+import {
+  newVideoLessonReducer,
+  NewVideoLessonState,
+} from '../modules/new-video-lesson/reducer';
 import { newPostReducer, NewPostState } from '../modules/newpost/reducer';
 import { postReducer, PostState } from '../modules/post/reducer';
-import { systemReducer, SystemState } from './reducer';
 import {
-  NewVideoLessonState,
-  newVideoLessonReducer,
-} from '../modules/new-video-lesson/reducer';
+  videoLessonsReducer,
+  VideoLessonsState,
+} from '../modules/video-lessons/reducer';
+import { systemReducer, SystemState } from './reducer';
 
 export interface AppStoreState {
   system: SystemState;
   home: HomeState;
   post: PostState;
   newPost: NewPostState;
+  videoLessons: VideoLessonsState;
   newVideoLesson: NewVideoLessonState;
 }
 
@@ -29,6 +34,7 @@ const rootReducer = combineReducers({
   home: homeReducer,
   post: postReducer,
   newPost: newPostReducer,
+  videoLessons: videoLessonsReducer,
   newVideoLesson: newVideoLessonReducer,
 });
 

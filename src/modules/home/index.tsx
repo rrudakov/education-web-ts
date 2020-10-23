@@ -1,42 +1,9 @@
-import { createStyles, Grid, makeStyles, Theme, Button } from '@material-ui/core';
-import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Grid } from '@material-ui/core';
+import React from 'react';
 import { AboutComponent } from './components/about';
-import { FeaturedPostComponent } from './components/featured-post';
-import { Main } from './components/main';
-import { MainFeaturedPost } from './components/main-featured-post';
-import { Sidebar } from './components/sidebar';
-import { getFeaturedPosts } from './selectors';
-import { thunkFetchFeaturedPosts } from './thunks';
-import { updateCertificatesModalOpen } from './actions';
 import { CertificatesModal } from './components/certificates-modal';
 
-const useStyles = makeStyles(({ spacing, palette }: Theme) =>
-  createStyles({
-    mainGrid: {
-      marginTop: spacing(3),
-    },
-    toolbarSecondary: {
-      justifyContent: 'space-between',
-      overflowX: 'auto',
-      background: palette.secondary.main,
-    },
-    toolbarLink: {
-      padding: spacing(1),
-      flexShrink: 0,
-    }
-  }));
-
 export const Home: React.FC = () => {
-  const classes = useStyles();
-  const featuredPosts = useSelector(getFeaturedPosts);
-  const dispatch = useDispatch();
-  const fetchFeaturedPosts = useCallback(() => dispatch(thunkFetchFeaturedPosts()), [dispatch]);
-
-  useEffect(() => {
-    fetchFeaturedPosts()
-  }, [fetchFeaturedPosts]);
-
   return (
     <React.Fragment>
       <CertificatesModal />
@@ -55,5 +22,5 @@ export const Home: React.FC = () => {
           <Sidebar title="About" description="Some valuable description for sidebar" />
           </Grid> */}
     </React.Fragment>
-  )
-}
+  );
+};

@@ -2,37 +2,27 @@ import {
   Button,
   createStyles,
   FormGroup,
-  GridList,
-  GridListTile,
-  GridListTileBar,
-  IconButton,
   makeStyles,
   TextField,
   Theme,
   Typography,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
+import SaveIcon from '@material-ui/icons/Save';
 import React, { ChangeEvent, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import {
-  deleteScreenshotActionCreator,
   setUpdateDialogOpenActionCreator,
   updateDescriptionActionCreator,
   updatePriceActionCreator,
   updateSubtitleActionCreator,
   updateTitleActionCreator,
 } from '../actions';
-import {
-  getDescription,
-  getPrice,
-  getScreenshots,
-  getSubtitle,
-  getTitle,
-} from '../selectors';
+import { getDescription, getPrice, getSubtitle, getTitle } from '../selectors';
+import { thunkSubmitNewVideoLesson } from '../thunks';
+import { SingleLineScreenshots } from './single-line-screenshots';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -46,6 +36,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 
 export const NewVideoLessonForm: React.FC = () => {
   const classes = useStyles();
+  const history = useHistory();
   const title = useSelector(getTitle);
   const subtitle = useSelector(getSubtitle);
   const description = useSelector(getDescription);
@@ -78,6 +69,12 @@ export const NewVideoLessonForm: React.FC = () => {
   const openUploadDialog = useCallback(
     () => dispatch(setUpdateDialogOpenActionCreator(true)),
     [dispatch]
+  );
+
+  /* Submit lesson */
+  const submitVideoLesson = useCallback(
+    () => dispatch(thunkSubmitNewVideoLesson(history)),
+    [dispatch, history]
   );
 
   return (
@@ -150,6 +147,7 @@ export const NewVideoLessonForm: React.FC = () => {
           variant="contained"
           color="primary"
           component="span"
+          onClick={submitVideoLesson}
           startIcon={<SaveIcon />}
         >
           Сохранить
@@ -158,66 +156,5 @@ export const NewVideoLessonForm: React.FC = () => {
       <Typography variant="h4">Прикрепленные скриншоты</Typography>
       <SingleLineScreenshots />
     </React.Fragment>
-  );
-};
-
-/* Copy-paste from documentation :) */
-const useGridListStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-      overflow: 'hidden',
-      backgroundColor: theme.palette.background.paper,
-    },
-    gridList: {
-      flexWrap: 'nowrap',
-      // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-      transform: 'translateZ(0)',
-    },
-    title: {
-      color: theme.palette.primary.light,
-    },
-    titleBar: {
-      background:
-        'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-    },
-  })
-);
-
-const SingleLineScreenshots: React.FC = () => {
-  const classes = useGridListStyles();
-  const screenshots = useSelector(getScreenshots);
-  const dispatch = useDispatch();
-  const deleteScreenshot = useCallback(
-    (s: string) => dispatch(deleteScreenshotActionCreator(s)),
-    [dispatch]
-  );
-
-  return (
-    <div className={classes.root}>
-      <GridList className={classes.gridList} cols={2}>
-        {screenshots.map((screenshot) => (
-          <GridListTile key={screenshot}>
-            <img src={screenshot} />
-            <GridListTileBar
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
-              actionIcon={
-                <IconButton aria-label={`star ${screenshot}`}>
-                  <DeleteOutlineIcon
-                    className={classes.title}
-                    onClick={() => deleteScreenshot(screenshot)}
-                  />
-                </IconButton>
-              }
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
   );
 };

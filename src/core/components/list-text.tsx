@@ -1,6 +1,6 @@
-import React, { Props } from 'react';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import React, { Props } from 'react';
 
 export const BulletListItem: React.FC<Props<{}>> = (props) => {
   return (
@@ -8,7 +8,9 @@ export const BulletListItem: React.FC<Props<{}>> = (props) => {
       <ListItemIcon>
         <ArrowRightIcon />
       </ListItemIcon>
-      <ListItemText primaryTypographyProps={{ variant: 'body1' }}>
+      <ListItemText
+        primaryTypographyProps={{ variant: 'body2', color: 'textSecondary' }}
+      >
         {props.children}
       </ListItemText>
     </ListItem>

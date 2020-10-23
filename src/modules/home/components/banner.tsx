@@ -1,8 +1,8 @@
 import { Card, CardMedia, makeStyles } from '@material-ui/core';
 import React from 'react';
-import Carousel from 'react-material-ui-carousel';
-import BannerLego from '../img/banner_lego.png';
+import { Carousel } from 'react-responsive-carousel';
 import BannerCelebration from '../img/banner_celebr.png';
+import BannerLego from '../img/banner_lego.png';
 
 const useStyles = makeStyles({
   img: {
@@ -16,9 +16,18 @@ export const HomeBanner: React.FC = () => {
   const bannerImages = [BannerLego, BannerCelebration];
 
   return (
-    <Carousel interval={10000}>
+    <Carousel
+      showStatus={false}
+      showThumbs={false}
+      swipeable
+      infiniteLoop
+      autoPlay
+      stopOnHover
+      interval={10000}
+      transitionTime={400}
+    >
       {bannerImages.map((image, i) => (
-        <Card key={i} variant="outlined" square>
+        <Card key={i} elevation={0} square>
           <CardMedia
             classes={{ media: classes.img }}
             component="img"

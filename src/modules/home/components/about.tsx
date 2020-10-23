@@ -13,7 +13,7 @@ import {
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateCertificatesModalOpen } from '../actions';
-import about from '../img/about.png';
+import about from '../../../core/img/avatar.png';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({

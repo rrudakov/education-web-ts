@@ -1,12 +1,13 @@
+import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { AnyAction, CombinedState, Store } from 'redux';
 import { App } from './App';
-import * as serviceWorker from './serviceWorker';
-import { configureStore, AppStoreState } from './core/store';
-import { Store, CombinedState, AnyAction } from 'redux';
-import { ThemeProvider, CssBaseline } from '@material-ui/core';
+import { AppStoreState, configureStore } from './core/store';
 import { theme } from './core/theme';
+import * as serviceWorker from './serviceWorker';
 
 const store: Store<CombinedState<AppStoreState>, AnyAction> = configureStore();
 

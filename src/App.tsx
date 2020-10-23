@@ -13,20 +13,19 @@ import { SignInDialog } from './core/components/auth';
 import { Footer } from './core/components/footer';
 import { MenuDrawer } from './core/components/menu-drawer';
 import { ErrorMessage, SuccessMessage } from './core/components/message';
-import { NewPostFab } from './core/components/new-post-button';
 import { TopBar } from './core/components/topbar';
 import { getFetching } from './core/selector';
 import { thunkCheckLogin } from './core/thunks';
-import { Home } from './modules/home';
-import { NewPost } from './modules/newpost';
-import { SinglePost } from './modules/post';
-import { HomeBanner } from './modules/home/components/banner';
-import { VideoLessonsPage } from './modules/video-lessons';
-import { OnlineOfflineLessonsPage } from './modules/online-offline-lessons';
 import { BirthdaysPage } from './modules/birthdays';
-import { FairytailEvents } from './modules/fairytail-events';
 import { DressesPage } from './modules/dresses';
+import { FairytailEvents } from './modules/fairytail-events';
+import { Home } from './modules/home';
+import { HomeBanner } from './modules/home/components/banner';
 import { NewVideoLessonPage } from './modules/new-video-lesson';
+import { NewPost } from './modules/newpost';
+import { OnlineOfflineLessonsPage } from './modules/online-offline-lessons';
+import { SinglePost } from './modules/post';
+import { VideoLessonsPage } from './modules/video-lessons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
