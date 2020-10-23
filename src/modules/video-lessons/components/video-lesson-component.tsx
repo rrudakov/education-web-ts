@@ -100,7 +100,7 @@ export const VideoLessonComponent: React.FC<VideoLessonComponentProps> = ({
         interval={10000}
       >
         {videoLesson.screenshots.map((screenshot, i) => (
-          <CardMedia key={i} component="img" image={screenshot} />
+          <CardMedia key={i} component="img" image={screenshot} height="100%" />
         ))}
       </Carousel>
       <CardContent>
