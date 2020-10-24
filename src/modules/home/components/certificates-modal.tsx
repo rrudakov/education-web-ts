@@ -46,7 +46,7 @@ export const CertificatesModal: React.FC = () => {
             transitionTime={400}
           >
             {certs.map((cert, i) => (
-              <CardMedia key={i} component="img" image={cert} />
+              <CardMedia key={i} component="img" image={cert} height="100%" />
             ))}
           </Carousel>
         </Card>

@@ -23,6 +23,7 @@ import {
 import { getDescription, getPrice, getSubtitle, getTitle } from '../selectors';
 import { thunkSubmitNewVideoLesson } from '../thunks';
 import { SingleLineScreenshots } from './single-line-screenshots';
+import { PriceNumberFormatComponent } from '../../../core/components/price-number-format';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -121,6 +122,9 @@ export const NewVideoLessonForm: React.FC = () => {
           fullWidth
           variant="outlined"
           margin="normal"
+          InputProps={{
+            inputComponent: PriceNumberFormatComponent as any
+          }}
         />
         <Button
           className={classes.button}
