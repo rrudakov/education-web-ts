@@ -13,17 +13,17 @@ import SaveIcon from '@material-ui/icons/Save';
 import React, { ChangeEvent, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { PriceNumberFormatComponent } from '../../../core/components/price-number-format';
 import {
   setUpdateDialogOpenActionCreator,
-  updateDescriptionActionCreator,
   updatePriceActionCreator,
-  updateSubtitleActionCreator,
-  updateTitleActionCreator,
 } from '../actions';
-import { getDescription, getPrice, getSubtitle, getTitle } from '../selectors';
+import { getPrice } from '../selectors';
 import { thunkSubmitNewVideoLesson } from '../thunks';
+import { DescriptionInputComponent } from './description-input';
 import { SingleLineScreenshots } from './single-line-screenshots';
-import { PriceNumberFormatComponent } from '../../../core/components/price-number-format';
+import { SubTitleInputComponent } from './subtitle-input';
+import { TitleInputComponent } from './title-input';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -38,28 +38,10 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 export const NewVideoLessonForm: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
-  const title = useSelector(getTitle);
-  const subtitle = useSelector(getSubtitle);
-  const description = useSelector(getDescription);
   const price = useSelector(getPrice);
   const dispatch = useDispatch();
 
   /* Update inputs */
-  const updateTitle = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) =>
-      dispatch(updateTitleActionCreator(e.target.value)),
-    [dispatch]
-  );
-  const updateSubtitle = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) =>
-      dispatch(updateSubtitleActionCreator(e.target.value)),
-    [dispatch]
-  );
-  const updateDescription = useCallback(
-    (e: ChangeEvent<HTMLTextAreaElement>) =>
-      dispatch(updateDescriptionActionCreator(e.target.value)),
-    [dispatch]
-  );
   const updatePrice = useCallback(
     (e: ChangeEvent<HTMLInputElement>) =>
       dispatch(updatePriceActionCreator(e.target.value)),
@@ -81,38 +63,9 @@ export const NewVideoLessonForm: React.FC = () => {
   return (
     <React.Fragment>
       <FormGroup row>
-        <TextField
-          id="newVideoLessonTitle"
-          label="Заголовок"
-          placeholder="Заголовок для нового видео-урока..."
-          value={title}
-          onChange={updateTitle}
-          fullWidth={true}
-          variant="outlined"
-          margin="normal"
-        />
-        <TextField
-          id="newVideoLessonSubtitle"
-          label="Подзаголовок"
-          placeholder="Подзаголовок для нового видео-урока..."
-          value={subtitle}
-          onChange={updateSubtitle}
-          fullWidth
-          variant="outlined"
-          margin="normal"
-        />
-        <TextField
-          id="newVideoLessonDescription"
-          label="Описание"
-          placeholder="Описание нового видео-урока..."
-          value={description}
-          onChange={updateDescription}
-          fullWidth
-          variant="outlined"
-          margin="normal"
-          multiline
-          rows={3}
-        />
+        <TitleInputComponent />
+        <SubTitleInputComponent />
+        <DescriptionInputComponent />
         <TextField
           id="newVideoLessonPrice"
           label="Цена"
@@ -123,7 +76,7 @@ export const NewVideoLessonForm: React.FC = () => {
           variant="outlined"
           margin="normal"
           InputProps={{
-            inputComponent: PriceNumberFormatComponent as any
+            inputComponent: PriceNumberFormatComponent as any,
           }}
         />
         <Button
