@@ -5,3 +5,25 @@ import { VideoLesson } from './reducer';
 export const getVideoLessons: Selector<AppStoreState, VideoLesson[]> = ({
   videoLessons,
 }) => videoLessons.lessons;
+
+export const getTitle: Selector<AppStoreState, string> = ({ videoLessons }) =>
+  videoLessons.form.title;
+
+export const getSubtitle: Selector<AppStoreState, string> = ({
+  videoLessons,
+}) => videoLessons.form.subtitle;
+
+export const getDescription: Selector<AppStoreState, string> = ({
+  videoLessons,
+}) => videoLessons.form.description;
+
+export const getScreenshots: Selector<AppStoreState, string[]> = ({
+  videoLessons,
+}) => videoLessons.form.screenshots;
+
+export const getPrice: Selector<AppStoreState, string> = ({ videoLessons }) =>
+  videoLessons.form.price;
+
+export const getUploadDialogOpen: Selector<AppStoreState, boolean> = ({
+  videoLessons,
+}) => videoLessons.form.uploadDialogOpen;

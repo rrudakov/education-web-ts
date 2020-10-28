@@ -8,10 +8,6 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import { homeReducer, HomeState } from '../modules/home/reducer';
-import {
-  newVideoLessonReducer,
-  NewVideoLessonState,
-} from '../modules/new-video-lesson/reducer';
 import { newPostReducer, NewPostState } from '../modules/newpost/reducer';
 import { postReducer, PostState } from '../modules/post/reducer';
 import {
@@ -26,7 +22,6 @@ export interface AppStoreState {
   post: PostState;
   newPost: NewPostState;
   videoLessons: VideoLessonsState;
-  newVideoLesson: NewVideoLessonState;
 }
 
 const rootReducer = combineReducers({
@@ -35,7 +30,6 @@ const rootReducer = combineReducers({
   post: postReducer,
   newPost: newPostReducer,
   videoLessons: videoLessonsReducer,
-  newVideoLesson: newVideoLessonReducer,
 });
 
 export const configureStore = (): Store<

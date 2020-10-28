@@ -21,7 +21,6 @@ import { DressesPage } from './modules/dresses';
 import { FairytailEvents } from './modules/fairytail-events';
 import { Home } from './modules/home';
 import { HomeBanner } from './modules/home/components/banner';
-import { NewVideoLessonPage } from './modules/new-video-lesson';
 import { NewPost } from './modules/newpost';
 import { OnlineOfflineLessonsPage } from './modules/online-offline-lessons';
 import { SinglePost } from './modules/post';
@@ -56,40 +55,36 @@ export const App: React.FC = () => {
       <SignInDialog />
       <TopBar />
       <MenuDrawer />
-      {/* <NewPostFab /> */}
       <Switch>
-        <Route path="/" exact={true}>
+        <Route path="/" exact>
           <HomeBanner />
         </Route>
       </Switch>
       <Container maxWidth="lg">
         <main>
           <Switch>
-            <Route path="/" exact={true}>
+            <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/video-lessons" exact={true}>
+            <Route path="/video-lessons" exact >
               <VideoLessonsPage />
             </Route>
-            <Route path="/video-lessons/new" exact={true}>
-              <NewVideoLessonPage />
-            </Route>
-            <Route path="/online-offline-lessons" exact={true}>
+            <Route path="/online-offline-lessons" exact>
               <OnlineOfflineLessonsPage />
             </Route>
-            <Route path="/birthdays" exact={true}>
+            <Route path="/birthdays" exact>
               <BirthdaysPage />
             </Route>
-            <Route path="/events" exact={true}>
+            <Route path="/events" exact>
               <FairytailEvents />
             </Route>
-            <Route path="/dresses" exact={true}>
+            <Route path="/dresses" exact>
               <DressesPage />
             </Route>
-            <Route path="/posts/new" exact={true}>
+            <Route path="/posts/new" exact>
               <NewPost />
             </Route>
-            <Route path="/posts/:id" exact={true}>
+            <Route path="/posts/:id" exact>
               <SinglePost />
             </Route>
           </Switch>

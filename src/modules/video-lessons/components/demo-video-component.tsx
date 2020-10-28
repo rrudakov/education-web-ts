@@ -47,7 +47,7 @@ export const DemoVideoComponent: React.FC = () => {
     <Card className={classes.root}>
       <CardMedia
         component="video"
-        src="https://alenkinaskazka.net/media/video_2020-10-21_14-33-38.webm"
+        src="https://alenkinaskazka.net/media/video_2020-10-27_08-55-05.webm"
         controls
         title="Demo video"
       />

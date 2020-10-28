@@ -1,9 +1,23 @@
 import { VideoLesson } from './reducer';
 import {
+  AddScreenshotAction,
+  ADD_SCREENSHOT,
   DeleteLessonAction,
+  DeleteScreenshotAction,
   DELETE_LESSON,
+  DELETE_SCREENSHOT,
+  SetUploadDialogOpenAction,
+  SET_UPLOAD_DIALOG_OPEN,
+  UpdateDescriptionAction,
   UpdateLessonsAction,
+  UpdatePriceAction,
+  UpdateSubtitleAction,
+  UpdateTitleAction,
+  UPDATE_DESCRIPTION,
   UPDATE_LESSONS,
+  UPDATE_PRICE,
+  UPDATE_SUBTITLE,
+  UPDATE_TITLE,
 } from './types';
 
 export const updateLessonsActionCreator = (
@@ -18,4 +32,49 @@ export const deleteLessonActionCreator = (
 ): DeleteLessonAction => ({
   type: DELETE_LESSON,
   payload: lessonId,
+});
+
+export const setUpdateDialogOpenActionCreator = (
+  open: boolean
+): SetUploadDialogOpenAction => ({
+  type: SET_UPLOAD_DIALOG_OPEN,
+  payload: open,
+});
+
+export const updateTitleActionCreator = (title: string): UpdateTitleAction => ({
+  type: UPDATE_TITLE,
+  payload: title,
+});
+
+export const updateSubtitleActionCreator = (
+  subtitle: string
+): UpdateSubtitleAction => ({
+  type: UPDATE_SUBTITLE,
+  payload: subtitle,
+});
+
+export const updateDescriptionActionCreator = (
+  description: string
+): UpdateDescriptionAction => ({
+  type: UPDATE_DESCRIPTION,
+  payload: description,
+});
+
+export const addScreenshotActionCreator = (
+  screenshot: string
+): AddScreenshotAction => ({
+  type: ADD_SCREENSHOT,
+  payload: screenshot,
+});
+
+export const deleteScreenshotActionCreator = (
+  screenshot: string
+): DeleteScreenshotAction => ({
+  type: DELETE_SCREENSHOT,
+  payload: screenshot,
+});
+
+export const updatePriceActionCreator = (price: string): UpdatePriceAction => ({
+  type: UPDATE_PRICE,
+  payload: price,
 });

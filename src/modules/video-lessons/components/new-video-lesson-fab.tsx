@@ -1,10 +1,10 @@
-import React from 'react';
-import { makeStyles, Theme, createStyles, Fab } from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import { getUser, getLoggedIn } from '../../../core/selector';
-import { isModerator, isAdmin } from '../../../core/utils/user';
-import { Link as RouterLink } from 'react-router-dom';
+import { createStyles, Fab, makeStyles, Theme } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link as RouterLink, useRouteMatch } from 'react-router-dom';
+import { getLoggedIn, getUser } from '../../../core/selector';
+import { isAdmin, isModerator } from '../../../core/utils/user';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -20,6 +20,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 );
 
 export const NewVideoLessonFab: React.FC = () => {
+  const {url} = useRouteMatch();
   const classes = useStyles();
   const user = useSelector(getUser);
   const loggedIn = useSelector(getLoggedIn);
@@ -31,7 +32,7 @@ export const NewVideoLessonFab: React.FC = () => {
         color="primary"
         aria-label="add"
         component={RouterLink}
-        to="/video-lessons/new"
+        to={`${url}/new`}
       >
         <AddIcon />
       </Fab>
