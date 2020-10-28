@@ -6,6 +6,7 @@ import { DemoVideoComponent } from './components/demo-video-component';
 import { NewVideoLessonFab } from './components/new-video-lesson-fab';
 import { VideoLessonComponent } from './components/video-lesson-component';
 import { NewVideoLessonPage } from './modules/create';
+import { UpdateVideoLessonPage } from './modules/update';
 import { getVideoLessons } from './selectors';
 import { thunkFetchVideoLessons } from './thunks';
 
@@ -24,7 +25,7 @@ export const VideoLessonsPage: React.FC = () => {
 
   return (
     <Switch>
-      <Route path={path} exact>
+      <Route exact path={path}>
         <Container maxWidth="lg">
           <DemoVideoComponent />
           {videoLessons.map((videoLesson) => (
@@ -36,8 +37,11 @@ export const VideoLessonsPage: React.FC = () => {
         </Container>
         <NewVideoLessonFab />
       </Route>
-      <Route path={`${path}/new`} exact>
+      <Route exact path={`${path}/new`}>
         <NewVideoLessonPage />
+      </Route>
+      <Route exact path={`${path}/:lessonId`}>
+        <UpdateVideoLessonPage />
       </Route>
     </Switch>
   );

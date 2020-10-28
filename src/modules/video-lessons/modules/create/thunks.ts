@@ -2,19 +2,17 @@ import { History } from 'history';
 import { ThunkAction } from 'redux-thunk';
 import request, { ResponseError } from 'superagent';
 import {
+  fetching,
+  logout,
+  openAuthModal,
+  stopFetching,
   updateErrorMessage,
   updateSuccessMessage,
 } from '../../../../core/actions';
 import { BASE_URL } from '../../../../core/constants';
 import { ErrorResponse } from '../../../../core/reducer';
 import { AppStoreState } from '../../../../core/store';
-import {
-  DECREASE_FETCHING,
-  INCREASE_FETCHING,
-  LOGOUT,
-  OPEN_AUTH,
-  SystemActionTypes,
-} from '../../../../core/types';
+import { SystemActionTypes } from '../../../../core/types';
 import { getToken } from '../../../../core/utils/storage';
 
 // interface CreateVideoLessonResponse {
@@ -32,9 +30,9 @@ export const thunkSubmitNewVideoLesson = (
 
   if (authToken === null) {
     dispatch(updateErrorMessage('Unauthorized!'));
-    dispatch({ type: LOGOUT });
+    dispatch(logout());
   } else {
-    dispatch({ type: INCREASE_FETCHING });
+    dispatch(fetching());
     request
       .post(`${BASE_URL}/lessons`)
       .set('Authorization', `Token ${authToken}`)
@@ -46,16 +44,16 @@ export const thunkSubmitNewVideoLesson = (
         price: videoLessons.form.price,
       })
       .then((_) => {
-        dispatch({ type: DECREASE_FETCHING });
+        dispatch(stopFetching());
         // const lessonId = (response.body as CreateVideoLessonResponse).id;
         history.push(`/video-lessons`);
         dispatch(updateSuccessMessage('Video lesson was added successfully'));
       })
       .catch((error: ResponseError) => {
-        dispatch({ type: DECREASE_FETCHING });
+        dispatch(stopFetching());
         if (error.status === 401) {
-          dispatch({ type: LOGOUT });
-          dispatch({ type: OPEN_AUTH });
+          dispatch(logout());
+          dispatch(openAuthModal());
         }
         if (error.response !== undefined) {
           dispatch(

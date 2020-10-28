@@ -17,6 +17,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { getUser } from '../../../core/selector';
 import { isAdmin, isModerator } from '../../../core/utils/user';
 import { VideoLesson } from '../reducer';
@@ -39,6 +40,7 @@ export const VideoLessonComponent: React.FC<VideoLessonComponentProps> = ({
 }: VideoLessonComponentProps) => {
   const classes = useStyles();
   const user = useSelector(getUser);
+  const { url } = useRouteMatch();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -85,7 +87,9 @@ export const VideoLessonComponent: React.FC<VideoLessonComponentProps> = ({
         open={open}
         onClose={closeMenu}
       >
-        <MenuItem onClick={closeMenu}>Редактировать</MenuItem>
+        <MenuItem component={Link} to={`${url}/${videoLesson.id}`}>
+          Редактировать
+        </MenuItem>
         <MenuItem onClick={() => deleteVideoLesson(videoLesson.id)}>
           Удалить
         </MenuItem>

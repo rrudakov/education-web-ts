@@ -9,7 +9,7 @@ export const CloseFormButton: React.FC<{ className: string }> = ({
   return (
     <Button
       className={className}
-      variant="outlined"
+      variant="contained"
       color="primary"
       startIcon={<CancelIcon />}
       component={RouterLink}

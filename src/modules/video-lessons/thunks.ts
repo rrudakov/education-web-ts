@@ -1,15 +1,16 @@
 import { ThunkAction } from 'redux-thunk';
 import request from 'superagent';
-import { updateErrorMessage, updateSuccessMessage } from '../../core/actions';
+import {
+  fetching,
+  logout,
+  stopFetching,
+  updateErrorMessage,
+  updateSuccessMessage,
+} from '../../core/actions';
 import { BASE_URL } from '../../core/constants';
 import { ErrorResponse } from '../../core/reducer';
 import { AppStoreState } from '../../core/store';
-import {
-  DECREASE_FETCHING,
-  INCREASE_FETCHING,
-  LOGOUT,
-  SystemActionTypes,
-} from '../../core/types';
+import { SystemActionTypes } from '../../core/types';
 import { getToken } from '../../core/utils/storage';
 import {
   addScreenshotActionCreator,
@@ -25,15 +26,15 @@ export const thunkFetchVideoLessons = (): ThunkAction<
   null,
   SystemActionTypes | VideoLessonsActionType
 > => (dispatch) => {
-  dispatch({ type: INCREASE_FETCHING });
+  dispatch(fetching());
   request
     .get(`${BASE_URL}/lessons`)
     .then((response) => {
-      dispatch({ type: DECREASE_FETCHING });
+      dispatch(stopFetching());
       dispatch(updateLessonsActionCreator(response.body));
     })
     .catch((err) => {
-      dispatch({ type: DECREASE_FETCHING });
+      dispatch(stopFetching());
       dispatch(updateErrorMessage((err as ErrorResponse).message));
     });
 };
@@ -50,19 +51,19 @@ export const thunkDeleteVideoLessonById = (
 
   if (authToken === null) {
     dispatch(updateErrorMessage('Unauthorized!'));
-    dispatch({ type: LOGOUT });
+    dispatch(logout());
   } else {
-    dispatch({ type: INCREASE_FETCHING });
+    dispatch(fetching());
     request
       .delete(`${BASE_URL}/lessons/${lessonId}`)
       .set('Authorization', `Token ${authToken}`)
       .then((_) => {
-        dispatch({ type: DECREASE_FETCHING });
+        dispatch(stopFetching());
         dispatch(deleteLessonActionCreator(lessonId));
         dispatch(updateSuccessMessage('Video lesson was deleted successfully'));
       })
       .catch((err) => {
-        dispatch({ type: DECREASE_FETCHING });
+        dispatch(stopFetching());
         dispatch(updateErrorMessage((err as ErrorResponse).message));
       });
   }
@@ -82,7 +83,7 @@ export const thunkUploadScreenshots = (
 > => (dispatch) => {
   dispatch(setUpdateDialogOpenActionCreator(false));
   files.forEach((f) => {
-    dispatch({ type: INCREASE_FETCHING });
+    dispatch(fetching());
     request
       .post(`${BASE_URL}/upload`)
       .attach('file', f, f.name)
@@ -90,10 +91,10 @@ export const thunkUploadScreenshots = (
         dispatch(
           addScreenshotActionCreator((response.body as UploadFileResponse).url)
         );
-        dispatch({ type: DECREASE_FETCHING });
+        dispatch(stopFetching());
       })
       .catch((err) => {
-        dispatch({ type: DECREASE_FETCHING });
+        dispatch(stopFetching());
         dispatch(updateErrorMessage((err as ErrorResponse).message));
       });
   });

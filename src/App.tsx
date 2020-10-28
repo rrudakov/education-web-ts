@@ -66,7 +66,7 @@ export const App: React.FC = () => {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/video-lessons" exact >
+            <Route path="/video-lessons">
               <VideoLessonsPage />
             </Route>
             <Route path="/online-offline-lessons" exact>

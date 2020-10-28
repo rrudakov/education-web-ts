@@ -20,7 +20,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 );
 
 export const NewVideoLessonFab: React.FC = () => {
-  const {url} = useRouteMatch();
+  const { url } = useRouteMatch();
   const classes = useStyles();
   const user = useSelector(getUser);
   const loggedIn = useSelector(getLoggedIn);

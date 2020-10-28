@@ -5,12 +5,12 @@ import { CreateVideoLessonForm } from './components/create-video-lesson-form';
 
 export const NewVideoLessonPage: React.FC = () => {
   return (
-    <main>
+    <React.Fragment>
       <Typography variant="h3" gutterBottom>
-        Добавить новое видео
+        Добавить новый видео-урок
       </Typography>
       <CreateVideoLessonForm />
       <UploadScreenshotsDialog />
-    </main>
+    </React.Fragment>
   );
 };
