@@ -1,11 +1,13 @@
 import {
   ADD_SCREENSHOT,
+  CLEAR_FORM,
   DELETE_LESSON,
   DELETE_SCREENSHOT,
   SET_UPLOAD_DIALOG_OPEN,
   UPDATE_DESCRIPTION,
   UPDATE_LESSONS,
   UPDATE_PRICE,
+  UPDATE_SCREENSHOTS,
   UPDATE_SUBTITLE,
   UPDATE_TITLE,
   VideoLessonsActionType,
@@ -84,8 +86,22 @@ export const videoLessonsReducer = (
           ),
         },
       };
+    case UPDATE_SCREENSHOTS:
+      return { ...state, form: { ...state.form, screenshots: action.payload } };
     case UPDATE_PRICE:
       return { ...state, form: { ...state.form, price: action.payload } };
+    case CLEAR_FORM:
+      return {
+        ...state,
+        form: {
+          title: '',
+          subtitle: '',
+          description: '',
+          screenshots: [],
+          price: '',
+          uploadDialogOpen: false,
+        },
+      };
     case SET_UPLOAD_DIALOG_OPEN:
       return {
         ...state,

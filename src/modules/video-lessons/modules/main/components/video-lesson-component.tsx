@@ -18,9 +18,9 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { getUser } from '../../../core/selector';
-import { isAdmin, isModerator } from '../../../core/utils/user';
-import { VideoLesson } from '../reducer';
+import { getUser } from '../../../../../core/selector';
+import { isAdmin, isModerator } from '../../../../../core/utils/user';
+import { VideoLesson } from '../../../reducer';
 import { thunkDeleteVideoLessonById } from '../thunks';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>

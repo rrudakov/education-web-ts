@@ -15,8 +15,10 @@ import { AppStoreState } from '../../../../core/store';
 import { SystemActionTypes } from '../../../../core/types';
 import { getToken } from '../../../../core/utils/storage';
 import {
+  clearFormActionCreator,
   updateDescriptionActionCreator,
   updatePriceActionCreator,
+  updateScreenshotsActionCreator,
   updateSubtitleActionCreator,
   updateTitleActionCreator,
 } from '../../actions';
@@ -51,6 +53,7 @@ export const thunkGetLesson = (
       dispatch(updateSubtitleActionCreator(lesson.subtitle));
       dispatch(updateDescriptionActionCreator(lesson.description));
       dispatch(updatePriceActionCreator(lesson.price));
+      dispatch(updateScreenshotsActionCreator(lesson.screenshots));
     })
     .catch((err) => {
       dispatch(stopFetching());
@@ -88,6 +91,7 @@ export const thunkUpdateLesson = (
       .then((_) => {
         dispatch(stopFetching());
         history.push('/video-lessons');
+        dispatch(clearFormActionCreator());
         dispatch(updateSuccessMessage('Video lesson was successfully updated'));
       })
       .catch((err: ResponseError) => {

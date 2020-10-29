@@ -14,6 +14,8 @@ import { ErrorResponse } from '../../../../core/reducer';
 import { AppStoreState } from '../../../../core/store';
 import { SystemActionTypes } from '../../../../core/types';
 import { getToken } from '../../../../core/utils/storage';
+import { clearFormActionCreator } from '../../actions';
+import { VideoLessonsActionType } from '../../types';
 
 // interface CreateVideoLessonResponse {
 //   id: number;
@@ -21,10 +23,12 @@ import { getToken } from '../../../../core/utils/storage';
 
 export const thunkSubmitNewVideoLesson = (
   history: History<History.UnknownFacade>
-): ThunkAction<void, AppStoreState, null, SystemActionTypes> => (
-  dispatch,
-  getState
-) => {
+): ThunkAction<
+  void,
+  AppStoreState,
+  null,
+  SystemActionTypes | VideoLessonsActionType
+> => (dispatch, getState) => {
   const { videoLessons } = getState();
   const authToken = getToken();
 
@@ -47,6 +51,7 @@ export const thunkSubmitNewVideoLesson = (
         dispatch(stopFetching());
         // const lessonId = (response.body as CreateVideoLessonResponse).id;
         history.push(`/video-lessons`);
+        dispatch(clearFormActionCreator());
         dispatch(updateSuccessMessage('Video lesson was added successfully'));
       })
       .catch((error: ResponseError) => {

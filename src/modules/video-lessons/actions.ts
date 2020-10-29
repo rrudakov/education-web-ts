@@ -2,6 +2,8 @@ import { VideoLesson } from './reducer';
 import {
   AddScreenshotAction,
   ADD_SCREENSHOT,
+  ClearFormAction,
+  CLEAR_FORM,
   DeleteLessonAction,
   DeleteScreenshotAction,
   DELETE_LESSON,
@@ -11,11 +13,13 @@ import {
   UpdateDescriptionAction,
   UpdateLessonsAction,
   UpdatePriceAction,
+  UpdateScreenshotsAction,
   UpdateSubtitleAction,
   UpdateTitleAction,
   UPDATE_DESCRIPTION,
   UPDATE_LESSONS,
   UPDATE_PRICE,
+  UPDATE_SCREENSHOTS,
   UPDATE_SUBTITLE,
   UPDATE_TITLE,
 } from './types';
@@ -72,6 +76,17 @@ export const deleteScreenshotActionCreator = (
 ): DeleteScreenshotAction => ({
   type: DELETE_SCREENSHOT,
   payload: screenshot,
+});
+
+export const updateScreenshotsActionCreator = (
+  screenshots: string[]
+): UpdateScreenshotsAction => ({
+  type: UPDATE_SCREENSHOTS,
+  payload: screenshots,
+});
+
+export const clearFormActionCreator = (): ClearFormAction => ({
+  type: CLEAR_FORM,
 });
 
 export const updatePriceActionCreator = (price: string): UpdatePriceAction => ({

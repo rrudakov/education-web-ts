@@ -14,7 +14,7 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import { BulletListItem } from '../../../core/components/list-text';
+import { BulletListItem } from '../../../../../core/components/list-text';
 
 export const useStyles = makeStyles(({ spacing, transitions }: Theme) =>
   createStyles({

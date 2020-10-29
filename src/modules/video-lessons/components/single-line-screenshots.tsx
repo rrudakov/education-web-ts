@@ -58,11 +58,11 @@ export const SingleLineScreenshots: React.FC = () => {
                 title: classes.title,
               }}
               actionIcon={
-                <IconButton aria-label={`star ${screenshot}`}>
-                  <DeleteOutlineIcon
-                    className={classes.title}
-                    onClick={() => deleteScreenshot(screenshot)}
-                  />
+                <IconButton
+                  aria-label={`star ${screenshot}`}
+                  onClick={() => deleteScreenshot(screenshot)}
+                >
+                  <DeleteOutlineIcon className={classes.title} />
                 </IconButton>
               }
             />
