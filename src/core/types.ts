@@ -1,4 +1,4 @@
-import { UserState } from "./reducer";
+import { UserState } from './reducer';
 
 export const INCREASE_FETCHING = 'UPDATE_FETCHING/SYSTEM';
 export const DECREASE_FETCHING = 'DECREASE_FETCHING/SYSTEM';
@@ -13,63 +13,63 @@ export const UPDATE_SUCCESS_MESSAGE = 'UPDATE_SUCCESS_MESSAGE/SYSTEM';
 export const TOGGLE_MENU_DRAWER = 'TOGGLE_MENU_DRAWER/SYSTEM';
 
 export interface IncreaseFetchingAction {
-    type: typeof INCREASE_FETCHING;
+  type: typeof INCREASE_FETCHING;
 }
 
 export interface DecreaseFetchingAction {
-    type: typeof DECREASE_FETCHING;
+  type: typeof DECREASE_FETCHING;
 }
 
 export interface OpenAuthModalAction {
-    type: typeof OPEN_AUTH;
+  type: typeof OPEN_AUTH;
 }
 
 export interface CloseAuthModalAction {
-    type: typeof CLOSE_AUTH;
+  type: typeof CLOSE_AUTH;
 }
 
 export interface UpdateSignInUsernameAction {
-    type: typeof UPDATE_SIGN_IN_USERNAME;
-    payload: string;
+  type: typeof UPDATE_SIGN_IN_USERNAME;
+  payload: string;
 }
 
 export interface UpdateSignInPasswordAction {
-    type: typeof UPDATE_SIGN_IN_PASSWORD;
-    payload: string;
+  type: typeof UPDATE_SIGN_IN_PASSWORD;
+  payload: string;
 }
 
 export interface SuccessfulLoginAction {
-    type: typeof SUCCESSFUL_LOGIN;
-    payload: UserState;
+  type: typeof SUCCESSFUL_LOGIN;
+  payload: UserState;
 }
 
 export interface LogoutAction {
-    type: typeof LOGOUT;
+  type: typeof LOGOUT;
 }
 
 export interface UpdateErrorMessageAction {
-    type: typeof UPDATE_ERROR_MESSAGE;
-    payload?: string;
+  type: typeof UPDATE_ERROR_MESSAGE;
+  payload?: string;
 }
 
 export interface UpdateSuccessMessageAction {
-    type: typeof UPDATE_SUCCESS_MESSAGE;
-    payload?: string;
+  type: typeof UPDATE_SUCCESS_MESSAGE;
+  payload?: string;
 }
 
 export interface ToggleMenuDrawerAction {
-    type: typeof TOGGLE_MENU_DRAWER;
+  type: typeof TOGGLE_MENU_DRAWER;
 }
 
 export type SystemActionTypes =
-    IncreaseFetchingAction
-    | DecreaseFetchingAction
-    | OpenAuthModalAction
-    | CloseAuthModalAction
-    | UpdateSignInUsernameAction
-    | UpdateSignInPasswordAction
-    | SuccessfulLoginAction
-    | LogoutAction
-    | UpdateErrorMessageAction
-    | UpdateSuccessMessageAction
-    | ToggleMenuDrawerAction;
+  | IncreaseFetchingAction
+  | DecreaseFetchingAction
+  | OpenAuthModalAction
+  | CloseAuthModalAction
+  | UpdateSignInUsernameAction
+  | UpdateSignInPasswordAction
+  | SuccessfulLoginAction
+  | LogoutAction
+  | UpdateErrorMessageAction
+  | UpdateSuccessMessageAction
+  | ToggleMenuDrawerAction;

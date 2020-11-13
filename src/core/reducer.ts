@@ -6,11 +6,11 @@ import {
   OPEN_AUTH,
   SUCCESSFUL_LOGIN,
   SystemActionTypes,
+  TOGGLE_MENU_DRAWER,
   UPDATE_ERROR_MESSAGE,
   UPDATE_SIGN_IN_PASSWORD,
   UPDATE_SIGN_IN_USERNAME,
   UPDATE_SUCCESS_MESSAGE,
-  TOGGLE_MENU_DRAWER,
 } from './types';
 
 export interface ErrorResponse {

@@ -1,8 +1,18 @@
-import { Card, CardActionArea, CardContent, CardMedia, createStyles, Grid, Hidden, makeStyles, Typography } from '@material-ui/core';
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  createStyles,
+  Grid,
+  Hidden,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import React from 'react';
-import { FeaturedPost } from '../reducer';
 import { Link } from 'react-router-dom';
 import { formatDateTime, toDateTime } from '../../../core/utils/datetime';
+import { FeaturedPost } from '../reducer';
 
 const useStyles = makeStyles(
   createStyles({
@@ -14,14 +24,17 @@ const useStyles = makeStyles(
     },
     cardMedia: {
       width: 160,
-    }
-  }))
+    },
+  })
+);
 
 export interface FeaturedPostProps {
   post: FeaturedPost;
 }
 
-export const FeaturedPostComponent: React.FC<FeaturedPostProps> = ({ post }: FeaturedPostProps) => {
+export const FeaturedPostComponent: React.FC<FeaturedPostProps> = ({
+  post,
+}: FeaturedPostProps) => {
   const classes = useStyles();
   const updated = formatDateTime(toDateTime(post.updated_on));
 
@@ -46,10 +59,14 @@ export const FeaturedPostComponent: React.FC<FeaturedPostProps> = ({ post }: Fea
             </CardContent>
           </div>
           <Hidden xsDown={true}>
-            <CardMedia className={classes.cardMedia} image={post.featured_image} title={post.title} />
+            <CardMedia
+              className={classes.cardMedia}
+              image={post.featured_image}
+              title={post.title}
+            />
           </Hidden>
         </Card>
       </CardActionArea>
     </Grid>
   );
-}
+};

@@ -1,9 +1,18 @@
-import { createStyles, makeStyles, Theme, Grid, Paper, Typography, SvgIconTypeMap, Link } from '@material-ui/core';
-import React from 'react';
+import {
+  createStyles,
+  Grid,
+  Link,
+  makeStyles,
+  Paper,
+  SvgIconTypeMap,
+  Theme,
+  Typography,
+} from '@material-ui/core';
+import { OverridableComponent } from '@material-ui/core/OverridableComponent';
+import FacebookIcon from '@material-ui/icons/Facebook';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import { OverridableComponent } from '@material-ui/core/OverridableComponent';
+import React from 'react';
 
 const useStyles = makeStyles(({ spacing, palette }: Theme) =>
   createStyles({
@@ -13,8 +22,9 @@ const useStyles = makeStyles(({ spacing, palette }: Theme) =>
     },
     sidebarSection: {
       marginTop: spacing(3),
-    }
-  }));
+    },
+  })
+);
 
 interface Archive {
   title: string;
@@ -23,7 +33,7 @@ interface Archive {
 
 interface Social {
   name: string;
-  icon: OverridableComponent<SvgIconTypeMap<unknown, "svg">>;
+  icon: OverridableComponent<SvgIconTypeMap<unknown, 'svg'>>;
 }
 
 export interface SidebarProps {
@@ -31,7 +41,10 @@ export interface SidebarProps {
   description: string;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ title, description }: SidebarProps) => {
+export const Sidebar: React.FC<SidebarProps> = ({
+  title,
+  description,
+}: SidebarProps) => {
   const classes = useStyles();
   const archives: Archive[] = [
     { title: 'March 2020', url: '#' },
@@ -59,33 +72,47 @@ export const Sidebar: React.FC<SidebarProps> = ({ title, description }: SidebarP
         <Typography variant="h6" gutterBottom={true}>
           {title}
         </Typography>
-        <Typography>
-          {description}
-        </Typography>
+        <Typography>{description}</Typography>
       </Paper>
-      <Typography variant="h6" gutterBottom={true} className={classes.sidebarSection}>
+      <Typography
+        variant="h6"
+        gutterBottom={true}
+        className={classes.sidebarSection}
+      >
         Archives
       </Typography>
       {archives.map((archive) => (
-        <Link display="block" variant="body1" href={archive.url} key={archive.title}>
+        <Link
+          display="block"
+          variant="body1"
+          href={archive.url}
+          key={archive.title}
+        >
           {archive.title}
         </Link>
       ))}
-      <Typography variant="h6" gutterBottom={true} className={classes.sidebarSection}>
+      <Typography
+        variant="h6"
+        gutterBottom={true}
+        className={classes.sidebarSection}
+      >
         Social
       </Typography>
       {social.map((network) => (
         <Link display="block" variant="body1" href="#" key={network.name}>
-          <Grid container={true} direction="row" spacing={1} alignItems="center">
+          <Grid
+            container={true}
+            direction="row"
+            spacing={1}
+            alignItems="center"
+          >
             <Grid item={true}>
               <network.icon />
             </Grid>
-            <Grid item={true}>
-              {network.name}
-            </Grid>
+            <Grid item={true}>{network.name}</Grid>
           </Grid>
         </Link>
       ))}
     </Grid>
   );
-}
+};

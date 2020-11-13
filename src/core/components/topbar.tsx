@@ -1,4 +1,18 @@
-import { AppBar, Button, createStyles, Hidden, IconButton, Link, makeStyles, Menu, MenuItem, MenuProps, Theme, Toolbar, withStyles } from '@material-ui/core';
+import {
+  AppBar,
+  Button,
+  createStyles,
+  Hidden,
+  IconButton,
+  Link,
+  makeStyles,
+  Menu,
+  MenuItem,
+  MenuProps,
+  Theme,
+  Toolbar,
+  withStyles,
+} from '@material-ui/core';
 import ChildCareIcon from '@material-ui/icons/ChildCare';
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { useCallback } from 'react';
@@ -38,8 +52,8 @@ const useStyles = makeStyles(({ spacing, palette }: Theme) =>
     menuItemLink: {
       textDecoration: 'none',
       color: palette.text.primary,
-    }
-  }),
+    },
+  })
 );
 
 export const TopBar: React.FC = () => {
@@ -49,18 +63,28 @@ export const TopBar: React.FC = () => {
   const dispatch = useDispatch();
   const openAuth = useCallback(() => dispatch({ type: OPEN_AUTH }), [dispatch]);
   const logout = useCallback(() => dispatch(thunkLogout()), [dispatch]);
-  const toggleMenuDrawer = useCallback(() => dispatch({ type: TOGGLE_MENU_DRAWER }), [dispatch]);
+  const toggleMenuDrawer = useCallback(
+    () => dispatch({ type: TOGGLE_MENU_DRAWER }),
+    [dispatch]
+  );
 
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Hidden lgUp>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleMenuDrawer}>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleMenuDrawer}
+            >
               <MenuIcon />
             </IconButton>
           </Hidden>
           <ChildCareIcon />
+
           <Link
             variant="h6"
             style={{ textDecoration: 'none' }}
@@ -71,14 +95,24 @@ export const TopBar: React.FC = () => {
           >
             Аленкина сказка
           </Link>
-          {loggedIn
-            ? <Button color="inherit" onClick={logout}>Выход</Button>
-            : <Button color="inherit" onClick={openAuth}>Вход</Button>}
+          {loggedIn ? (
+            <Button color="inherit" onClick={logout}>
+              Выход
+            </Button>
+          ) : (
+            <Button color="inherit" onClick={openAuth}>
+              Вход
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Hidden mdDown>
         <AppBar position="static" className={classes.appBarSecondary}>
-          <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+          <Toolbar
+            component="nav"
+            variant="dense"
+            className={classes.toolbarSecondary}
+          >
             {menuItems.map((menuItem, i) => (
               <DropdownMenuComponent key={i} item={menuItem} idx={i} />
             ))}
@@ -87,7 +121,7 @@ export const TopBar: React.FC = () => {
       </Hidden>
     </div>
   );
-}
+};
 
 const StyledMenu = withStyles({
   paper: {
@@ -125,7 +159,10 @@ interface DropdownMenuProps {
   idx: number;
 }
 
-const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({ item, idx }: DropdownMenuProps) => {
+const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
+  item,
+  idx,
+}: DropdownMenuProps) => {
   const classes = useStyles();
   const [anchorEl, setAnchorE1] = React.useState<null | HTMLElement>(null);
 
@@ -140,18 +177,30 @@ const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({ item, idx }: Dropd
   if (item.url === undefined && item.subitems !== undefined) {
     return (
       <div>
-        <Button aria-controls={`menuItem${idx}`} aria-haspopup="true" onClick={handleClick}>
+        <Button
+          aria-controls={`menuItem${idx}`}
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
           {item.name}
         </Button>
-        <StyledMenu id={`menuItem${idx}`} anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-          {item.subitems.map((subitem, i) => (
-            subitem.url !== undefined &&
-            <StyledMenuItem key={i} onClick={handleClose}>
-              <RouterLink to={subitem.url} className={classes.menuItemLink}>
-                {subitem.name}
-              </RouterLink>
-            </StyledMenuItem>
-          ))}
+        <StyledMenu
+          id={`menuItem${idx}`}
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          {item.subitems.map(
+            (subitem, i) =>
+              subitem.url !== undefined && (
+                <StyledMenuItem key={i} onClick={handleClose}>
+                  <RouterLink to={subitem.url} className={classes.menuItemLink}>
+                    {subitem.name}
+                  </RouterLink>
+                </StyledMenuItem>
+              )
+          )}
         </StyledMenu>
       </div>
     );
@@ -167,6 +216,6 @@ const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({ item, idx }: Dropd
       </Button>
     );
   } else {
-    return <div />
+    return <div />;
   }
-}
+};

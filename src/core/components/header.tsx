@@ -1,4 +1,12 @@
-import { Button, createStyles, IconButton, makeStyles, Theme, Toolbar, Typography } from '@material-ui/core';
+import {
+  Button,
+  createStyles,
+  IconButton,
+  makeStyles,
+  Theme,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import SearchIcon from '@material-ui/icons/Search';
 import React, { useCallback } from 'react';
@@ -35,7 +43,7 @@ export const Header: React.FC = () => {
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-        {location.pathname !== "/" &&
+        {location.pathname !== '/' && (
           <Button
             size="small"
             startIcon={<NavigateBeforeIcon />}
@@ -43,7 +51,8 @@ export const Header: React.FC = () => {
             to="/"
           >
             Home
-         </Button>}
+          </Button>
+        )}
         <Typography
           component="h2"
           variant="h5"
@@ -57,20 +66,29 @@ export const Header: React.FC = () => {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        {loggedIn && user !== undefined && (isAdmin(user) || isModerator(user)) &&
-          <Button
-            className={classes.newPostButton}
-            variant="outlined"
-            size="small"
-            component={RouterLink}
-            to="/posts/new"
-          >
-            New post
-         </Button>}
-        {loggedIn
-          ? <Button variant="outlined" size="small" onClick={logout}>Log out</Button>
-          : <Button variant="outlined" size="small" onClick={openAuth}>Log in</Button>}
+        {loggedIn &&
+          user !== undefined &&
+          (isAdmin(user) || isModerator(user)) && (
+            <Button
+              className={classes.newPostButton}
+              variant="outlined"
+              size="small"
+              component={RouterLink}
+              to="/posts/new"
+            >
+              New post
+            </Button>
+          )}
+        {loggedIn ? (
+          <Button variant="outlined" size="small" onClick={logout}>
+            Log out
+          </Button>
+        ) : (
+          <Button variant="outlined" size="small" onClick={openAuth}>
+            Log in
+          </Button>
+        )}
       </Toolbar>
     </React.Fragment>
-  )
-}
+  );
+};

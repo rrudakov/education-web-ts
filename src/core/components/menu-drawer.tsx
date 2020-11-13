@@ -1,25 +1,25 @@
-import React, { useCallback } from 'react';
 import {
+  Collapse,
+  createStyles,
+  Divider,
   Drawer,
+  List,
   ListItem,
   ListItemText,
   makeStyles,
-  createStyles,
   Theme,
-  Divider,
-  Collapse,
-  List,
 } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
-import { getMenuItems, getMenuDrawerOpen } from '../selector';
-import { TOGGLE_MENU_DRAWER } from '../types';
-import { SiteMenuItem } from '../reducer';
 import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Link as RouterLink,
   LinkProps as RouterLinkProps,
 } from 'react-router-dom';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import { SiteMenuItem } from '../reducer';
+import { getMenuDrawerOpen, getMenuItems } from '../selector';
+import { TOGGLE_MENU_DRAWER } from '../types';
 
 const useStyles = makeStyles(({ palette, spacing }: Theme) =>
   createStyles({

@@ -1,12 +1,12 @@
+import { EditorState } from 'draft-js';
 import {
   NewPostActionTypes,
-  UPDATE_TITLE,
   UPDATE_DESCRIPTION,
+  UPDATE_FEATURED_IMAGE,
   UPDATE_IS_MAIN_FEATURED,
   UPDATE_POST_BODY,
-  UPDATE_FEATURED_IMAGE,
+  UPDATE_TITLE,
 } from './types';
-import { EditorState } from 'draft-js';
 
 export interface NewPostState {
   title: string;

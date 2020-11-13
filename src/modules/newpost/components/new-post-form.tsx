@@ -1,15 +1,32 @@
-import React, { useCallback, ChangeEvent } from 'react';
-import { makeStyles, createStyles, FormGroup, TextField, FormControlLabel, Checkbox } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
-import { getTitle, getIsMainFeatured, getFeaturedImage, getDescription } from '../selectors';
-import { updateTitleActionCreator, updateIsMainFeaturedActionCreator, updateFeaturedImageActionCreator, updateDescriptionActionCreator } from '../actions';
+import {
+  Checkbox,
+  createStyles,
+  FormControlLabel,
+  FormGroup,
+  makeStyles,
+  TextField,
+} from '@material-ui/core';
+import React, { ChangeEvent, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  updateDescriptionActionCreator,
+  updateFeaturedImageActionCreator,
+  updateIsMainFeaturedActionCreator,
+  updateTitleActionCreator,
+} from '../actions';
+import {
+  getDescription,
+  getFeaturedImage,
+  getIsMainFeatured,
+  getTitle,
+} from '../selectors';
 
 const useStyles = makeStyles(
   createStyles({
     formGroup: {
       margin: 8,
     },
-  }),
+  })
 );
 
 export const NewPostForm: React.FC = () => {
@@ -17,22 +34,26 @@ export const NewPostForm: React.FC = () => {
   const dispatch = useDispatch();
   const title = useSelector(getTitle);
   const updateTitle = useCallback(
-    (e: ChangeEvent<HTMLTextAreaElement>) => dispatch(updateTitleActionCreator(e.target.value)),
+    (e: ChangeEvent<HTMLTextAreaElement>) =>
+      dispatch(updateTitleActionCreator(e.target.value)),
     [dispatch]
   );
   const description = useSelector(getDescription);
   const updateDescription = useCallback(
-    (e: ChangeEvent<HTMLTextAreaElement>) => dispatch(updateDescriptionActionCreator(e.target.value)),
+    (e: ChangeEvent<HTMLTextAreaElement>) =>
+      dispatch(updateDescriptionActionCreator(e.target.value)),
     [dispatch]
   );
   const isMainFeatured = useSelector(getIsMainFeatured);
   const updateIsMainFeatured = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => dispatch(updateIsMainFeaturedActionCreator(e.target.checked)),
+    (e: ChangeEvent<HTMLInputElement>) =>
+      dispatch(updateIsMainFeaturedActionCreator(e.target.checked)),
     [dispatch]
   );
   const featuredImage = useSelector(getFeaturedImage);
   const updateFeaturedImage = useCallback(
-    (e: ChangeEvent<HTMLTextAreaElement>) => dispatch(updateFeaturedImageActionCreator(e.target.value)),
+    (e: ChangeEvent<HTMLTextAreaElement>) =>
+      dispatch(updateFeaturedImageActionCreator(e.target.value)),
     [dispatch]
   );
 
@@ -66,7 +87,9 @@ export const NewPostForm: React.FC = () => {
       />
       <FormControlLabel
         label="Make main featured"
-        control={<Checkbox checked={isMainFeatured} onChange={updateIsMainFeatured} />}
+        control={
+          <Checkbox checked={isMainFeatured} onChange={updateIsMainFeatured} />
+        }
       />
       <TextField
         id="newPostFeaturedImage"
@@ -83,4 +106,4 @@ export const NewPostForm: React.FC = () => {
       />
     </FormGroup>
   );
-}
+};

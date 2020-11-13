@@ -1,5 +1,12 @@
+import {
+  Container,
+  createStyles,
+  Link,
+  makeStyles,
+  Theme,
+  Typography,
+} from '@material-ui/core';
 import React from 'react';
-import { Typography, Link, Container, makeStyles, createStyles, Theme } from '@material-ui/core';
 
 const Copyright: React.FC = () => {
   return (
@@ -10,8 +17,8 @@ const Copyright: React.FC = () => {
       </Link>
       {'.'}
     </Typography>
-  )
-}
+  );
+};
 
 export interface FooterProps {
   title: string;
@@ -23,9 +30,9 @@ const useStyles = makeStyles(({ palette, spacing }: Theme) =>
     footer: {
       backgroundColor: palette.background.paper,
       padding: spacing(6, 0),
-    }
+    },
   })
-)
+);
 
 export const Footer: React.FC<FooterProps> = (props: FooterProps) => {
   const classes = useStyles();
@@ -36,11 +43,16 @@ export const Footer: React.FC<FooterProps> = (props: FooterProps) => {
         <Typography variant="h6" align="center" gutterBottom={true}>
           {props.title}
         </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="textSecondary"
+          component="p"
+        >
           {props.description}
         </Typography>
         <Copyright />
       </Container>
     </footer>
-  )
-}
+  );
+};

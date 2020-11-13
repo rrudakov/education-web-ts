@@ -1,21 +1,25 @@
-import { FullPost } from "../home/reducer";
-import { PostActionTypes, UPDATE_POST } from "./types";
+import { FullPost } from '../home/reducer';
+import { PostActionTypes, UPDATE_POST } from './types';
 
 export interface PostState {
-    post?: FullPost;
+  post?: FullPost;
 }
 
 const initialState: PostState = {
-    post: undefined,
-}
+  post: undefined,
+};
 
-export const postReducer = (state: PostState = initialState, action: PostActionTypes): PostState => {
-    switch (action.type) {
-        case UPDATE_POST:
-            return {
-                ...state, post: action.payload,
-            };
-        default:
-            return state;
-    }
-}
+export const postReducer = (
+  state: PostState = initialState,
+  action: PostActionTypes
+): PostState => {
+  switch (action.type) {
+    case UPDATE_POST:
+      return {
+        ...state,
+        post: action.payload,
+      };
+    default:
+      return state;
+  }
+};

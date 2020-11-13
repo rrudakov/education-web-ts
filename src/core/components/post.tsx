@@ -8,6 +8,10 @@ interface PostProps {
 
 export const PostBody: React.FC<PostProps> = (props: PostProps) => {
   return (
-    <Editor toolbarHidden={true} readOnly={true} editorState={toEditorState(props.body)} />
-  )
-}
+    <Editor
+      toolbarHidden={true}
+      readOnly={true}
+      editorState={toEditorState(props.body)}
+    />
+  );
+};

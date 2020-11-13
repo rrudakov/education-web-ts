@@ -1,14 +1,14 @@
-import { FeaturedPost, FullPost } from "./reducer";
+import { FeaturedPost, FullPost } from './reducer';
 import {
-  UPDATE_CERTIFICATES_MODAL_OPEN,
-  UPDATE_FEATURED,
-  UPDATE_FULL_POSTS,
-  UPDATE_MAIN_FEATURED,
   UpdateCertificatesModalOpenAction,
   UpdateFeaturedAction,
   UpdateFullPostsAction,
   UpdateMainFeaturedAction,
-} from "./types";
+  UPDATE_CERTIFICATES_MODAL_OPEN,
+  UPDATE_FEATURED,
+  UPDATE_FULL_POSTS,
+  UPDATE_MAIN_FEATURED,
+} from './types';
 
 export const updateMainFeaturedArticle = (
   featuredPost: FeaturedPost

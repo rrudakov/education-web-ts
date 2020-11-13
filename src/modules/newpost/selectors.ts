@@ -1,6 +1,6 @@
+import { EditorState } from 'draft-js';
 import { Selector } from 'react-redux';
 import { AppStoreState } from '../../core/store';
-import { EditorState } from 'draft-js';
 
 export const getTitle: Selector<AppStoreState, string> = ({ newPost }) =>
   newPost.title;

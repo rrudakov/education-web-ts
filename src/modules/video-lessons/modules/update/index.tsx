@@ -3,8 +3,8 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { UploadScreenshotsDialog } from '../../components/upload-screenshots-dialog';
-import { thunkGetLesson } from './thunks';
 import { UpdateVideoLessonForm } from './components/update-video-lesson-form';
+import { thunkGetLesson } from './thunks';
 
 export const UpdateVideoLessonPage: React.FC = () => {
   const { lessonId } = useParams();

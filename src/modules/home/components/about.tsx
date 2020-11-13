@@ -12,8 +12,8 @@ import {
 } from '@material-ui/core';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateCertificatesModalOpen } from '../actions';
 import about from '../../../core/img/avatar.png';
+import { updateCertificatesModalOpen } from '../actions';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({

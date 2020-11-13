@@ -1,18 +1,29 @@
-import { createStyles, Divider, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import {
+  createStyles,
+  Divider,
+  Grid,
+  makeStyles,
+  Theme,
+  Typography,
+} from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { PostBody } from '../../../core/components/post';
+import {
+  formatRelativeDateTime,
+  toDateTime,
+} from '../../../core/utils/datetime';
 import { getFullPosts } from '../selectors';
 import { thunkFetchLatestFullPosts } from '../thunks';
-import { formatRelativeDateTime, toDateTime } from '../../../core/utils/datetime';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
     post: {
       padding: spacing(3, 0),
-    }
-  }));
+    },
+  })
+);
 
 export interface MainProps {
   title: string;
@@ -22,7 +33,10 @@ export const Main: React.FC<MainProps> = ({ title }: MainProps) => {
   const classes = useStyles();
   const latestPosts = useSelector(getFullPosts);
   const dispatch = useDispatch();
-  const fetchLatestPosts = useCallback(() => dispatch(thunkFetchLatestFullPosts()), [dispatch]);
+  const fetchLatestPosts = useCallback(
+    () => dispatch(thunkFetchLatestFullPosts()),
+    [dispatch]
+  );
 
   useEffect(() => {
     fetchLatestPosts();
@@ -43,6 +57,6 @@ export const Main: React.FC<MainProps> = ({ title }: MainProps) => {
           <PostBody body={post.body} />
         </div>
       ))}
-    </Grid >
-  )
-}
+    </Grid>
+  );
+};

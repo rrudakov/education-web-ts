@@ -1,5 +1,8 @@
 import { ThunkAction } from 'redux-thunk';
 import request from 'superagent';
+import { updateErrorMessage } from '../../core/actions';
+import { BASE_URL } from '../../core/constants';
+import { ErrorResponse } from '../../core/reducer';
 import { AppStoreState } from '../../core/store';
 import {
   DECREASE_FETCHING,
@@ -12,9 +15,6 @@ import {
   updateMainFeaturedArticle,
 } from './actions';
 import { HomeActionTypes } from './types';
-import { BASE_URL } from '../../core/constants';
-import { updateErrorMessage } from '../../core/actions';
-import { ErrorResponse } from '../../core/reducer';
 
 export const thunkFetchMainFeaturedPost = (): ThunkAction<
   void,

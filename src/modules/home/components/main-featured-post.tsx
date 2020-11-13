@@ -1,6 +1,14 @@
+import {
+  createStyles,
+  Grid,
+  Link,
+  makeStyles,
+  Paper,
+  Theme,
+  Typography,
+} from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
-import { makeStyles, Theme, createStyles, Paper, Grid, Typography, Link } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { getMainFeaturedPost } from '../selectors';
 import { thunkFetchMainFeaturedPost } from '../thunks';
@@ -33,32 +41,54 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) =>
         paddingRight: 0,
       },
     },
-  }))
+  })
+);
 
 export const MainFeaturedPost: React.FC = () => {
   const classes = useStyles();
   const mainFeaturedPost = useSelector(getMainFeaturedPost);
   const dispatch = useDispatch();
-  const fetchMainFeatured = useCallback(() => dispatch(thunkFetchMainFeaturedPost()), [dispatch]);
+  const fetchMainFeatured = useCallback(
+    () => dispatch(thunkFetchMainFeaturedPost()),
+    [dispatch]
+  );
 
   useEffect(() => {
-    fetchMainFeatured()
+    fetchMainFeatured();
   }, [fetchMainFeatured]);
 
   return (
-    <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${mainFeaturedPost.featured_image})` }}>
-      {<img style={{ display: 'none' }} src={mainFeaturedPost.featured_image} alt={mainFeaturedPost.title} />}
+    <Paper
+      className={classes.mainFeaturedPost}
+      style={{ backgroundImage: `url(${mainFeaturedPost.featured_image})` }}
+    >
+      {
+        <img
+          style={{ display: 'none' }}
+          src={mainFeaturedPost.featured_image}
+          alt={mainFeaturedPost.title}
+        />
+      }
       <div className={classes.overlay} />
       <Grid container={true}>
         <Grid item={true} md={6}>
           <div className={classes.mainFeaturedPostContent}>
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom={true}>
+            <Typography
+              component="h1"
+              variant="h3"
+              color="inherit"
+              gutterBottom={true}
+            >
               {mainFeaturedPost.title}
             </Typography>
             <Typography variant="h5" color="inherit" paragraph={true}>
               {mainFeaturedPost.description}
             </Typography>
-            <Link variant="subtitle1" component={RouterLink} to={`/posts/${mainFeaturedPost.id}`}>
+            <Link
+              variant="subtitle1"
+              component={RouterLink}
+              to={`/posts/${mainFeaturedPost.id}`}
+            >
               Continue reading...
             </Link>
           </div>
@@ -66,4 +96,4 @@ export const MainFeaturedPost: React.FC = () => {
       </Grid>
     </Paper>
   );
-}
+};

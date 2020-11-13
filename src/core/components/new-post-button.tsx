@@ -1,10 +1,10 @@
-import { Fab, makeStyles, createStyles, Theme } from '@material-ui/core';
+import { createStyles, Fab, makeStyles, Theme } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
 import { getLoggedIn, getUser } from '../selector';
 import { isAdmin, isModerator } from '../utils/user';
-import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -26,14 +26,17 @@ export const NewPostFab: React.FC = () => {
 
   if (loggedIn && user !== undefined && (isAdmin(user) || isModerator(user))) {
     return (
-      <Fab className={classes.fab} color="primary" aria-label="add" component={RouterLink} to="/posts/new">
+      <Fab
+        className={classes.fab}
+        color="primary"
+        aria-label="add"
+        component={RouterLink}
+        to="/posts/new"
+      >
         <AddIcon />
       </Fab>
     );
   } else {
-    return (
-      <div />
-    );
+    return <div />;
   }
-
-}
+};
