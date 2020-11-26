@@ -14,10 +14,12 @@ import {
   Typography,
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { WHATSAPP_LINK } from '../../../../../core/constants';
 import { getUser } from '../../../../../core/selector';
 import { isAdmin, isModerator } from '../../../../../core/utils/user';
 import { VideoLesson } from '../../../reducer';
@@ -120,9 +122,19 @@ export const VideoLessonComponent: React.FC<VideoLessonComponentProps> = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="contained" color="primary" disabled>
-          {`Купить € ${videoLesson.price}`}
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<WhatsAppIcon />}
+          component="a"
+          href={WHATSAPP_LINK}
+          target="_blank"
+        >
+          WhatsApp
         </Button>
+        {/* <Button variant="contained" color="primary" disabled>
+            {`Купить € ${videoLesson.price}`}
+            </Button> */}
       </CardActions>
     </Card>
   );
