@@ -82,7 +82,7 @@ const initialState: SystemState = {
       ],
     },
     { name: 'Прокат детских платьев', url: '/dresses' },
-    { name: 'Контакты', url: '#' },
+    { name: 'Контакты', url: '/contacts' },
   ],
   menuDrawerOpen: false,
 };

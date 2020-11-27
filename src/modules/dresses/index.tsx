@@ -1,14 +1,14 @@
-import { Container, Typography } from '@material-ui/core';
 import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { DressesMainPage } from './modules/main';
 
 export const DressesPage: React.FC = () => {
+  const { path } = useRouteMatch();
   return (
-    <Container maxWidth="lg">
-      <Typography variant="body1" paragraph>
-        Если вы планируете фотосессию или день рождение, вы можете взять в
-        аренду платье для этого события и ваша принцесса будет самая красивая на
-        празднике.
-      </Typography>
-    </Container>
+    <Switch>
+      <Route exact path={path}>
+        <DressesMainPage />
+      </Route>
+    </Switch>
   );
 };

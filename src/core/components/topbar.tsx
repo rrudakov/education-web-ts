@@ -13,8 +13,8 @@ import {
   Toolbar,
   withStyles,
 } from '@material-ui/core';
-import ChildCareIcon from '@material-ui/icons/ChildCare';
 import MenuIcon from '@material-ui/icons/Menu';
+import SchoolIcon from '@material-ui/icons/School';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
@@ -83,7 +83,7 @@ export const TopBar: React.FC = () => {
               <MenuIcon />
             </IconButton>
           </Hidden>
-          <ChildCareIcon />
+          <SchoolIcon />
 
           <Link
             variant="h6"

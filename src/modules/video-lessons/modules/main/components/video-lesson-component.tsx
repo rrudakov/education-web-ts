@@ -129,6 +129,7 @@ export const VideoLessonComponent: React.FC<VideoLessonComponentProps> = ({
           component="a"
           href={WHATSAPP_LINK}
           target="_blank"
+          rel="noopener"
         >
           WhatsApp
         </Button>

@@ -17,6 +17,7 @@ import { TopBar } from './core/components/topbar';
 import { getFetching } from './core/selector';
 import { thunkCheckLogin } from './core/thunks';
 import { BirthdaysPage } from './modules/birthdays';
+import { ContactsPage } from './modules/contacts';
 import { DressesPage } from './modules/dresses';
 import { FairytailEvents } from './modules/fairytail-events';
 import { Home } from './modules/home';
@@ -80,6 +81,9 @@ export const App: React.FC = () => {
             </Route>
             <Route path="/dresses" exact>
               <DressesPage />
+            </Route>
+            <Route path="/contacts" exact>
+              <ContactsPage />
             </Route>
             <Route path="/posts/new" exact>
               <NewPost />
