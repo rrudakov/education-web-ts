@@ -3,8 +3,8 @@ import AddIcon from '@material-ui/icons/Add';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link as RouterLink, useRouteMatch } from 'react-router-dom';
-import { getLoggedIn, getUser } from '../../../core/selector';
-import { isAdmin, isModerator } from '../../../core/utils/user';
+import { getLoggedIn, getUser } from '../selector';
+import { isAdmin, isModerator } from '../utils/user';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -19,7 +19,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
   })
 );
 
-export const NewVideoLessonFab: React.FC = () => {
+export const NewItemFab: React.FC = () => {
   const { url } = useRouteMatch();
   const classes = useStyles();
   const user = useSelector(getUser);
@@ -38,6 +38,6 @@ export const NewVideoLessonFab: React.FC = () => {
       </Fab>
     );
   } else {
-    return <div />;
+    return <h1>Jopa</h1>;
   }
 };

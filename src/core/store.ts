@@ -7,6 +7,7 @@ import {
   Store,
 } from 'redux';
 import thunk from 'redux-thunk';
+import { dressesReducer, DressesState } from '../modules/dresses/reducer';
 import { homeReducer, HomeState } from '../modules/home/reducer';
 import { newPostReducer, NewPostState } from '../modules/newpost/reducer';
 import { postReducer, PostState } from '../modules/post/reducer';
@@ -22,6 +23,7 @@ export interface AppStoreState {
   post: PostState;
   newPost: NewPostState;
   videoLessons: VideoLessonsState;
+  dresses: DressesState;
 }
 
 const rootReducer = combineReducers({
@@ -30,6 +32,7 @@ const rootReducer = combineReducers({
   post: postReducer,
   newPost: newPostReducer,
   videoLessons: videoLessonsReducer,
+  dresses: dressesReducer,
 });
 
 export const configureStore = (): Store<

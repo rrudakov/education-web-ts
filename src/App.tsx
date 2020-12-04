@@ -79,7 +79,7 @@ export const App: React.FC = () => {
             <Route path="/events" exact>
               <FairytailEvents />
             </Route>
-            <Route path="/dresses" exact>
+            <Route path="/dresses">
               <DressesPage />
             </Route>
             <Route path="/contacts" exact>
