@@ -21,7 +21,6 @@ import {
 const useStyles = makeStyles(({ spacing, palette }: Theme) =>
   createStyles({
     title: {
-      marginTop: spacing(2),
       marginBottom: spacing(2),
     },
     link: {

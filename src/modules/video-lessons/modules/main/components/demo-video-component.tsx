@@ -16,12 +16,8 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import { BulletListItem } from '../../../../../core/components/list-text';
 
-export const useStyles = makeStyles(({ spacing, transitions }: Theme) =>
+export const useStyles = makeStyles(({ transitions }: Theme) =>
   createStyles({
-    root: {
-      marginTop: spacing(2),
-      marginBottom: spacing(2),
-    },
     expand: {
       transform: 'rotate(0deg)',
       marginLeft: 'auto',
@@ -44,7 +40,7 @@ export const DemoVideoComponent: React.FC = () => {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card>
       <CardMedia
         component="video"
         src="https://alenkinaskazka.net/media/video_2020-10-27_08-55-05.webm"

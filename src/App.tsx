@@ -25,6 +25,7 @@ import { HomeBanner } from './modules/home/components/banner';
 import { NewPost } from './modules/newpost';
 import { OnlineOfflineLessonsPage } from './modules/online-offline-lessons';
 import { SinglePost } from './modules/post';
+import { PresentationsPage } from './modules/presentations';
 import { VideoLessonsPage } from './modules/video-lessons';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -33,6 +34,10 @@ const useStyles = makeStyles((theme: Theme) =>
       zIndex: theme.zIndex.drawer + 1,
       color: '#fff',
     },
+    content: {
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
+    }
   })
 );
 
@@ -61,7 +66,7 @@ export const App: React.FC = () => {
           <HomeBanner />
         </Route>
       </Switch>
-      <Container maxWidth="lg">
+      <Container className={classes.content} maxWidth="lg">
         <main>
           <Switch>
             <Route path="/" exact>
@@ -90,6 +95,9 @@ export const App: React.FC = () => {
             </Route>
             <Route path="/posts/:id" exact>
               <SinglePost />
+            </Route>
+            <Route path="/presentations" exact>
+              <PresentationsPage />
             </Route>
           </Switch>
         </main>

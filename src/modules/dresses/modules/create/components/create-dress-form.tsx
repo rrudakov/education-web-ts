@@ -1,6 +1,9 @@
 import { createStyles, FormGroup, makeStyles, Theme } from '@material-ui/core';
 import React from 'react';
+import { PriceInputComponent } from '../../../../video-lessons/components/price-input';
+import { CloseFormButton } from '../../../components/close-form-button';
 import { DescriptionInputComponent } from '../../../components/description-input';
+import { OpenUploadPicturesDialogButton } from '../../../components/open-upload-dialog-button';
 import { SizeInputComponent } from '../../../components/size-input-component';
 import { TitleInputComponent } from '../../../components/title-input';
 
@@ -23,6 +26,10 @@ export const CreateDressForm: React.FC = () => {
         <TitleInputComponent />
         <DescriptionInputComponent />
         <SizeInputComponent />
+        <PriceInputComponent />
+        <OpenUploadPicturesDialogButton className={classes.button} />
+        <CloseFormButton className={classes.button} />
+
       </FormGroup>
     </React.Fragment>
   );
