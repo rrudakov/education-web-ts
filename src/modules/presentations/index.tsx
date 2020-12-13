@@ -90,9 +90,8 @@ const PresentationComponent: React.FC<PresentationProps> = ({
           src={url}
           title={title}
           frameBorder={0}
-          width={1440}
-          height={839}
           allowFullScreen
+          style={{ width: '100%', height: 710 }}
         />
         <Typography gutterBottom variant="h5" component="h2">
           Описание

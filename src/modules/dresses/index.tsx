@@ -14,7 +14,6 @@ export const DressesPage: React.FC = () => {
         <NewItemFab />
       </Route>
       <Route exact path={`${path}/new`}>
-        <h1>Jopa</h1>
         <NewDressPage />
       </Route>
     </Switch>
