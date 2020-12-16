@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(2),
-    }
+    },
   })
 );
 
@@ -102,10 +102,7 @@ export const App: React.FC = () => {
           </Switch>
         </main>
       </Container>
-      <Footer
-        title="All rights protected"
-        description="This site developed using React and TypeScript"
-      />
+      <Footer />
     </BrowserRouter>
   );
 };

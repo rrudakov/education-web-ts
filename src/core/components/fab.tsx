@@ -38,6 +38,6 @@ export const NewItemFab: React.FC = () => {
       </Fab>
     );
   } else {
-    return <h1>Jopa</h1>;
+    return <div />;
   }
 };

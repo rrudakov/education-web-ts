@@ -16,8 +16,11 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import { BulletListItem } from '../../../../../core/components/list-text';
 
-export const useStyles = makeStyles(({ transitions }: Theme) =>
+export const useStyles = makeStyles(({ transitions, spacing }: Theme) =>
   createStyles({
+    root: {
+      marginBottom: spacing(2),
+    },
     expand: {
       transform: 'rotate(0deg)',
       marginLeft: 'auto',
@@ -40,7 +43,7 @@ export const DemoVideoComponent: React.FC = () => {
   };
 
   return (
-    <Card>
+    <Card className={classes.root}>
       <CardMedia
         component="video"
         src="https://alenkinaskazka.net/media/video_2020-10-27_08-55-05.webm"
@@ -48,7 +51,12 @@ export const DemoVideoComponent: React.FC = () => {
         title="Demo video"
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography
+          variant="body2"
+          align="justify"
+          color="textSecondary"
+          component="p"
+        >
           Свои уроки я стараюсь сделать интересными, захватывающими и
           необычными. На страницах моего сайта вы сможете найти примеры таких
           уроков, а именно видео-уроки про фермера Ваню, которые уже полюбились

@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 const Copyright: React.FC = () => {
   return (
@@ -20,11 +21,6 @@ const Copyright: React.FC = () => {
   );
 };
 
-export interface FooterProps {
-  title: string;
-  description: string;
-}
-
 const useStyles = makeStyles(({ palette, spacing }: Theme) =>
   createStyles({
     footer: {
@@ -34,14 +30,14 @@ const useStyles = makeStyles(({ palette, spacing }: Theme) =>
   })
 );
 
-export const Footer: React.FC<FooterProps> = (props: FooterProps) => {
+export const Footer: React.FC = () => {
   const classes = useStyles();
 
   return (
     <footer className={classes.footer}>
       <Container maxWidth="lg">
         <Typography variant="h6" align="center" gutterBottom={true}>
-          {props.title}
+          Аленкина сказка
         </Typography>
         <Typography
           variant="subtitle1"
@@ -49,7 +45,11 @@ export const Footer: React.FC<FooterProps> = (props: FooterProps) => {
           color="textSecondary"
           component="p"
         >
-          {props.description}
+          По любым вопросам вы можете писать мне на e-mail или в социальных
+          сетях. Подробная информация на странице{' '}
+          <Link color="inherit" component={RouterLink} to="/contacts">
+            контакты
+          </Link>
         </Typography>
         <Copyright />
       </Container>

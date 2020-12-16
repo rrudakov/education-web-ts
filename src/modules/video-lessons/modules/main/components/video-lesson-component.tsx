@@ -116,6 +116,7 @@ export const VideoLessonComponent: React.FC<VideoLessonComponentProps> = ({
         <Typography
           paragraph
           color="textSecondary"
+          align="justify"
           style={{ whiteSpace: 'pre-line' }}
         >
           {videoLesson.description}
