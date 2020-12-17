@@ -15,7 +15,7 @@ interface UploadFileResponse {
   url: string;
 }
 
-export const thunkUploadPicture = (
+export const thunkUploadPictures = (
   files: File[]
 ): ThunkAction<
   void,

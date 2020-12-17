@@ -38,7 +38,7 @@ export const deleteLessonActionCreator = (
   payload: lessonId,
 });
 
-export const setUpdateDialogOpenActionCreator = (
+export const setUploadDialogOpenActionCreator = (
   open: boolean
 ): SetUploadDialogOpenAction => ({
   type: SET_UPLOAD_DIALOG_OPEN,

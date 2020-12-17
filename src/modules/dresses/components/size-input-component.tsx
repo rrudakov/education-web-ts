@@ -10,7 +10,7 @@ export const SizeInputComponent: React.FC = () => {
   const dispatch = useDispatch();
   const updateSize = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      if (Number.isInteger(e.target.value)) {
+      if (Boolean(Number(e.target.value))) {
         dispatch(updateSizeActionCreator(Number(e.target.value)));
       }
     },

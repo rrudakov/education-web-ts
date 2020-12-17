@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUploadDialogOpenActionCreator } from '../actions';
 import { getUploadDialogOpen } from '../selectors';
-import { thunkUploadScreenshots } from '../thunks';
+import { thunkUploadPictures } from '../thunks';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -17,7 +17,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
   })
 );
 
-export const UploadScreenshotsDialog: React.FC = () => {
+export const UploadPicturesDialog: React.FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const open = useSelector(getUploadDialogOpen);
@@ -26,7 +26,7 @@ export const UploadScreenshotsDialog: React.FC = () => {
     [dispatch]
   );
   const handleOnSave = useCallback(
-    (files: File[]) => dispatch(thunkUploadScreenshots(files)),
+    (files: File[]) => dispatch(thunkUploadPictures(files)),
     [dispatch]
   );
 

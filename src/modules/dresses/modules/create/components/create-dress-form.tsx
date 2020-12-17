@@ -1,11 +1,19 @@
-import { createStyles, FormGroup, makeStyles, Theme } from '@material-ui/core';
+import {
+  createStyles,
+  FormGroup,
+  makeStyles,
+  Theme,
+  Typography,
+} from '@material-ui/core';
 import React from 'react';
-import { PriceInputComponent } from '../../../../video-lessons/components/price-input';
 import { CloseFormButton } from '../../../components/close-form-button';
 import { DescriptionInputComponent } from '../../../components/description-input';
 import { OpenUploadPicturesDialogButton } from '../../../components/open-upload-dialog-button';
+import { PriceInputComponent } from '../../../components/price-input-component';
+import { DressesSingleLinePictures } from '../../../components/single-line-screenshots';
 import { SizeInputComponent } from '../../../components/size-input-component';
 import { TitleInputComponent } from '../../../components/title-input';
+import { CreateButton } from './create-button';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -29,8 +37,10 @@ export const CreateDressForm: React.FC = () => {
         <PriceInputComponent />
         <OpenUploadPicturesDialogButton className={classes.button} />
         <CloseFormButton className={classes.button} />
-
+        <CreateButton className={classes.button} />
       </FormGroup>
+      <Typography variant="h4">Прикрепленные скриншоты</Typography>
+      <DressesSingleLinePictures />
     </React.Fragment>
   );
 };

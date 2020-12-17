@@ -10,7 +10,7 @@ import { CloseFormButton } from '../../../components/close-form-button';
 import { DescriptionInputComponent } from '../../../components/description-input';
 import { OpenUploadScreenshotsDialogButton } from '../../../components/open-upload-dialog-button';
 import { PriceInputComponent } from '../../../components/price-input';
-import { SingleLineScreenshots } from '../../../components/single-line-screenshots';
+import { VideoLessonsSingleLineScreenshots } from '../../../components/single-line-screenshots';
 import { SubTitleInputComponent } from '../../../components/subtitle-input';
 import { TitleInputComponent } from '../../../components/title-input';
 import { CreateButton } from './create-button';
@@ -40,7 +40,7 @@ export const CreateVideoLessonForm: React.FC = () => {
         <CreateButton className={classes.button} />
       </FormGroup>
       <Typography variant="h4">Прикрепленные скриншоты</Typography>
-      <SingleLineScreenshots />
+      <VideoLessonsSingleLineScreenshots />
     </React.Fragment>
   );
 };

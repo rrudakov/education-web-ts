@@ -1,5 +1,6 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
+import { UploadPicturesDialog } from '../../components/upload-pictures-dialog';
 import { CreateDressForm } from './components/create-dress-form';
 
 export const NewDressPage: React.FC = () => {
@@ -9,6 +10,7 @@ export const NewDressPage: React.FC = () => {
         Добавить новое платье
       </Typography>
       <CreateDressForm />
+      <UploadPicturesDialog />
     </React.Fragment>
   );
 };

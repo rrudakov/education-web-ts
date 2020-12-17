@@ -7,7 +7,7 @@ import { AppStoreState } from '../../core/store';
 import { SystemActionTypes } from '../../core/types';
 import {
   addScreenshotActionCreator,
-  setUpdateDialogOpenActionCreator,
+  setUploadDialogOpenActionCreator,
 } from './actions';
 import { VideoLessonsActionType } from './types';
 
@@ -23,7 +23,7 @@ export const thunkUploadScreenshots = (
   null,
   SystemActionTypes | VideoLessonsActionType
 > => (dispatch) => {
-  dispatch(setUpdateDialogOpenActionCreator(false));
+  dispatch(setUploadDialogOpenActionCreator(false));
   files.forEach((f) => {
     dispatch(fetching());
     request

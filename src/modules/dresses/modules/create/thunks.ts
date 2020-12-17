@@ -51,7 +51,7 @@ export const thunkSubmitNewDress = (
       })
       .catch((err: ResponseError) => {
         dispatch(stopFetching());
-        if (err.status == 401) {
+        if (err.status === 401) {
           dispatch(logout());
           dispatch(openAuthModal());
         }
