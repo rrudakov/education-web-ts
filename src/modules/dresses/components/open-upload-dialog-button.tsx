@@ -21,7 +21,7 @@ export const OpenUploadPicturesDialogButton: React.FC<{
       onClick={openDialog}
       startIcon={<AddIcon />}
     >
-      Загрузить скриншоты
+      Загрузить фото
     </Button>
   );
 };

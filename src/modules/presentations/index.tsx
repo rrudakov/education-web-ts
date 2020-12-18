@@ -99,6 +99,7 @@ const PresentationComponent: React.FC<PresentationProps> = ({
         <Typography
           paragraph
           color="textSecondary"
+          align="justify"
           style={{ whiteSpace: 'pre-wrap' }}
         >
           {description}

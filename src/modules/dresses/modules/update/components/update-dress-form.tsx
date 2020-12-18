@@ -6,6 +6,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { CloseFormButton } from '../../../components/close-form-button';
 import { DescriptionInputComponent } from '../../../components/description-input';
 import { OpenUploadPicturesDialogButton } from '../../../components/open-upload-dialog-button';
@@ -13,7 +14,7 @@ import { PriceInputComponent } from '../../../components/price-input-component';
 import { DressesSingleLinePictures } from '../../../components/single-line-screenshots';
 import { SizeInputComponent } from '../../../components/size-input-component';
 import { TitleInputComponent } from '../../../components/title-input';
-import { CreateButton } from './create-button';
+import { UpdateButton } from './update-button';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -25,8 +26,9 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
   })
 );
 
-export const CreateDressForm: React.FC = () => {
+export const UpdateDressForm: React.FC = () => {
   const classes = useStyles();
+  const { dressId } = useParams();
 
   return (
     <React.Fragment>
@@ -37,7 +39,7 @@ export const CreateDressForm: React.FC = () => {
         <PriceInputComponent />
         <OpenUploadPicturesDialogButton className={classes.button} />
         <CloseFormButton className={classes.button} />
-        <CreateButton className={classes.button} />
+        <UpdateButton className={classes.button} dressId={dressId} />
       </FormGroup>
       <Typography variant="h4">Прикрепленные фото</Typography>
       <DressesSingleLinePictures />
