@@ -20,6 +20,7 @@ import { BirthdaysPage } from './modules/birthdays';
 import { ContactsPage } from './modules/contacts';
 import { DressesPage } from './modules/dresses';
 import { FairytailEvents } from './modules/fairytail-events';
+import { GymnasticsPage } from './modules/gymnastics';
 import { Home } from './modules/home';
 import { HomeBanner } from './modules/home/components/banner';
 import { OnlineOfflineLessonsPage } from './modules/online-offline-lessons';
@@ -94,6 +95,9 @@ export const App: React.FC = () => {
             </Route>
             <Route path="/presentations" exact>
               <PresentationsPage />
+            </Route>
+            <Route path="/gymnastics">
+              <GymnasticsPage />
             </Route>
           </Switch>
         </main>

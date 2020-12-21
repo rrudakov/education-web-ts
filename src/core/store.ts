@@ -8,6 +8,10 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import { dressesReducer, DressesState } from '../modules/dresses/reducer';
+import {
+  gymnasticsReducer,
+  GymnasticsState,
+} from '../modules/gymnastics/reducer';
 import { homeReducer, HomeState } from '../modules/home/reducer';
 import { newPostReducer, NewPostState } from '../modules/newpost/reducer';
 import { postReducer, PostState } from '../modules/post/reducer';
@@ -24,6 +28,7 @@ export interface AppStoreState {
   newPost: NewPostState;
   videoLessons: VideoLessonsState;
   dresses: DressesState;
+  gymnastics: GymnasticsState;
 }
 
 const rootReducer = combineReducers({
@@ -33,6 +38,7 @@ const rootReducer = combineReducers({
   newPost: newPostReducer,
   videoLessons: videoLessonsReducer,
   dresses: dressesReducer,
+  gymnastics: gymnasticsReducer,
 });
 
 export const configureStore = (): Store<

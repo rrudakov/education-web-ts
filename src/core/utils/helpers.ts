@@ -1,3 +1,5 @@
+import { GYMNASTICS_SUBTYPES } from '../constants';
+
 export const splitIntoChunks: <T>(arr: T[], chunkSize: number) => T[][] = (
   arr,
   chunkSize
@@ -12,4 +14,13 @@ export const splitIntoChunks: <T>(arr: T[], chunkSize: number) => T[][] = (
   }
 
   return result;
+};
+
+export const getGymnasticURLBySubtypeId = (subtypeId: number): string => {
+  const foundItem = GYMNASTICS_SUBTYPES.find((g) => g.subtypeId === subtypeId);
+  if (foundItem !== undefined) {
+    return foundItem.url;
+  } else {
+    return '/';
+  }
 };

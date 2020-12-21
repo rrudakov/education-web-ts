@@ -1,3 +1,4 @@
+import { GYMNASTICS_SUBTYPES } from './constants';
 import {
   CLOSE_AUTH,
   DECREASE_FETCHING,
@@ -68,13 +69,8 @@ const initialState: SystemState = {
       name: 'Играем с мамой',
       subitems: [
         { name: 'Интерактивные презентации', url: '/presentations' },
-        { name: 'Пальчиковая гимнастика', url: '#' },
-        { name: 'Артикуляционная гимнастика', url: '#' },
-        { name: 'Дыхательная гимнастика', url: '#' },
-        { name: 'Физкультурная минутка', url: '#' },
-        { name: 'Кинезиологические упражнения', url: '#' },
         // { name: 'Аудиосказки', url: '#' },
-      ],
+      ].concat(GYMNASTICS_SUBTYPES.map((g) => ({ name: g.name, url: g.url }))),
     },
     {
       name: 'Мероприятия',
