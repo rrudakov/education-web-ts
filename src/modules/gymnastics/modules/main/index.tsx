@@ -3,10 +3,9 @@ import { Pagination } from '@material-ui/lab';
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { splitIntoChunks } from '../../../../core/utils/helpers';
-import { getVideoLessons } from '../../selectors';
-import { DemoVideoComponent } from './components/demo-video-component';
-import { VideoLessonComponent } from './components/video-lesson-component';
-import { thunkFetchVideoLessons } from './thunks';
+import { getGymnastics } from '../../selectors';
+import { GymnasticComponent } from './components/gymnastic-component';
+import { thunkFetchGymnastics } from './thunks';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -16,29 +15,34 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
   })
 );
 
-export const VideoLessonsMainPage: React.FC = () => {
+export interface GymnasticsMainPageProps {
+  subtypeId: number;
+}
+
+export const GymnasticsMainPage: React.FC<GymnasticsMainPageProps> = ({
+  subtypeId,
+}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const fetchVideoLessons = useCallback(
-    () => dispatch(thunkFetchVideoLessons()),
-    [dispatch]
+  const fetchGymnastics = useCallback(
+    () => dispatch(thunkFetchGymnastics(subtypeId)),
+    [dispatch, subtypeId]
   );
-  const videoLessons = useSelector(getVideoLessons);
-  const lessonsOnPage = 5;
-  const pageCount = Math.ceil(videoLessons.length / lessonsOnPage);
-  const videoLessonsChunks = splitIntoChunks(videoLessons, lessonsOnPage);
+  const gymnastics = useSelector(getGymnastics);
+  const gymnasticsOnPage = 6;
+  const pageCount = Math.ceil(gymnastics.length / gymnasticsOnPage);
+  const chunks = splitIntoChunks(gymnastics, gymnasticsOnPage);
   const [page, setPage] = useState(1);
   const handlePageSelect = (_: ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
   useEffect(() => {
-    fetchVideoLessons();
-  }, [fetchVideoLessons]);
+    fetchGymnastics();
+  }, [fetchGymnastics]);
 
   return (
     <React.Fragment>
-      <DemoVideoComponent />
       {pageCount > 1 && (
         <Grid
           className={classes.pagination}
@@ -53,13 +57,12 @@ export const VideoLessonsMainPage: React.FC = () => {
           />
         </Grid>
       )}
-      {videoLessonsChunks[page - 1] !== undefined &&
-        videoLessonsChunks[page - 1].map((videoLesson) => (
-          <VideoLessonComponent
-            key={videoLesson.id}
-            videoLesson={videoLesson}
-          />
-        ))}
+      <Grid container spacing={3}>
+        {chunks[page - 1] !== undefined &&
+          chunks[page - 1].map((gymnastic, i) => (
+            <GymnasticComponent key={i} gymnastic={gymnastic} />
+          ))}
+      </Grid>
       {pageCount > 1 && (
         <Grid
           className={classes.pagination}

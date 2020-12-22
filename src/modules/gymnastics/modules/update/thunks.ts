@@ -18,43 +18,40 @@ import { getToken } from '../../../../core/utils/storage';
 import {
   clearFormActionCreator,
   updateDescriptionActionCreator,
-  updatePicturesActionCreator,
-  updatePriceActionCreator,
-  updateSizeActionCreator,
+  updatePictureActionCreator,
+  updateSubtypeIdActionCreator,
   updateTitleActionCreator,
 } from '../../actions';
-import { DressesActionType } from '../../types';
+import { GymnasticsActionType } from '../../types';
 
-interface DressResponse {
-  id: string;
+interface GymnasticResponse {
+  id: number;
+  subtype_id: number;
   title: string;
   description: string;
-  size: number;
-  pictures: string[];
-  price: string;
+  picture?: string;
   created_on: string;
   updated_on: string;
 }
 
-export const thunkGetDress = (
-  dressId: number
+export const thunkGetGymnastic = (
+  gymnasticId: number
 ): ThunkAction<
   void,
   AppStoreState,
   null,
-  SystemActionTypes | DressesActionType
+  SystemActionTypes | GymnasticsActionType
 > => (dispatch) => {
   dispatch(fetching());
   request
-    .get(`${BASE_URL}/dresses/${dressId}`)
+    .get(`${BASE_URL}/gymnastics/${gymnasticId}`)
     .then((response) => {
       dispatch(stopFetching());
-      const dress: DressResponse = response.body;
-      dispatch(updateTitleActionCreator(dress.title));
-      dispatch(updateDescriptionActionCreator(dress.description));
-      dispatch(updateSizeActionCreator(dress.size));
-      dispatch(updatePicturesActionCreator(dress.pictures));
-      dispatch(updatePriceActionCreator(dress.price));
+      const gymnastic: GymnasticResponse = response.body;
+      dispatch(updateTitleActionCreator(gymnastic.title));
+      dispatch(updateSubtypeIdActionCreator(gymnastic.subtype_id));
+      dispatch(updateDescriptionActionCreator(gymnastic.description));
+      dispatch(updatePictureActionCreator(gymnastic.picture));
     })
     .catch((err) => {
       dispatch(stopFetching());
@@ -62,16 +59,18 @@ export const thunkGetDress = (
     });
 };
 
-export const thunkUpdateDress = (
-  dressId: number,
+export const thunkUpdateGymnastic = (
+  gymnasticId: number,
   history: History<History.UnknownFacade>
 ): ThunkAction<
   void,
   AppStoreState,
   null,
-  SystemActionTypes | DressesActionType
+  SystemActionTypes | GymnasticsActionType
 > => (dispatch, getState) => {
-  const { dresses } = getState();
+  const {
+    gymnastics: { form },
+  } = getState();
   const authToken = getToken();
 
   if (authToken === null) {
@@ -80,20 +79,19 @@ export const thunkUpdateDress = (
   } else {
     dispatch(fetching());
     request
-      .patch(`${BASE_URL}/dresses/${dressId}`)
+      .patch(`${BASE_URL}/gymnastics/${gymnasticId}`)
       .set('Authorization', `Token ${authToken}`)
       .send({
-        title: dresses.form.title,
-        description: dresses.form.description,
-        size: dresses.form.size,
-        pictures: dresses.form.pictures,
-        price: dresses.form.price,
+        subtype_id: form.subtype_id,
+        title: form.title,
+        description: form.description,
+        picture: form.picture !== undefined ? form.picture : null,
       })
       .then((_) => {
         dispatch(stopFetching());
-        history.push('/dresses');
+        history.goBack();
         dispatch(clearFormActionCreator());
-        dispatch(updateSuccessMessage('Dress was successfully updated'));
+        dispatch(updateSuccessMessage('Gymnastic was successfully updated'));
       })
       .catch((err: ResponseError) => {
         dispatch(stopFetching());

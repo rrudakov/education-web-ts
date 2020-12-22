@@ -24,3 +24,12 @@ export const getGymnasticURLBySubtypeId = (subtypeId: number): string => {
     return '/';
   }
 };
+
+export const getGymnasticNameBySubtypeId = (subtypeId: number): string => {
+  const foundItem = GYMNASTICS_SUBTYPES.find((g) => g.subtypeId === subtypeId);
+  if (foundItem !== undefined) {
+    return foundItem.name;
+  } else {
+    return '';
+  }
+};

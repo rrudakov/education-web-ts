@@ -23,7 +23,7 @@ import { TOGGLE_MENU_DRAWER } from '../types';
 
 const useStyles = makeStyles(({ palette, spacing }: Theme) =>
   createStyles({
-    list: {
+    menu: {
       width: 250,
     },
     drawer: {
@@ -52,7 +52,7 @@ export const MenuDrawer: React.FC = () => {
       open={menuDrawerOpen}
       onClose={toggleMenuDrawer}
     >
-      <div className={classes.list} role="presentation">
+      <div className={classes.menu} role="presentation">
         {menuItems.map((item, i) => (
           <NestedMenuComponent key={i} item={item} />
         ))}
@@ -84,14 +84,12 @@ const ListItemLink: React.FC<ListItemLinkProps> = ({
   );
 
   return (
-    <li>
-      <ListItem button component={renderLink} onClick={toggleMenuDrawer}>
-        <ListItemText
-          primary={text}
-          primaryTypographyProps={{ variant: 'button' }}
-        />
-      </ListItem>
-    </li>
+    <ListItem button component={renderLink} onClick={toggleMenuDrawer}>
+      <ListItemText
+        primary={text}
+        primaryTypographyProps={{ variant: 'button' }}
+      />
+    </ListItem>
   );
 };
 

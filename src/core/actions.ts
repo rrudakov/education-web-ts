@@ -36,6 +36,11 @@ export const updateErrorMessage = (
   payload: message,
 });
 
+export const unauthorizedError = (): UpdateErrorMessageAction => ({
+  type: UPDATE_ERROR_MESSAGE,
+  payload: 'Unauthorized!',
+});
+
 export const updateSuccessMessage = (
   message?: string
 ): UpdateSuccessMessageAction => ({

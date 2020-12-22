@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUploadDialogOpenActionCreator } from '../../../actions';
+import { setUploadDialogOpenActionCreator } from '../actions';
 
 export const OpenUploadPictureDialogButtonComponent: React.FC<{
   className: string;

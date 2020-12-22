@@ -15,6 +15,10 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
     card: {
       marginBottom: spacing(2),
     },
+    media: {
+      height: 0,
+      paddingTop: '56.25%',
+    },
   })
 );
 
@@ -86,12 +90,12 @@ const PresentationComponent: React.FC<PresentationProps> = ({
       <CardHeader title={title} />
       <CardContent>
         <CardMedia
+          className={classes.media}
           component="iframe"
           src={url}
           title={title}
           frameBorder={0}
           allowFullScreen
-          style={{ width: '100%', height: 710 }}
         />
         <Typography gutterBottom variant="h5" component="h2">
           Описание
