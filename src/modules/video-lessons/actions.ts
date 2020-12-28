@@ -10,12 +10,16 @@ import {
   DELETE_SCREENSHOT,
   SetUploadDialogOpenAction,
   SET_UPLOAD_DIALOG_OPEN,
+  UpdateCurrentChunkAction,
+  UpdateCurrentPageAction,
   UpdateDescriptionAction,
   UpdateLessonsAction,
   UpdatePriceAction,
   UpdateScreenshotsAction,
   UpdateSubtitleAction,
   UpdateTitleAction,
+  UPDATE_CURRENT_CHUNK,
+  UPDATE_CURRENT_PAGE,
   UPDATE_DESCRIPTION,
   UPDATE_LESSONS,
   UPDATE_PRICE,
@@ -36,6 +40,20 @@ export const deleteLessonActionCreator = (
 ): DeleteLessonAction => ({
   type: DELETE_LESSON,
   payload: lessonId,
+});
+
+export const updateCurrentPageActionCreator = (
+  page: number
+): UpdateCurrentPageAction => ({
+  type: UPDATE_CURRENT_PAGE,
+  payload: page,
+});
+
+export const updateCurrentChunkActionCreator = (
+  chunk: VideoLesson[]
+): UpdateCurrentChunkAction => ({
+  type: UPDATE_CURRENT_CHUNK,
+  payload: chunk,
 });
 
 export const setUploadDialogOpenActionCreator = (

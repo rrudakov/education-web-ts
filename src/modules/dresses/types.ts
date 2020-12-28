@@ -2,6 +2,8 @@ import { Dress } from './reducer';
 
 export const UPDATE_DRESSES = 'UPDATE_DRESSES/DRESSES';
 export const DELETE_DRESS = 'DELETE_DRESS/DRESSES';
+export const UPDATE_CURRENT_PAGE = 'UPDATE_CURRENT_PAGE/DRESSES';
+export const UPDATE_CURRENT_CHUNK = 'UPDATE_CURRENT_CHUNK/DRESSES';
 export const UPDATE_TITLE = 'UPDATE_TITLE/DRESSES';
 export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION/DRESSES';
 export const UPDATE_SIZE = 'UPDATE_SIZE/DRESSES';
@@ -20,6 +22,16 @@ export interface UpdateDressesAction {
 export interface DeleteDressAction {
   type: typeof DELETE_DRESS;
   payload: number;
+}
+
+export interface UpdateCurrentPageAction {
+  type: typeof UPDATE_CURRENT_PAGE;
+  payload: number;
+}
+
+export interface UpdateCurrentChunkAction {
+  type: typeof UPDATE_CURRENT_CHUNK;
+  payload: Dress[];
 }
 
 export interface UpdateTitleAction {
@@ -69,6 +81,8 @@ export interface SetUploadDialogOpenAction {
 export type DressesActionType =
   | UpdateDressesAction
   | DeleteDressAction
+  | UpdateCurrentPageAction
+  | UpdateCurrentChunkAction
   | UpdateTitleAction
   | UpdateDescriptionAction
   | UpdateSizeAction

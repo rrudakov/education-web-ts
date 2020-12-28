@@ -5,6 +5,7 @@ import {
   CardMedia,
   createStyles,
   Grid,
+  Grow,
   IconButton,
   makeStyles,
   Menu,
@@ -13,10 +14,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { getUser } from '../../../../../core/selector';
+import { getTransitioning, getUser } from '../../../../../core/selector';
 import { getGymnasticNameBySubtypeId } from '../../../../../core/utils/helpers';
 import { isAdmin, isModerator } from '../../../../../core/utils/user';
 import { Gymnastic } from '../../../reducer';
@@ -47,6 +48,9 @@ export const GymnasticComponent: React.FC<GymnasticComponentProps> = ({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const { url } = useRouteMatch();
+  const transitioning = useSelector(getTransitioning);
+  const [show, setShow] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const openMenu = (e: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(e.currentTarget);
@@ -64,59 +68,79 @@ export const GymnasticComponent: React.FC<GymnasticComponentProps> = ({
     [dispatch]
   );
 
+  const handleImageLoaded = (
+    _: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    setImageLoaded(true);
+  };
+
+  useEffect(
+    () =>
+      setShow(
+        !transitioning &&
+          (gymnastic.picture === undefined ||
+            gymnastic.picture === null ||
+            imageLoaded)
+      ),
+    [transitioning, imageLoaded, gymnastic]
+  );
+
   return (
-    <Grid item sm={12} md={6}>
-      <Card className={classes.root}>
-        <CardHeader
-          title={gymnastic.title}
-          subheader={gymnasticType}
-          action={
-            user !== undefined &&
-            (isAdmin(user) || isModerator(user)) && (
-              <IconButton
-                aria-label="settings"
-                aria-controls="gymnastic-menu"
-                aria-haspopup={true}
-                onClick={openMenu}
-              >
-                <MoreVertIcon />
-              </IconButton>
-            )
-          }
-        />
-        <Menu
-          id="gymnastic-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={open}
-          onClose={closeMenu}
-        >
-          <MenuItem component={Link} to={`${url}/${gymnastic.id}`}>
-            Редактировать
-          </MenuItem>
-          <MenuItem onClick={() => deleteGymnastic(gymnastic.id)}>
-            Удалить
-          </MenuItem>
-        </Menu>
-        <CardContent>
-          <Typography
-            paragraph
-            color="textSecondary"
-            align="justify"
-            style={{ whiteSpace: 'pre-line' }}
-          >
-            {gymnastic.description}
-          </Typography>
-        </CardContent>
-        {gymnastic.picture !== undefined && (
-          <CardMedia
-            className={classes.media}
-            component="img"
-            image={gymnastic.picture}
-            height="100%"
+    <Grid className={classes.root} item sm={12} md={6}>
+      <Grow in={show} timeout={500}>
+        <Card>
+          <CardHeader
+            title={gymnastic.title}
+            subheader={gymnasticType}
+            action={
+              user !== undefined &&
+              (isAdmin(user) || isModerator(user)) && (
+                <IconButton
+                  aria-label="settings"
+                  aria-controls="gymnastic-menu"
+                  aria-haspopup={true}
+                  onClick={openMenu}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+              )
+            }
           />
-        )}
-      </Card>
+          <Menu
+            id="gymnastic-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={open}
+            onClose={closeMenu}
+          >
+            <MenuItem component={Link} to={`${url}/${gymnastic.id}`}>
+              Редактировать
+            </MenuItem>
+            <MenuItem onClick={() => deleteGymnastic(gymnastic.id)}>
+              Удалить
+            </MenuItem>
+          </Menu>
+          <CardContent>
+            <Typography
+              paragraph
+              color="textSecondary"
+              align="justify"
+              style={{ whiteSpace: 'pre-line' }}
+            >
+              {gymnastic.description}
+            </Typography>
+          </CardContent>
+          {gymnastic.picture !== undefined && gymnastic.picture !== null && (
+            <CardMedia
+              className={classes.media}
+              component="img"
+              image={gymnastic.picture}
+              onLoad={handleImageLoaded}
+              height="100%"
+            />
+          )}
+        </Card>
+      </Grow>
     </Grid>
   );
 };

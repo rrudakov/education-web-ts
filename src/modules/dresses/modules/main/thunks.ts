@@ -3,7 +3,9 @@ import request from 'superagent';
 import {
   fetching,
   logout,
+  startTransitioning,
   stopFetching,
+  stopTransitioning,
   updateErrorMessage,
   updateSuccessMessage,
 } from '../../../../core/actions';
@@ -14,6 +16,8 @@ import { SystemActionTypes } from '../../../../core/types';
 import { getToken } from '../../../../core/utils/storage';
 import {
   deleteDressActionCreator,
+  updateCurrentChunkActionCreator,
+  updateCurrentPageActionCreator,
   updateDressesActionCreator,
 } from '../../actions';
 import { DressesActionType } from '../../types';
@@ -35,6 +39,24 @@ export const thunkFetchDresses = (): ThunkAction<
       dispatch(stopFetching());
       dispatch(updateErrorMessage((err as ErrorResponse).message));
     });
+};
+
+export const thunkSelectPage = (
+  page: number
+): ThunkAction<
+  void,
+  AppStoreState,
+  null,
+  SystemActionTypes | DressesActionType
+> => (dispatch, getState) => {
+  const { dresses } = getState();
+  dispatch(startTransitioning());
+  dispatch(updateCurrentChunkActionCreator([]));
+  dispatch(updateCurrentPageActionCreator(page));
+  setTimeout(() => {
+    dispatch(updateCurrentChunkActionCreator(dresses.chunks[page - 1] || []));
+    dispatch(stopTransitioning());
+  }, 500);
 };
 
 export const thunkDeleteDressById = (

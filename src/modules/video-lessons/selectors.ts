@@ -6,6 +6,18 @@ export const getVideoLessons: Selector<AppStoreState, VideoLesson[]> = ({
   videoLessons,
 }) => videoLessons.lessons;
 
+export const getCurrentChunk: Selector<AppStoreState, VideoLesson[]> = ({
+  videoLessons,
+}) => videoLessons.currentChunk;
+
+export const getPagesCount: Selector<AppStoreState, number> = ({
+  videoLessons,
+}) => videoLessons.pagesCount;
+
+export const getCurrentPage: Selector<AppStoreState, number> = ({
+  videoLessons,
+}) => videoLessons.currentPage;
+
 export const getTitle: Selector<AppStoreState, string> = ({ videoLessons }) =>
   videoLessons.form.title;
 

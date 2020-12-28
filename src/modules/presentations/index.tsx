@@ -2,22 +2,31 @@ import {
   Card,
   CardContent,
   CardHeader,
-  CardMedia,
   createStyles,
+  Grow,
   makeStyles,
   Theme,
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { getTransitioning } from '../../core/selector';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
     card: {
       marginBottom: spacing(2),
     },
-    media: {
-      height: 0,
-      paddingTop: '56.25%',
+    videoWrapper: {
+      position: 'relative',
+      paddingBottom: '58.8%',
+    },
+    iframe: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
     },
   })
 );
@@ -84,31 +93,35 @@ const PresentationComponent: React.FC<PresentationProps> = ({
   description,
 }: PresentationProps) => {
   const classes = useStyles();
+  const transitioning = useSelector(getTransitioning);
 
   return (
-    <Card className={classes.card}>
-      <CardHeader title={title} />
-      <CardContent>
-        <CardMedia
-          className={classes.media}
-          component="iframe"
-          src={url}
-          title={title}
-          frameBorder={0}
-          allowFullScreen
-        />
-        <Typography gutterBottom variant="h5" component="h2">
-          Описание
-        </Typography>
-        <Typography
-          paragraph
-          color="textSecondary"
-          align="justify"
-          style={{ whiteSpace: 'pre-wrap' }}
-        >
-          {description}
-        </Typography>
-      </CardContent>
-    </Card>
+    <Grow in={!transitioning} timeout="auto">
+      <Card className={classes.card}>
+        <CardHeader title={title} />
+        <CardContent>
+          <div className={classes.videoWrapper}>
+            <iframe
+              className={classes.iframe}
+              src={url}
+              title={title}
+              frameBorder={0}
+              allowFullScreen
+            ></iframe>
+          </div>
+          <Typography gutterBottom variant="h5" component="h2">
+            Описание
+          </Typography>
+          <Typography
+            paragraph
+            color="textSecondary"
+            align="justify"
+            style={{ whiteSpace: 'pre-wrap' }}
+          >
+            {description}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Grow>
   );
 };

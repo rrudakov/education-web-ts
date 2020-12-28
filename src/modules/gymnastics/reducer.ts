@@ -1,8 +1,11 @@
+import { splitIntoChunks } from '../../core/utils/helpers';
 import {
   CLEAR_FORM,
   DELETE_GYMNASTIC,
   GymnasticsActionType,
   SET_UPLOAD_DIALOG_OPEN,
+  UPDATE_CURRENT_CHUNK,
+  UPDATE_CURRENT_PAGE,
   UPDATE_DESCRIPTION,
   UPDATE_GYMNSATICS,
   UPDATE_PICTURE,
@@ -28,13 +31,23 @@ export interface GymnasticForm {
   uploadDialogOpen: boolean;
 }
 
+export const ITEMS_ON_PAGE = 6;
+
 export interface GymnasticsState {
   gymnastics: Gymnastic[];
+  pagesCount: number;
+  currentPage: number;
+  chunks: Gymnastic[][];
+  currentChunk: Gymnastic[];
   form: GymnasticForm;
 }
 
 export const initialState: GymnasticsState = {
   gymnastics: [],
+  pagesCount: 1,
+  currentPage: 1,
+  chunks: [],
+  currentChunk: [],
   form: {
     subtype_id: 1,
     title: '',
@@ -48,13 +61,37 @@ export const gymnasticsReducer = (
   state: GymnasticsState = initialState,
   action: GymnasticsActionType
 ): GymnasticsState => {
+  let chunks = [];
   switch (action.type) {
     case UPDATE_GYMNSATICS:
-      return { ...state, gymnastics: action.payload };
-    case DELETE_GYMNASTIC:
+      chunks = splitIntoChunks(action.payload, ITEMS_ON_PAGE);
       return {
         ...state,
-        gymnastics: state.gymnastics.filter((g) => g.id !== action.payload),
+        gymnastics: action.payload,
+        pagesCount: Math.ceil(action.payload.length / ITEMS_ON_PAGE),
+        currentPage: 1,
+        chunks: chunks,
+        currentChunk: chunks[0] !== undefined ? chunks[0] : [],
+      };
+    case DELETE_GYMNASTIC:
+      const newGymnastics = state.gymnastics.filter(
+        (g) => g.id !== action.payload
+      );
+      chunks = splitIntoChunks(newGymnastics, ITEMS_ON_PAGE);
+      return {
+        ...state,
+        gymnastics: newGymnastics,
+        pagesCount: Math.ceil(newGymnastics.length / ITEMS_ON_PAGE),
+        currentPage: 1,
+        chunks: chunks,
+        currentChunk: chunks[0] !== undefined ? chunks[0] : [],
+      };
+    case UPDATE_CURRENT_CHUNK:
+      return { ...state, currentChunk: action.payload };
+    case UPDATE_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
       };
     case UPDATE_SUBTYPE_ID:
       return { ...state, form: { ...state.form, subtype_id: action.payload } };

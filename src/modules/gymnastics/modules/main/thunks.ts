@@ -3,7 +3,9 @@ import request from 'superagent';
 import {
   fetching,
   logout,
+  startTransitioning,
   stopFetching,
+  stopTransitioning,
   updateErrorMessage,
   updateSuccessMessage,
 } from '../../../../core/actions';
@@ -14,6 +16,8 @@ import { SystemActionTypes } from '../../../../core/types';
 import { getToken } from '../../../../core/utils/storage';
 import {
   deleteGymnasticActionCreator,
+  updateCurrentChunkActionCreator,
+  updateCurrentPageActionCreator,
   updateGymnasticsActionCreator,
 } from '../../actions';
 import { GymnasticsActionType } from '../../types';
@@ -26,6 +30,7 @@ export const thunkFetchGymnastics = (
   null,
   SystemActionTypes | GymnasticsActionType
 > => (dispatch) => {
+  dispatch(updateGymnasticsActionCreator([]));
   dispatch(fetching());
   request
     .get(`${BASE_URL}/gymnastics`)
@@ -38,6 +43,26 @@ export const thunkFetchGymnastics = (
       dispatch(stopFetching());
       dispatch(updateErrorMessage((err as ErrorResponse).message));
     });
+};
+
+export const thunkSelectPage = (
+  page: number
+): ThunkAction<
+  void,
+  AppStoreState,
+  null,
+  SystemActionTypes | GymnasticsActionType
+> => (dispatch, getState) => {
+  const { gymnastics } = getState();
+  dispatch(startTransitioning());
+  dispatch(updateCurrentChunkActionCreator([]));
+  dispatch(updateCurrentPageActionCreator(page));
+  setTimeout(() => {
+    dispatch(
+      updateCurrentChunkActionCreator(gymnastics.chunks[page - 1] || [])
+    );
+    dispatch(stopTransitioning());
+  }, 500);
 };
 
 export const thunkDeleteGymnasticById = (

@@ -1,9 +1,12 @@
+import { splitIntoChunks } from '../../core/utils/helpers';
 import {
   ADD_SCREENSHOT,
   CLEAR_FORM,
   DELETE_LESSON,
   DELETE_SCREENSHOT,
   SET_UPLOAD_DIALOG_OPEN,
+  UPDATE_CURRENT_CHUNK,
+  UPDATE_CURRENT_PAGE,
   UPDATE_DESCRIPTION,
   UPDATE_LESSONS,
   UPDATE_PRICE,
@@ -33,13 +36,23 @@ export interface VideoLessonForm {
   uploadDialogOpen: boolean;
 }
 
+export const ITEMS_ON_PAGE = 5;
+
 export interface VideoLessonsState {
   lessons: VideoLesson[];
+  pagesCount: number;
+  currentPage: number;
+  chunks: VideoLesson[][];
+  currentChunk: VideoLesson[];
   form: VideoLessonForm;
 }
 
 export const initialState: VideoLessonsState = {
   lessons: [],
+  pagesCount: 1,
+  currentPage: 1,
+  chunks: [],
+  currentChunk: [],
   form: {
     title: '',
     subtitle: '',
@@ -54,14 +67,35 @@ export const videoLessonsReducer = (
   state: VideoLessonsState = initialState,
   action: VideoLessonsActionType
 ): VideoLessonsState => {
+  let chunks = [];
   switch (action.type) {
     case UPDATE_LESSONS:
-      return { ...state, lessons: action.payload };
-    case DELETE_LESSON:
+      chunks = splitIntoChunks(action.payload, ITEMS_ON_PAGE);
       return {
         ...state,
-        lessons: state.lessons.filter((l) => l.id !== action.payload),
+        lessons: action.payload,
+        pagesCount: Math.ceil(action.payload.length / ITEMS_ON_PAGE),
+        currentPage: 1,
+        chunks: chunks,
+        currentChunk: chunks[0] || [],
       };
+    case DELETE_LESSON:
+      const newVideoLessons = state.lessons.filter(
+        (l) => l.id !== action.payload
+      );
+      chunks = splitIntoChunks(newVideoLessons, ITEMS_ON_PAGE);
+      return {
+        ...state,
+        lessons: newVideoLessons,
+        pagesCount: Math.ceil(newVideoLessons.length / ITEMS_ON_PAGE),
+        currentPage: 1,
+        chunks: chunks,
+        currentChunk: chunks[0] || [],
+      };
+    case UPDATE_CURRENT_CHUNK:
+      return { ...state, currentChunk: action.payload };
+    case UPDATE_CURRENT_PAGE:
+      return { ...state, currentPage: action.payload };
     case UPDATE_TITLE:
       return { ...state, form: { ...state.form, title: action.payload } };
     case UPDATE_SUBTITLE:

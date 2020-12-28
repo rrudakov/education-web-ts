@@ -2,6 +2,8 @@ import { VideoLesson } from './reducer';
 
 export const UPDATE_LESSONS = 'UPDATE_LESSONS/VIDEO_LESSONS';
 export const DELETE_LESSON = 'DELETE_LESSON/VIDEO_LESSONS';
+export const UPDATE_CURRENT_PAGE = 'UPDATE_CURRENT_PAGE/VIDEO_LESSONS';
+export const UPDATE_CURRENT_CHUNK = 'UPDATE_CURRENT_CHUNK/VIDEO_LESSONS';
 export const UPDATE_TITLE = 'UPDATE_TITLE/VIDEO_LESSONS';
 export const UPDATE_SUBTITLE = 'UPDATE_SUBTITLE/VIDEO_LESSONS';
 export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION/VIDEO_LESSONS';
@@ -20,6 +22,16 @@ export interface UpdateLessonsAction {
 export interface DeleteLessonAction {
   type: typeof DELETE_LESSON;
   payload: number;
+}
+
+export interface UpdateCurrentPageAction {
+  type: typeof UPDATE_CURRENT_PAGE;
+  payload: number;
+}
+
+export interface UpdateCurrentChunkAction {
+  type: typeof UPDATE_CURRENT_CHUNK;
+  payload: VideoLesson[];
 }
 
 export interface UpdateTitleAction {
@@ -69,6 +81,8 @@ export interface SetUploadDialogOpenAction {
 export type VideoLessonsActionType =
   | UpdateLessonsAction
   | DeleteLessonAction
+  | UpdateCurrentPageAction
+  | UpdateCurrentChunkAction
   | UpdateTitleAction
   | UpdateSubtitleAction
   | UpdateDescriptionAction

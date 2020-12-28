@@ -5,6 +5,16 @@ import { Dress } from './reducer';
 export const getDresses: Selector<AppStoreState, Dress[]> = ({ dresses }) =>
   dresses.dresses;
 
+export const getCurrentChunk: Selector<AppStoreState, Dress[]> = ({
+  dresses,
+}) => dresses.currentChunk;
+
+export const getPagesCount: Selector<AppStoreState, number> = ({ dresses }) =>
+  dresses.pagesCount;
+
+export const getCurrentPage: Selector<AppStoreState, number> = ({ dresses }) =>
+  dresses.currentPage;
+
 export const getTitle: Selector<AppStoreState, string> = ({ dresses }) =>
   dresses.form.title;
 

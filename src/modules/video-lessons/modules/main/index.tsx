@@ -1,17 +1,21 @@
 import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { splitIntoChunks } from '../../../../core/utils/helpers';
-import { getVideoLessons } from '../../selectors';
+import {
+  getCurrentChunk,
+  getCurrentPage,
+  getPagesCount,
+} from '../../selectors';
 import { DemoVideoComponent } from './components/demo-video-component';
 import { VideoLessonComponent } from './components/video-lesson-component';
-import { thunkFetchVideoLessons } from './thunks';
+import { thunkFetchVideoLessons, thunkSelectPage } from './thunks';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
     pagination: {
       marginBottom: spacing(2),
+      marginTop: spacing(2),
     },
   })
 );
@@ -23,14 +27,14 @@ export const VideoLessonsMainPage: React.FC = () => {
     () => dispatch(thunkFetchVideoLessons()),
     [dispatch]
   );
-  const videoLessons = useSelector(getVideoLessons);
-  const lessonsOnPage = 5;
-  const pageCount = Math.ceil(videoLessons.length / lessonsOnPage);
-  const videoLessonsChunks = splitIntoChunks(videoLessons, lessonsOnPage);
-  const [page, setPage] = useState(1);
-  const handlePageSelect = (_: ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-  };
+  const videoLessons = useSelector(getCurrentChunk);
+  const pageCount = useSelector(getPagesCount);
+  const page = useSelector(getCurrentPage);
+  const handlePageSelect = useCallback(
+    (_: ChangeEvent<unknown>, value: number) =>
+      dispatch(thunkSelectPage(value)),
+    [dispatch]
+  );
 
   useEffect(() => {
     fetchVideoLessons();
@@ -53,13 +57,9 @@ export const VideoLessonsMainPage: React.FC = () => {
           />
         </Grid>
       )}
-      {videoLessonsChunks[page - 1] !== undefined &&
-        videoLessonsChunks[page - 1].map((videoLesson) => (
-          <VideoLessonComponent
-            key={videoLesson.id}
-            videoLesson={videoLesson}
-          />
-        ))}
+      {videoLessons.map((videoLesson) => (
+        <VideoLessonComponent key={videoLesson.id} videoLesson={videoLesson} />
+      ))}
       {pageCount > 1 && (
         <Grid
           className={classes.pagination}

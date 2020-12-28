@@ -7,6 +7,10 @@ import {
   LogoutAction,
   OpenAuthModalAction,
   OPEN_AUTH,
+  StartTransitioningAction,
+  START_TRANSITIONING,
+  StopTransitioningAction,
+  STOP_TRANSITIONING,
   UpdateErrorMessageAction,
   UpdateSuccessMessageAction,
   UPDATE_ERROR_MESSAGE,
@@ -19,6 +23,14 @@ export const fetching = (): IncreaseFetchingAction => ({
 
 export const stopFetching = (): DecreaseFetchingAction => ({
   type: DECREASE_FETCHING,
+});
+
+export const startTransitioning = (): StartTransitioningAction => ({
+  type: START_TRANSITIONING,
+});
+
+export const stopTransitioning = (): StopTransitioningAction => ({
+  type: STOP_TRANSITIONING,
 });
 
 export const logout = (): LogoutAction => ({

@@ -6,11 +6,15 @@ import {
   DELETE_GYMNASTIC,
   SetUploadDialogOpenAction,
   SET_UPLOAD_DIALOG_OPEN,
+  UpdateCurrentChunkAction,
+  UpdateCurrentPageAction,
   UpdateDescriptionAction,
   UpdateGymnasticsAction,
   UpdatePictureAction,
   UpdateSubtypeIdAction,
   UpdateTitleAction,
+  UPDATE_CURRENT_CHUNK,
+  UPDATE_CURRENT_PAGE,
   UPDATE_DESCRIPTION,
   UPDATE_GYMNSATICS,
   UPDATE_PICTURE,
@@ -30,6 +34,20 @@ export const deleteGymnasticActionCreator = (
 ): DeleteGymnasticAction => ({
   type: DELETE_GYMNASTIC,
   payload: gymnasticId,
+});
+
+export const updateCurrentPageActionCreator = (
+  page: number
+): UpdateCurrentPageAction => ({
+  type: UPDATE_CURRENT_PAGE,
+  payload: page,
+});
+
+export const updateCurrentChunkActionCreator = (
+  chunk: Gymnastic[]
+): UpdateCurrentChunkAction => ({
+  type: UPDATE_CURRENT_CHUNK,
+  payload: chunk,
 });
 
 export const updateSubtypeIdActionCreator = (

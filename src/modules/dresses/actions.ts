@@ -10,12 +10,16 @@ import {
   DELETE_PICTURE,
   SetUploadDialogOpenAction,
   SET_UPLOAD_DIALOG_OPEN,
+  UpdateCurrentChunkAction,
+  UpdateCurrentPageAction,
   UpdateDescriptionAction,
   UpdateDressesAction,
   UpdatePicturesAction,
   UpdatePriceAction,
   UpdateSizeAction,
   UpdateTitleAction,
+  UPDATE_CURRENT_CHUNK,
+  UPDATE_CURRENT_PAGE,
   UPDATE_DESCRIPTION,
   UPDATE_DRESSES,
   UPDATE_PICTURES,
@@ -36,6 +40,20 @@ export const deleteDressActionCreator = (
 ): DeleteDressAction => ({
   type: DELETE_DRESS,
   payload: dressId,
+});
+
+export const updateCurrentPageActionCreator = (
+  page: number
+): UpdateCurrentPageAction => ({
+  type: UPDATE_CURRENT_PAGE,
+  payload: page,
+});
+
+export const updateCurrentChunkActionCreator = (
+  chunk: Dress[]
+): UpdateCurrentChunkAction => ({
+  type: UPDATE_CURRENT_CHUNK,
+  payload: chunk,
 });
 
 export const updateTitleActionCreator = (title: string): UpdateTitleAction => ({

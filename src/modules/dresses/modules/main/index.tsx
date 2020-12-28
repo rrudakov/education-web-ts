@@ -1,21 +1,32 @@
 import {
+  Card,
+  CardContent,
+  CardHeader,
   createStyles,
   Grid,
+  Grow,
   makeStyles,
   Theme,
   Typography,
 } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { splitIntoChunks } from '../../../../core/utils/helpers';
-import { getDresses } from '../../selectors';
+import {
+  getCurrentChunk,
+  getCurrentPage,
+  getPagesCount,
+} from '../../selectors';
 import { DressComponent } from './components/dress-component';
-import { thunkFetchDresses } from './thunks';
+import { thunkFetchDresses, thunkSelectPage } from './thunks';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
     pagination: {
+      marginBottom: spacing(2),
+      marginTop: spacing(2),
+    },
+    disclamer: {
       marginBottom: spacing(2),
     },
   })
@@ -27,14 +38,14 @@ export const DressesMainPage: React.FC = () => {
   const fetchDresses = useCallback(() => dispatch(thunkFetchDresses()), [
     dispatch,
   ]);
-  const dresses = useSelector(getDresses);
-  const dressesOnPage = 5;
-  const pageCount = Math.ceil(dresses.length / dressesOnPage);
-  const chunks = splitIntoChunks(dresses, dressesOnPage);
-  const [page, setPage] = useState(1);
-  const handlePageSelect = (_: ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-  };
+  const dresses = useSelector(getCurrentChunk);
+  const pageCount = useSelector(getPagesCount);
+  const page = useSelector(getCurrentPage);
+  const handlePageSelect = useCallback(
+    (_: ChangeEvent<unknown>, value: number) =>
+      dispatch(thunkSelectPage(value)),
+    [dispatch]
+  );
 
   useEffect(() => {
     fetchDresses();
@@ -42,11 +53,19 @@ export const DressesMainPage: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Typography paragraph>
-        Если вы планируете фотосессию или День рождения, вы можете взять в
-        аренду платье для этого события и ваша принцесса будет самая красивая на
-        празднике.
-      </Typography>
+      <Grow in>
+        <Card className={classes.disclamer}>
+          <CardHeader title={'Прокат детских платьев'} />
+          <CardContent>
+            <Typography paragraph color="textSecondary" align="justify">
+              Если вы планируете фотосессию или День рождения, вы можете взять в
+              аренду платье для этого события и ваша принцесса будет самая
+              красивая на празднике.
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grow>
+
       {pageCount > 1 && (
         <Grid
           className={classes.pagination}
@@ -61,10 +80,11 @@ export const DressesMainPage: React.FC = () => {
           />
         </Grid>
       )}
-      {chunks[page - 1] !== undefined &&
-        chunks[page - 1].map((dress) => (
-          <DressComponent key={dress.id} dress={dress} />
+      <Grid container direction="row" spacing={3}>
+        {dresses.map((dress, i) => (
+          <DressComponent key={i} dress={dress} />
         ))}
+      </Grid>
       {pageCount > 1 && (
         <Grid
           className={classes.pagination}

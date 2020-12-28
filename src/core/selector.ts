@@ -5,6 +5,10 @@ import { AppStoreState } from './store';
 export const getFetching: Selector<AppStoreState, boolean> = ({ system }) =>
   system.fetching > 0;
 
+export const getTransitioning: Selector<AppStoreState, boolean> = ({
+  system,
+}) => system.transitioning;
+
 export const getAuthOpen: Selector<AppStoreState, boolean> = ({ system }) =>
   system.authOpen;
 

@@ -1,6 +1,10 @@
 import {
   Box,
+  Card,
+  CardContent,
+  CardHeader,
   createStyles,
+  Grow,
   Link,
   makeStyles,
   Theme,
@@ -11,18 +15,17 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   EMAIL_LINK,
   INSTAGRAM_LINK,
   TELEGRAM_LINK,
   WHATSAPP_LINK,
 } from '../../core/constants';
+import { getTransitioning } from '../../core/selector';
 
 const useStyles = makeStyles(({ spacing, palette }: Theme) =>
   createStyles({
-    title: {
-      marginBottom: spacing(2),
-    },
     link: {
       marginLeft: spacing(1),
       color: palette.text.secondary,
@@ -31,34 +34,36 @@ const useStyles = makeStyles(({ spacing, palette }: Theme) =>
 );
 
 export const ContactsPage: React.FC = () => {
-  const classes = useStyles();
+  const transitioning = useSelector(getTransitioning);
 
   return (
-    <React.Fragment>
-      <Typography className={classes.title} variant="h4">
-        Контакты
-      </Typography>
-      <ContactLink
-        icon={<EmailIcon />}
-        text="singerofnight@gmail.com"
-        linkUrl={EMAIL_LINK}
-      />
-      <ContactLink
-        icon={<InstagramIcon />}
-        text="Instagram"
-        linkUrl={INSTAGRAM_LINK}
-      />
-      <ContactLink
-        icon={<WhatsAppIcon />}
-        text="WhatsApp"
-        linkUrl={WHATSAPP_LINK}
-      />
-      <ContactLink
-        icon={<TelegramIcon />}
-        text="Telegram"
-        linkUrl={TELEGRAM_LINK}
-      />
-    </React.Fragment>
+    <Grow in={!transitioning}>
+      <Card>
+        <CardHeader title="Контакты" />
+        <CardContent>
+          <ContactLink
+            icon={<EmailIcon />}
+            text="singerofnight@gmail.com"
+            linkUrl={EMAIL_LINK}
+          />
+          <ContactLink
+            icon={<InstagramIcon />}
+            text="Instagram"
+            linkUrl={INSTAGRAM_LINK}
+          />
+          <ContactLink
+            icon={<WhatsAppIcon />}
+            text="WhatsApp"
+            linkUrl={WHATSAPP_LINK}
+          />
+          <ContactLink
+            icon={<TelegramIcon />}
+            text="Telegram"
+            linkUrl={TELEGRAM_LINK}
+          />
+        </CardContent>
+      </Card>
+    </Grow>
   );
 };
 

@@ -1,3 +1,4 @@
+import { splitIntoChunks } from '../../core/utils/helpers';
 import {
   ADD_PICTURE,
   CLEAR_FORM,
@@ -5,6 +6,8 @@ import {
   DELETE_PICTURE,
   DressesActionType,
   SET_UPLOAD_DIALOG_OPEN,
+  UPDATE_CURRENT_CHUNK,
+  UPDATE_CURRENT_PAGE,
   UPDATE_DESCRIPTION,
   UPDATE_DRESSES,
   UPDATE_PICTURES,
@@ -33,13 +36,23 @@ export interface DressForm {
   uploadDialogOpen: boolean;
 }
 
+export const ITEMS_ON_PAGE = 6;
+
 export interface DressesState {
   dresses: Dress[];
+  pagesCount: number;
+  currentPage: number;
+  chunks: Dress[][];
+  currentChunk: Dress[];
   form: DressForm;
 }
 
 export const initialState: DressesState = {
   dresses: [],
+  pagesCount: 1,
+  currentPage: 1,
+  chunks: [],
+  currentChunk: [],
   form: {
     title: '',
     description: '',
@@ -54,14 +67,33 @@ export const dressesReducer = (
   state: DressesState = initialState,
   action: DressesActionType
 ): DressesState => {
+  let chunks = [];
   switch (action.type) {
     case UPDATE_DRESSES:
-      return { ...state, dresses: action.payload };
-    case DELETE_DRESS:
+      chunks = splitIntoChunks(action.payload, ITEMS_ON_PAGE);
       return {
         ...state,
-        dresses: state.dresses.filter((d) => d.id !== action.payload),
+        dresses: action.payload,
+        pagesCount: Math.ceil(action.payload.length / ITEMS_ON_PAGE),
+        currentPage: 1,
+        chunks: chunks,
+        currentChunk: chunks[0] || [],
       };
+    case DELETE_DRESS:
+      const newDresses = state.dresses.filter((d) => d.id !== action.payload);
+      chunks = splitIntoChunks(newDresses, ITEMS_ON_PAGE);
+      return {
+        ...state,
+        dresses: newDresses,
+        pagesCount: Math.ceil(newDresses.length / ITEMS_ON_PAGE),
+        currentPage: 1,
+        chunks: chunks,
+        currentChunk: chunks[0] || [],
+      };
+    case UPDATE_CURRENT_CHUNK:
+      return { ...state, currentChunk: action.payload };
+    case UPDATE_CURRENT_PAGE:
+      return { ...state, currentPage: action.payload };
     case UPDATE_TITLE:
       return { ...state, form: { ...state.form, title: action.payload } };
     case UPDATE_DESCRIPTION:

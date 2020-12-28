@@ -3,7 +3,9 @@ import request from 'superagent';
 import {
   fetching,
   logout,
+  startTransitioning,
   stopFetching,
+  stopTransitioning,
   updateErrorMessage,
   updateSuccessMessage,
 } from '../../../../core/actions';
@@ -14,6 +16,8 @@ import { SystemActionTypes } from '../../../../core/types';
 import { getToken } from '../../../../core/utils/storage';
 import {
   deleteLessonActionCreator,
+  updateCurrentChunkActionCreator,
+  updateCurrentPageActionCreator,
   updateLessonsActionCreator,
 } from '../../actions';
 import { VideoLessonsActionType } from '../../types';
@@ -35,6 +39,26 @@ export const thunkFetchVideoLessons = (): ThunkAction<
       dispatch(stopFetching());
       dispatch(updateErrorMessage((err as ErrorResponse).message));
     });
+};
+
+export const thunkSelectPage = (
+  page: number
+): ThunkAction<
+  void,
+  AppStoreState,
+  null,
+  SystemActionTypes | VideoLessonsActionType
+> => (dispatch, getState) => {
+  const { videoLessons } = getState();
+  dispatch(startTransitioning());
+  dispatch(updateCurrentChunkActionCreator([]));
+  dispatch(updateCurrentPageActionCreator(page));
+  setTimeout(() => {
+    dispatch(
+      updateCurrentChunkActionCreator(videoLessons.chunks[page - 1] || [])
+    );
+    dispatch(stopTransitioning());
+  }, 500);
 };
 
 export const thunkDeleteVideoLessonById = (

@@ -38,6 +38,7 @@ export const UploadPicturesDialog: React.FC = () => {
       submitButtonText={'Сохранить'}
       dropzoneText={'Перетащите сюда файл или нажмите'}
       filesLimit={10}
+      maxFileSize={10000000}
       maxWidth="lg"
       acceptedFiles={['image/*']}
       onSave={handleOnSave}

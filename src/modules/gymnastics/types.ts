@@ -2,6 +2,8 @@ import { Gymnastic } from './reducer';
 
 export const UPDATE_GYMNSATICS = 'UPDATE_GYMNASTICS/GYMNASTICS';
 export const DELETE_GYMNASTIC = 'DELETE_GYMNASTIC/GYMNASTICS';
+export const UPDATE_CURRENT_PAGE = 'UPDATE_CURRENT_PAGE/GYMNASTICS';
+export const UPDATE_CURRENT_CHUNK = 'UPDATE_CURRENT_CHUNK/GYMNASTICS';
 export const UPDATE_SUBTYPE_ID = 'UPDATE_SUBTYPE_ID/GYMNASTICS';
 export const UPDATE_TITLE = 'UPDATE_TITLE/GYMNASTICS';
 export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION/GYMNASTICS';
@@ -17,6 +19,16 @@ export interface UpdateGymnasticsAction {
 export interface DeleteGymnasticAction {
   type: typeof DELETE_GYMNASTIC;
   payload: number;
+}
+
+export interface UpdateCurrentPageAction {
+  type: typeof UPDATE_CURRENT_PAGE;
+  payload: number;
+}
+
+export interface UpdateCurrentChunkAction {
+  type: typeof UPDATE_CURRENT_CHUNK;
+  payload: Gymnastic[];
 }
 
 export interface UpdateSubtypeIdAction {
@@ -51,6 +63,8 @@ export interface SetUploadDialogOpenAction {
 export type GymnasticsActionType =
   | UpdateGymnasticsAction
   | DeleteGymnasticAction
+  | UpdateCurrentPageAction
+  | UpdateCurrentChunkAction
   | UpdateSubtypeIdAction
   | UpdateTitleAction
   | UpdateDescriptionAction

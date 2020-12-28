@@ -2,6 +2,8 @@ import { UserState } from './reducer';
 
 export const INCREASE_FETCHING = 'UPDATE_FETCHING/SYSTEM';
 export const DECREASE_FETCHING = 'DECREASE_FETCHING/SYSTEM';
+export const START_TRANSITIONING = 'START_TRANSITIONING/SYSTEM';
+export const STOP_TRANSITIONING = 'STOP_TRANSITIONING/SYSTEM';
 export const OPEN_AUTH = 'OPEN_AUTH/SYSTEM';
 export const CLOSE_AUTH = 'CLOSE_AUTH/SYSTEM';
 export const UPDATE_SIGN_IN_USERNAME = 'UPDATE_USERNAME/SYSTEM/SIGN_IN';
@@ -18,6 +20,14 @@ export interface IncreaseFetchingAction {
 
 export interface DecreaseFetchingAction {
   type: typeof DECREASE_FETCHING;
+}
+
+export interface StartTransitioningAction {
+  type: typeof START_TRANSITIONING;
+}
+
+export interface StopTransitioningAction {
+  type: typeof STOP_TRANSITIONING;
 }
 
 export interface OpenAuthModalAction {
@@ -64,6 +74,8 @@ export interface ToggleMenuDrawerAction {
 export type SystemActionTypes =
   | IncreaseFetchingAction
   | DecreaseFetchingAction
+  | StartTransitioningAction
+  | StopTransitioningAction
   | OpenAuthModalAction
   | CloseAuthModalAction
   | UpdateSignInUsernameAction

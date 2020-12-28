@@ -3,10 +3,13 @@ import {
   CardHeader,
   CardMedia,
   createStyles,
+  Grow,
   makeStyles,
   Theme,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { getTransitioning } from '../../../core/selector';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -26,11 +29,24 @@ export const BonusVideoComponent: React.FC<BonusVideoComponentProps> = ({
   title,
 }: BonusVideoComponentProps) => {
   const classes = useStyles();
+  const transitioning = useSelector(getTransitioning);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const handleVideoLoaded = (
+    _: React.SyntheticEvent<HTMLVideoElement, Event>
+  ) => setVideoLoaded(true);
 
   return (
-    <Card className={classes.root}>
-      <CardHeader title={title} />
-      <CardMedia component="video" src={src} controls title={title} />
-    </Card>
+    <Grow in={!transitioning && videoLoaded} timeout="auto">
+      <Card className={classes.root}>
+        <CardHeader title={title} />
+        <CardMedia
+          component="video"
+          src={src}
+          controls
+          title={title}
+          onLoadedData={handleVideoLoaded}
+        />
+      </Card>
+    </Grow>
   );
 };

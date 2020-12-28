@@ -5,6 +5,8 @@ import {
   INCREASE_FETCHING,
   LOGOUT,
   OPEN_AUTH,
+  START_TRANSITIONING,
+  STOP_TRANSITIONING,
   SUCCESSFUL_LOGIN,
   SystemActionTypes,
   TOGGLE_MENU_DRAWER,
@@ -40,6 +42,7 @@ export interface SiteMenuItem {
 
 export interface SystemState {
   fetching: number;
+  transitioning: boolean;
   user?: UserState;
   authOpen: boolean;
   signInState: SignInState;
@@ -51,6 +54,7 @@ export interface SystemState {
 
 const initialState: SystemState = {
   fetching: 0,
+  transitioning: false,
   authOpen: false,
   signInState: {
     username: '',
@@ -72,13 +76,13 @@ const initialState: SystemState = {
         // { name: 'Аудиосказки', url: '#' },
       ].concat(GYMNASTICS_SUBTYPES.map((g) => ({ name: g.name, url: g.url }))),
     },
-    {
-      name: 'Мероприятия',
-      subitems: [
-        { name: 'Дни рождения', url: '/birthdays' },
-        { name: 'Сказочные встречи', url: '/events' },
-      ],
-    },
+    // {
+    //   name: 'Мероприятия',
+    //   subitems: [
+    //     { name: 'Дни рождения', url: '/birthdays' },
+    //     { name: 'Сказочные встречи', url: '/events' },
+    //   ],
+    // },
     { name: 'Прокат детских платьев', url: '/dresses' },
     { name: 'Контакты', url: '/contacts' },
   ],
@@ -94,6 +98,10 @@ export const systemReducer = (
       return { ...state, fetching: state.fetching + 1 };
     case DECREASE_FETCHING:
       return { ...state, fetching: state.fetching - 1 };
+    case START_TRANSITIONING:
+      return { ...state, transitioning: true };
+    case STOP_TRANSITIONING:
+      return { ...state, transitioning: false };
     case OPEN_AUTH:
       return { ...state, authOpen: true };
     case CLOSE_AUTH:
