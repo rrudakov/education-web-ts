@@ -15,11 +15,12 @@ import Cert1 from '../img/cert1.jpg';
 import Cert2 from '../img/cert2.jpg';
 import Cert3 from '../img/cert3.jpg';
 import Cert4 from '../img/cert4.jpg';
+import Cert5 from '../img/cert5.png';
 import { getCertificatesModalOpen } from '../selectors';
 
 export const CertificatesModal: React.FC = () => {
   const open = useSelector(getCertificatesModalOpen);
-  const certs = [Cert1, Cert2, Cert3, Cert4];
+  const certs = [Cert1, Cert2, Cert3, Cert5, Cert4];
   const dispatch = useDispatch();
   const closeModal = useCallback(
     () => dispatch(updateCertificatesModalOpen(false)),
