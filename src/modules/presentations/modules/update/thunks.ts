@@ -18,33 +18,29 @@ import { getToken } from '../../../../core/utils/storage';
 import {
   clearFormActionCreator,
   updateDescriptionActionCreator,
-  updatePicturesActionCreator,
-  updatePriceActionCreator,
-  updateSizeActionCreator,
   updateTitleActionCreator,
+  updateUrlActionCreator,
 } from '../../actions';
-import { Dress } from '../../reducer';
-import { DressesActionType } from '../../types';
+import { Presentation } from '../../reducer';
+import { PresentationsActionType } from '../../types';
 
-export const thunkGetDress = (
-  dressId: number
+export const thunkGetPresentation = (
+  presentationId: number
 ): ThunkAction<
   void,
   AppStoreState,
   null,
-  SystemActionTypes | DressesActionType
+  SystemActionTypes | PresentationsActionType
 > => (dispatch) => {
   dispatch(fetching());
   request
-    .get(`${BASE_URL}/dresses/${dressId}`)
+    .get(`${BASE_URL}/presentations/${presentationId}`)
     .then((response) => {
       dispatch(stopFetching());
-      const dress: Dress = response.body;
-      dispatch(updateTitleActionCreator(dress.title));
-      dispatch(updateDescriptionActionCreator(dress.description));
-      dispatch(updateSizeActionCreator(dress.size));
-      dispatch(updatePicturesActionCreator(dress.pictures));
-      dispatch(updatePriceActionCreator(dress.price));
+      const presentation: Presentation = response.body;
+      dispatch(updateTitleActionCreator(presentation.title));
+      dispatch(updateUrlActionCreator(presentation.url));
+      dispatch(updateDescriptionActionCreator(presentation.description));
     })
     .catch((err) => {
       dispatch(stopFetching());
@@ -52,16 +48,18 @@ export const thunkGetDress = (
     });
 };
 
-export const thunkUpdateDress = (
-  dressId: number,
+export const thunkUpdatePresentation = (
+  presentationId: number,
   history: History<History.UnknownFacade>
 ): ThunkAction<
   void,
   AppStoreState,
   null,
-  SystemActionTypes | DressesActionType
+  SystemActionTypes | PresentationsActionType
 > => (dispatch, getState) => {
-  const { dresses } = getState();
+  const {
+    presentations: { form },
+  } = getState();
   const authToken = getToken();
 
   if (authToken === null) {
@@ -70,20 +68,18 @@ export const thunkUpdateDress = (
   } else {
     dispatch(fetching());
     request
-      .patch(`${BASE_URL}/dresses/${dressId}`)
+      .patch(`${BASE_URL}/presentations/${presentationId}`)
       .set('Authorization', `Token ${authToken}`)
       .send({
-        title: dresses.form.title,
-        description: dresses.form.description,
-        size: dresses.form.size,
-        pictures: dresses.form.pictures,
-        price: dresses.form.price,
+        title: form.title,
+        url: form.url,
+        description: form.description,
       })
       .then((_) => {
         dispatch(stopFetching());
-        history.push('/dresses');
+        history.push('/presentations');
         dispatch(clearFormActionCreator());
-        dispatch(updateSuccessMessage('Dress was successfully updated'));
+        dispatch(updateSuccessMessage('Presentation was successfully updated'));
       })
       .catch((err: ResponseError) => {
         dispatch(stopFetching());

@@ -16,25 +16,25 @@ import { AppStoreState } from '../../../../core/store';
 import { SystemActionTypes } from '../../../../core/types';
 import { getToken } from '../../../../core/utils/storage';
 import {
-  deleteDressActionCreator,
+  deletePresentationActionCreator,
   updateCurrentChunkActionCreator,
   updateCurrentPageActionCreator,
-  updateDressesActionCreator,
+  updatePresentationsActionCreator,
 } from '../../actions';
-import { DressesActionType } from '../../types';
+import { PresentationsActionType } from '../../types';
 
-export const thunkFetchDresses = (): ThunkAction<
+export const thunkFetchPresentations = (): ThunkAction<
   void,
   AppStoreState,
   null,
-  SystemActionTypes | DressesActionType
+  SystemActionTypes | PresentationsActionType
 > => (dispatch) => {
   dispatch(fetching());
   request
-    .get(`${BASE_URL}/dresses`)
+    .get(`${BASE_URL}/presentations`)
     .then((response) => {
       dispatch(stopFetching());
-      dispatch(updateDressesActionCreator(response.body));
+      dispatch(updatePresentationsActionCreator(response.body));
     })
     .catch((err) => {
       dispatch(stopFetching());
@@ -48,25 +48,27 @@ export const thunkSelectPage = (
   void,
   AppStoreState,
   null,
-  SystemActionTypes | DressesActionType
+  SystemActionTypes | PresentationsActionType
 > => (dispatch, getState) => {
-  const { dresses } = getState();
+  const { presentations } = getState();
   dispatch(startTransitioning());
   dispatch(updateCurrentChunkActionCreator([]));
   dispatch(updateCurrentPageActionCreator(page));
   setTimeout(() => {
-    dispatch(updateCurrentChunkActionCreator(dresses.chunks[page - 1] || []));
+    dispatch(
+      updateCurrentChunkActionCreator(presentations.chunks[page - 1] || [])
+    );
     dispatch(stopTransitioning());
   }, 500);
 };
 
-export const thunkDeleteDressById = (
-  dressId: number
+export const thunkDeletePresentationById = (
+  presentationId: number
 ): ThunkAction<
   void,
   AppStoreState,
   null,
-  SystemActionTypes | DressesActionType
+  SystemActionTypes | PresentationsActionType
 > => (dispatch) => {
   const authToken = getToken();
 
@@ -76,12 +78,12 @@ export const thunkDeleteDressById = (
   } else {
     dispatch(fetching());
     request
-      .delete(`${BASE_URL}/dresses/${dressId}`)
+      .delete(`${BASE_URL}/presentations/${presentationId}`)
       .set('Authorization', `Token ${authToken}`)
       .then((_) => {
         dispatch(stopFetching());
-        dispatch(deleteDressActionCreator(dressId));
-        dispatch(updateSuccessMessage('Dress was deleted successfully'));
+        dispatch(deletePresentationActionCreator(presentationId));
+        dispatch(updateSuccessMessage('Presentation was deleted successfully'));
       })
       .catch((err) => {
         dispatch(stopFetching());

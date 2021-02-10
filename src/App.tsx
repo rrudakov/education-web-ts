@@ -93,7 +93,7 @@ export const App: React.FC = () => {
             <Route path="/contacts" exact>
               <ContactsPage />
             </Route>
-            <Route path="/presentations" exact>
+            <Route path="/presentations">
               <PresentationsPage />
             </Route>
             <Route path="/gymnastics">

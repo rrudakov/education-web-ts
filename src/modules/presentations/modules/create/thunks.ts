@@ -16,17 +16,19 @@ import { AppStoreState } from '../../../../core/store';
 import { SystemActionTypes } from '../../../../core/types';
 import { getToken } from '../../../../core/utils/storage';
 import { clearFormActionCreator } from '../../actions';
-import { DressesActionType } from '../../types';
+import { PresentationsActionType } from '../../types';
 
-export const thunkSubmitNewDress = (
+export const thunkSubmitNewPresentation = (
   history: History<History.UnknownFacade>
 ): ThunkAction<
   void,
   AppStoreState,
   null,
-  SystemActionTypes | DressesActionType
+  SystemActionTypes | PresentationsActionType
 > => (dispatch, getState) => {
-  const { dresses } = getState();
+  const {
+    presentations: { form },
+  } = getState();
   const authToken = getToken();
 
   if (authToken === null) {
@@ -35,20 +37,18 @@ export const thunkSubmitNewDress = (
   } else {
     dispatch(fetching());
     request
-      .post(`${BASE_URL}/dresses`)
+      .post(`${BASE_URL}/presentations`)
       .set('Authorization', `Token ${authToken}`)
       .send({
-        title: dresses.form.title,
-        description: dresses.form.description,
-        size: dresses.form.size,
-        pictures: dresses.form.pictures,
-        price: dresses.form.price,
+        title: form.title,
+        url: form.url,
+        description: form.description,
       })
       .then(() => {
         dispatch(stopFetching());
-        history.push('/dresses');
+        history.push('/presentations');
         dispatch(clearFormActionCreator());
-        dispatch(updateSuccessMessage('Dress was added successfully'));
+        dispatch(updateSuccessMessage('Presentation was added successfully'));
       })
       .catch((err: ResponseError) => {
         dispatch(stopFetching());

@@ -1,140 +1,25 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  createStyles,
-  Grow,
-  makeStyles,
-  Theme,
-  Typography,
-} from '@material-ui/core';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { getTransitioning } from '../../core/selector';
-
-const useStyles = makeStyles(({ spacing }: Theme) =>
-  createStyles({
-    card: {
-      marginBottom: spacing(2),
-    },
-    videoWrapper: {
-      position: 'relative',
-      paddingBottom: '58.8%',
-    },
-    iframe: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-    },
-  })
-);
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { NewItemFab } from '../../core/components/fab';
+import { NewPresentationPage } from './modules/create';
+import { PresentationsMainPage } from './modules/main';
+import { UpdatePresentationPage } from './modules/update';
 
 export const PresentationsPage: React.FC = () => {
-  const presentations: PresentationProps[] = [
-    {
-      title: 'На ферме. Домашние птицы',
-      url:
-        'https://docs.google.com/presentation/d/e/2PACX-1vTtLfyYFPWhk6g9l0YyBHDkKgFA-2rFom37zeIkOXfAJtCYsYwI71y9Pcl1wb6aZ5XcjkoH4iQIFLT2/embed?start=false&loop=false&delayms=3000',
-      description:
-        'Презентация служит практическим материалом для закрепления словаря по теме "Домашние птицы".\n\n' +
-        'Родитель читает текст, данный на слайдах, по щелчку мыши появляется картинка, ребенок слушает ' +
-        'подсказку ( аудирование) и отвечает на вопросы. Важно, чтобы были проговорены ребенком фразы, ' +
-        'которые прописаны на слайдах. Под звёздочкой усложнение, которое может использоваться уже когда' +
-        ' ребенок свободно отвечает на первые вопросы.',
-    },
-    {
-      title: 'На ферме. Детёныши домашних птиц',
-      url:
-        'https://docs.google.com/presentation/d/e/2PACX-1vSZMVFS2bp4Idj0QimHTVr7Fastiso5NaCZNqPMPoJ3mlKwtnV0yOiPtFbhqk-cOgSafyvfAThi6YOg/embed?start=false&loop=false&delayms=3000',
-      description:
-        'Презентация служит практическим пособием для изучения/закрепления темы ' +
-        '"Детёныши домашних птиц" и продолжением закрепления темы "Домашние птицы".\n\n' +
-        'Родитель читает текст, данный на слайдах, после щелчка мыши появляются картинки домашних птиц. ' +
-        'Важно, чтобы ребенок сам повторял названия детёнышей и домашних птиц. Усложняем только тогда, ' +
-        'когда первые вопросы не составляют труда у ребенка.',
-    },
-    {
-      title: 'Цвета',
-      url:
-        'https://docs.google.com/presentation/d/e/2PACX-1vQQWClruw5WMYz1sScBKVyYCHILnpABdAKgWXygmU0QXyBeuQHOGNLBGsumopszt2L42GTe6Pql5A9C/embed?start=false&loop=false&delayms=3000',
-      description:
-        'Презентация служит практическим пособием для изучения/повторения цветов.\n\n' +
-        'В презентации представлены основные 4 цвета: красный, жёлтый, синий, зелёный. ' +
-        'Сначала мы изучаем название цвета. Родитель читаем текст, данный на слайдах, по ' +
-        'щелчку мыши появляется цвет на палитре. Важно, чтобы он енок сначала узнавал цвет ' +
-        'и произносил его название. Далее появляются предметы этого же цвета. Для начального ' +
-        'уровня изучения достаточно просто называть цвет. Усложняет после того как ребенок ' +
-        'выучил название цветов. На слайдах даны прилагательные женского, мужского и среднего ' +
-        'рода, тем самым мы тренируем употребление прилагательных с разным родом существительных. ' +
-        'В конце игры на закрепление (инструкция на слайдах).',
-    },
-    {
-      title: 'Счет до 5',
-      url:
-        'https://docs.google.com/presentation/d/e/2PACX-1vS9Bx822CiGR7Db9yIR3dbww_ud3EydxPwG6NmwULrGYz0M7FtU9zesc8onDTthP1fUlWfaAHkvN2Vj/embed?start=false&loop=false&delayms=3000',
-      description:
-        'Презентация служит практическим пособием для изучения/повторения счета до 5.\n\n' +
-        'В презентации представлен счет до 5, цифровое обозначение, количественный счет, ' +
-        'сопоставление цифры и количества предметов. Сначала мы считаем и запоминаем цифровое ' +
-        'обозначение, затем закрепляем и тренируем количественный счет ("Сколько грибов в корзине?"). ' +
-        'Важно, чтобы ребенок выучил сначала количественное обозначение (один, два...), ' +
-        'a затем уже можно говорить о порядковом (первый, второй...). Усложнить можно следующим ' +
-        'образом: попросить ребенка посчитать в обратном порядке, посчитать с 2 до 4, с 5 до 2 и т. д.',
-    },
-  ];
+  const { path } = useRouteMatch();
 
   return (
-    <React.Fragment>
-      {presentations.map((presentation, i) => (
-        <PresentationComponent key={i} {...presentation} />
-      ))}
-    </React.Fragment>
-  );
-};
-
-interface PresentationProps {
-  title: string;
-  url: string;
-  description: string;
-}
-
-const PresentationComponent: React.FC<PresentationProps> = ({
-  title,
-  url,
-  description,
-}: PresentationProps) => {
-  const classes = useStyles();
-  const transitioning = useSelector(getTransitioning);
-
-  return (
-    <Grow in={!transitioning} timeout="auto">
-      <Card className={classes.card}>
-        <CardHeader title={title} />
-        <CardContent>
-          <div className={classes.videoWrapper}>
-            <iframe
-              className={classes.iframe}
-              src={url}
-              title={title}
-              frameBorder={0}
-              allowFullScreen
-            ></iframe>
-          </div>
-          <Typography gutterBottom variant="h5" component="h2">
-            Описание
-          </Typography>
-          <Typography
-            paragraph
-            color="textSecondary"
-            align="justify"
-            style={{ whiteSpace: 'pre-wrap' }}
-          >
-            {description}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Grow>
+    <Switch>
+      <Route exact path={path}>
+        <PresentationsMainPage />
+        <NewItemFab />
+      </Route>
+      <Route exact path={`${path}/new`}>
+        <NewPresentationPage />
+      </Route>
+      <Route exact path={`${path}/:presentationId`}>
+        <UpdatePresentationPage />
+      </Route>
+    </Switch>
   );
 };

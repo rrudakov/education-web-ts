@@ -16,6 +16,10 @@ import { homeReducer, HomeState } from '../modules/home/reducer';
 import { newPostReducer, NewPostState } from '../modules/newpost/reducer';
 import { postReducer, PostState } from '../modules/post/reducer';
 import {
+  presentationsReducer,
+  PresentationsState,
+} from '../modules/presentations/reducer';
+import {
   videoLessonsReducer,
   VideoLessonsState,
 } from '../modules/video-lessons/reducer';
@@ -29,6 +33,7 @@ export interface AppStoreState {
   videoLessons: VideoLessonsState;
   dresses: DressesState;
   gymnastics: GymnasticsState;
+  presentations: PresentationsState;
 }
 
 const rootReducer = combineReducers({
@@ -39,6 +44,7 @@ const rootReducer = combineReducers({
   videoLessons: videoLessonsReducer,
   dresses: dressesReducer,
   gymnastics: gymnasticsReducer,
+  presentations: presentationsReducer,
 });
 
 export const configureStore = (): Store<
