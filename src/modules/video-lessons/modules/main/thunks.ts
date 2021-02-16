@@ -31,6 +31,7 @@ export const thunkFetchVideoLessons = (): ThunkAction<
   dispatch(fetching());
   request
     .get(`${BASE_URL}/lessons`)
+    .query({ limit: 1000 })
     .then((response) => {
       dispatch(stopFetching());
       dispatch(updateLessonsActionCreator(response.body));

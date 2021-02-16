@@ -34,6 +34,7 @@ export const thunkFetchGymnastics = (
   dispatch(fetching());
   request
     .get(`${BASE_URL}/gymnastics`)
+    .query({ limit: 1000 })
     .query({ subtype_id: subtypeId })
     .then((response) => {
       dispatch(stopFetching());

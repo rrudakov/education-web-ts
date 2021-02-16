@@ -32,6 +32,7 @@ export const thunkFetchPresentations = (): ThunkAction<
   dispatch(fetching());
   request
     .get(`${BASE_URL}/presentations`)
+    .query({ limit: 1000 })
     .then((response) => {
       dispatch(stopFetching());
       dispatch(updatePresentationsActionCreator(response.body));

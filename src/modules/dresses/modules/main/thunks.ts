@@ -32,6 +32,7 @@ export const thunkFetchDresses = (): ThunkAction<
   dispatch(fetching());
   request
     .get(`${BASE_URL}/dresses`)
+    .query({ limit: 1000 })
     .then((response) => {
       dispatch(stopFetching());
       dispatch(updateDressesActionCreator(response.body));

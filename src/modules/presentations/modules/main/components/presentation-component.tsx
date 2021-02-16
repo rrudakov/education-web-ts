@@ -40,7 +40,7 @@ export const PresentationComponent: React.FC<Presentation> = (presentation) => {
   const dispatch = useDispatch();
   const openCurrentPresentationModal = useCallback(
     () => dispatch(updateCurrentPresentationActionCreator(presentation)),
-    [dispatch]
+    [dispatch, presentation]
   );
   const user = useSelector(getUser);
   const route = useRouteMatch();
