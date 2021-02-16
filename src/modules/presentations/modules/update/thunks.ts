@@ -17,12 +17,24 @@ import { SystemActionTypes } from '../../../../core/types';
 import { getToken } from '../../../../core/utils/storage';
 import {
   clearFormActionCreator,
+  updateAttachmentActionCreator,
   updateDescriptionActionCreator,
+  updateIsPublicActionCreator,
   updateTitleActionCreator,
   updateUrlActionCreator,
 } from '../../actions';
-import { Presentation } from '../../reducer';
 import { PresentationsActionType } from '../../types';
+
+interface PresentationAuthorizedResponse {
+  id: number;
+  title: string;
+  url: string;
+  description: string;
+  is_public: boolean;
+  attachment?: string;
+  created_on: string;
+  updated_on: string;
+}
 
 export const thunkGetPresentation = (
   presentationId: number
@@ -32,20 +44,30 @@ export const thunkGetPresentation = (
   null,
   SystemActionTypes | PresentationsActionType
 > => (dispatch) => {
-  dispatch(fetching());
-  request
-    .get(`${BASE_URL}/presentations/${presentationId}`)
-    .then((response) => {
-      dispatch(stopFetching());
-      const presentation: Presentation = response.body;
-      dispatch(updateTitleActionCreator(presentation.title));
-      dispatch(updateUrlActionCreator(presentation.url));
-      dispatch(updateDescriptionActionCreator(presentation.description));
-    })
-    .catch((err) => {
-      dispatch(stopFetching());
-      dispatch(updateErrorMessage((err as ErrorResponse).message));
-    });
+  const authToken = getToken();
+
+  if (authToken === null) {
+    dispatch(unauthorizedError());
+    dispatch(logout());
+  } else {
+    dispatch(fetching());
+    request
+      .get(`${BASE_URL}/presentations/${presentationId}`)
+      .set('Authorization', `Token ${authToken}`)
+      .then((response) => {
+        dispatch(stopFetching());
+        const presentation = response.body as PresentationAuthorizedResponse;
+        dispatch(updateTitleActionCreator(presentation.title));
+        dispatch(updateUrlActionCreator(presentation.url));
+        dispatch(updateDescriptionActionCreator(presentation.description));
+        dispatch(updateIsPublicActionCreator(presentation.is_public));
+        dispatch(updateAttachmentActionCreator(presentation.attachment));
+      })
+      .catch((err) => {
+        dispatch(stopFetching());
+        dispatch(updateErrorMessage((err as ErrorResponse).message));
+      });
+  }
 };
 
 export const thunkUpdatePresentation = (
@@ -70,11 +92,7 @@ export const thunkUpdatePresentation = (
     request
       .patch(`${BASE_URL}/presentations/${presentationId}`)
       .set('Authorization', `Token ${authToken}`)
-      .send({
-        title: form.title,
-        url: form.url,
-        description: form.description,
-      })
+      .send(form)
       .then((_) => {
         dispatch(stopFetching());
         history.push('/presentations');

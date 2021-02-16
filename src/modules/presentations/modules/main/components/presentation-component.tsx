@@ -1,8 +1,12 @@
 import {
+  Button,
   Card,
+  CardActions,
   CardContent,
   CardHeader,
+  Chip,
   createStyles,
+  Grid,
   Grow,
   IconButton,
   makeStyles,
@@ -12,11 +16,14 @@ import {
   Typography,
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { WHATSAPP_LINK } from '../../../../../core/constants';
 import { getTransitioning, getUser } from '../../../../../core/selector';
 import { isAdmin, isModerator } from '../../../../../core/utils/user';
+import { updateCurrentPresentationActionCreator } from '../../../actions';
 import { Presentation } from '../../../reducer';
 import { thunkDeletePresentationById } from '../thunks';
 
@@ -25,28 +32,16 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
     card: {
       marginBottom: spacing(2),
     },
-    videoWrapper: {
-      position: 'relative',
-      paddingBottom: '58.8%',
-    },
-    iframe: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-    },
   })
 );
 
-export const PresentationComponent: React.FC<Presentation> = ({
-  id,
-  title,
-  url,
-  description,
-}: Presentation) => {
+export const PresentationComponent: React.FC<Presentation> = (presentation) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const openCurrentPresentationModal = useCallback(
+    () => dispatch(updateCurrentPresentationActionCreator(presentation)),
+    [dispatch]
+  );
   const user = useSelector(getUser);
   const route = useRouteMatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -70,59 +65,81 @@ export const PresentationComponent: React.FC<Presentation> = ({
   );
 
   return (
-    <Grow in={!transitioning} timeout="auto">
-      <Card className={classes.card}>
-        <CardHeader
-          title={title}
-          action={
-            user !== undefined &&
-            (isAdmin(user) || isModerator(user)) && (
-              <IconButton
-                aria-label="settings"
-                aria-controls="presentation-menu"
-                aria-haspopup={true}
-                onClick={openMenu}
-              >
-                <MoreVertIcon />
-              </IconButton>
-            )
-          }
-        />
-        <Menu
-          id="presentation-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={open}
-          onClose={closeMenu}
-        >
-          <MenuItem component={Link} to={`${route.url}/${id}`}>
-            Редактировать
-          </MenuItem>
-          <MenuItem onClick={() => deletePresentation(id)}>Удалить</MenuItem>
-        </Menu>
-        <CardContent>
-          <div className={classes.videoWrapper}>
-            <iframe
-              className={classes.iframe}
-              src={url}
-              title={title}
-              frameBorder={0}
-              allowFullScreen
-            ></iframe>
-          </div>
-          <Typography gutterBottom variant="h5" component="h2">
-            Описание
-          </Typography>
-          <Typography
-            paragraph
-            color="textSecondary"
-            align="justify"
-            style={{ whiteSpace: 'pre-wrap' }}
+    <Grid item sm={12} md={6}>
+      <Grow in={!transitioning} timeout="auto">
+        <Card className={classes.card}>
+          <CardHeader
+            title={presentation.title}
+            subheader={
+              presentation.is_public ? (
+                <Chip size="small" label="Бесплатно" color="secondary" />
+              ) : (
+                <Chip size="small" color="secondary" label="Платный контент" />
+              )
+            }
+            action={
+              user !== undefined &&
+              (isAdmin(user) || isModerator(user)) && (
+                <IconButton
+                  aria-label="settings"
+                  aria-controls="presentation-menu"
+                  aria-haspopup={true}
+                  onClick={openMenu}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+              )
+            }
+          />
+          <Menu
+            id="presentation-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={open}
+            onClose={closeMenu}
           >
-            {description}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Grow>
+            <MenuItem component={Link} to={`${route.url}/${presentation.id}`}>
+              Редактировать
+            </MenuItem>
+            <MenuItem onClick={() => deletePresentation(presentation.id)}>
+              Удалить
+            </MenuItem>
+          </Menu>
+          <CardContent>
+            <Typography
+              paragraph
+              color="textSecondary"
+              align="justify"
+              style={{ whiteSpace: 'pre-wrap' }}
+            >
+              {presentation.description}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            {presentation.is_public ? (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={openCurrentPresentationModal}
+              >
+                Открыть
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<WhatsAppIcon />}
+                component="a"
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener"
+              >
+                WhatsApp
+              </Button>
+            )}
+          </CardActions>
+        </Card>
+      </Grow>
+    </Grid>
   );
 };

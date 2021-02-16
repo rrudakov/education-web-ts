@@ -5,9 +5,13 @@ export const DELETE_PRESENTATION = 'DELETE_PRESENTATION/PRESENTATIONS';
 export const UPDATE_CURRENT_PAGE = 'UPDATE_CURRENT_PAGE/PRESENTATIONS';
 export const UPDATE_CURRENT_CHUNK = 'UPDATE_CURRENT_CHUNK/PRESENTATIONS';
 export const CLEAR_FORM = 'CLEAR_FORM/PRESENTATIONS';
+export const UPDATE_CURRENT_PRESENTATION =
+  'UPDATE_CURRENT_PRESENTATION/PRESENTATIONS';
 export const UPDATE_TITLE = 'UPDATE_TITLE/PRESENTATIONS';
 export const UPDATE_URL = 'UPDATE_URL/PRESENTATIONS';
 export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION/PRESENTATIONS';
+export const UPDATE_IS_PUBLIC = 'UPDATE_IS_PUBLIC/PRESENTATIONS';
+export const UPDATE_ATTACHMENT = 'UPDATE_ATTACHMENT/PRESENTATIONS';
 
 export interface UpdatePresentationsAction {
   type: typeof UPDATE_PRESENTATIONS;
@@ -33,6 +37,11 @@ export interface ClearFormAction {
   type: typeof CLEAR_FORM;
 }
 
+export interface UpdateCurrentPresentationAction {
+  type: typeof UPDATE_CURRENT_PRESENTATION;
+  payload?: Presentation;
+}
+
 export interface UpdateTitleAction {
   type: typeof UPDATE_TITLE;
   payload: string;
@@ -48,12 +57,25 @@ export interface UpdateDescriptionAction {
   payload: string;
 }
 
+export interface UpdateIsPublicAction {
+  type: typeof UPDATE_IS_PUBLIC;
+  payload: boolean;
+}
+
+export interface UpdateAttachmentAction {
+  type: typeof UPDATE_ATTACHMENT;
+  payload?: string;
+}
+
 export type PresentationsActionType =
   | UpdatePresentationsAction
   | DeletePresentationAction
   | UpdateCurrentPageAction
   | UpdateCurrentChunkAction
   | ClearFormAction
+  | UpdateCurrentPresentationAction
   | UpdateTitleAction
   | UpdateUrlAction
-  | UpdateDescriptionAction;
+  | UpdateDescriptionAction
+  | UpdateIsPublicAction
+  | UpdateAttachmentAction;

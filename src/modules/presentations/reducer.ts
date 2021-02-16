@@ -3,9 +3,12 @@ import {
   CLEAR_FORM,
   DELETE_PRESENTATION,
   PresentationsActionType,
+  UPDATE_ATTACHMENT,
   UPDATE_CURRENT_CHUNK,
   UPDATE_CURRENT_PAGE,
+  UPDATE_CURRENT_PRESENTATION,
   UPDATE_DESCRIPTION,
+  UPDATE_IS_PUBLIC,
   UPDATE_PRESENTATIONS,
   UPDATE_TITLE,
   UPDATE_URL,
@@ -14,8 +17,10 @@ import {
 export interface Presentation {
   id: number;
   title: string;
-  url: string;
+  url?: string;
   description: string;
+  is_public: boolean;
+  attachment?: string;
   created_on: string;
   updated_on: string;
 }
@@ -24,6 +29,8 @@ export interface PresentationForm {
   title: string;
   url: string;
   description: string;
+  is_public: boolean;
+  attachment?: string;
 }
 
 export const ITEMS_ON_PAGE = 6;
@@ -35,6 +42,7 @@ export interface PresentationsState {
   chunks: Presentation[][];
   currentChunk: Presentation[];
   form: PresentationForm;
+  currentPresentation?: Presentation;
 }
 
 export const initialState: PresentationsState = {
@@ -47,6 +55,7 @@ export const initialState: PresentationsState = {
     title: '',
     url: '',
     description: '',
+    is_public: true,
   },
 };
 
@@ -90,14 +99,21 @@ export const presentationsReducer = (
           title: '',
           url: '',
           description: '',
+          is_public: true,
         },
       };
+    case UPDATE_CURRENT_PRESENTATION:
+      return { ...state, currentPresentation: action.payload };
     case UPDATE_TITLE:
       return { ...state, form: { ...state.form, title: action.payload } };
     case UPDATE_URL:
       return { ...state, form: { ...state.form, url: action.payload } };
     case UPDATE_DESCRIPTION:
       return { ...state, form: { ...state.form, description: action.payload } };
+    case UPDATE_IS_PUBLIC:
+      return { ...state, form: { ...state.form, is_public: action.payload } };
+    case UPDATE_ATTACHMENT:
+      return { ...state, form: { ...state.form, attachment: action.payload } };
     default:
       return state;
   }

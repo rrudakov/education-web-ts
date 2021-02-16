@@ -18,6 +18,11 @@ export const getCurrentPage: Selector<AppStoreState, number> = ({
   presentations,
 }) => presentations.currentPage;
 
+export const getCurrentPresentation: Selector<
+  AppStoreState,
+  Presentation | undefined
+> = ({ presentations }) => presentations.currentPresentation;
+
 export const getTitle: Selector<AppStoreState, string> = ({ presentations }) =>
   presentations.form.title;
 
@@ -27,3 +32,11 @@ export const getUrl: Selector<AppStoreState, string> = ({ presentations }) =>
 export const getDescription: Selector<AppStoreState, string> = ({
   presentations,
 }) => presentations.form.description;
+
+export const getIsPublic: Selector<AppStoreState, boolean> = ({
+  presentations,
+}) => presentations.form.is_public;
+
+export const getAttachment: Selector<AppStoreState, string | undefined> = ({
+  presentations,
+}) => presentations.form.attachment;

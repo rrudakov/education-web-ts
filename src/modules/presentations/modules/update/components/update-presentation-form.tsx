@@ -1,8 +1,15 @@
-import { createStyles, FormGroup, makeStyles, Theme } from '@material-ui/core';
+import {
+  createStyles,
+  FormGroup,
+  Grid,
+  makeStyles,
+  Theme,
+} from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { CloseFormButton } from '../../../components/close-form-button';
 import { DescriptionInputComponent } from '../../../components/description-input';
+import { IsPublicCheckboxComponent } from '../../../components/is-public-checkbox-component';
 import { TitleInputComponent } from '../../../components/title-input';
 import { UrlInputComponent } from '../../../components/url-input';
 import { UpdatePresentationButtonComponent } from './update-button';
@@ -19,7 +26,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 
 export const UpdatePresentationFormComponent: React.FC = () => {
   const classes = useStyles();
-  const { presenationId } = useParams();
+  const { presentationId } = useParams();
 
   return (
     <React.Fragment>
@@ -27,11 +34,14 @@ export const UpdatePresentationFormComponent: React.FC = () => {
         <TitleInputComponent />
         <UrlInputComponent />
         <DescriptionInputComponent />
-        <CloseFormButton className={classes.button} />
-        <UpdatePresentationButtonComponent
-          className={classes.button}
-          presentationId={presenationId}
-        />
+        <IsPublicCheckboxComponent />
+        <Grid container direction="row">
+          <CloseFormButton className={classes.button} />
+          <UpdatePresentationButtonComponent
+            className={classes.button}
+            presentationId={presentationId}
+          />
+        </Grid>
       </FormGroup>
     </React.Fragment>
   );

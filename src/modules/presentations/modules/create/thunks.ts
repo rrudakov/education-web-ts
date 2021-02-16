@@ -39,11 +39,7 @@ export const thunkSubmitNewPresentation = (
     request
       .post(`${BASE_URL}/presentations`)
       .set('Authorization', `Token ${authToken}`)
-      .send({
-        title: form.title,
-        url: form.url,
-        description: form.description,
-      })
+      .send(form)
       .then(() => {
         dispatch(stopFetching());
         history.push('/presentations');

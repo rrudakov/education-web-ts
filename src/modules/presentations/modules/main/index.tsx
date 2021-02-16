@@ -8,6 +8,7 @@ import {
   getPagesCount,
 } from '../../selectors';
 import { PresentationComponent } from './components/presentation-component';
+import { PresentationModalComponent } from './components/presentation-modal-component';
 import { thunkFetchPresentations, thunkSelectPage } from './thunks';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
@@ -41,6 +42,7 @@ export const PresentationsMainPage: React.FC = () => {
 
   return (
     <React.Fragment>
+      <PresentationModalComponent />
       {pageCount > 1 && (
         <Grid
           className={classes.pagination}
@@ -56,9 +58,11 @@ export const PresentationsMainPage: React.FC = () => {
         </Grid>
       )}
 
-      {presentations.map((presentation) => (
-        <PresentationComponent key={presentation.id} {...presentation} />
-      ))}
+      <Grid container direction="row" spacing={3}>
+        {presentations.map((presentation) => (
+          <PresentationComponent key={presentation.id} {...presentation} />
+        ))}
+      </Grid>
       {pageCount > 1 && (
         <Grid
           className={classes.pagination}

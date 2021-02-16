@@ -4,15 +4,21 @@ import {
   CLEAR_FORM,
   DeletePresentationAction,
   DELETE_PRESENTATION,
+  UpdateAttachmentAction,
   UpdateCurrentChunkAction,
   UpdateCurrentPageAction,
+  UpdateCurrentPresentationAction,
   UpdateDescriptionAction,
+  UpdateIsPublicAction,
   UpdatePresentationsAction,
   UpdateTitleAction,
   UpdateUrlAction,
+  UPDATE_ATTACHMENT,
   UPDATE_CURRENT_CHUNK,
   UPDATE_CURRENT_PAGE,
+  UPDATE_CURRENT_PRESENTATION,
   UPDATE_DESCRIPTION,
+  UPDATE_IS_PUBLIC,
   UPDATE_PRESENTATIONS,
   UPDATE_TITLE,
   UPDATE_URL,
@@ -50,6 +56,13 @@ export const clearFormActionCreator = (): ClearFormAction => ({
   type: CLEAR_FORM,
 });
 
+export const updateCurrentPresentationActionCreator = (
+  presentation?: Presentation
+): UpdateCurrentPresentationAction => ({
+  type: UPDATE_CURRENT_PRESENTATION,
+  payload: presentation,
+});
+
 export const updateTitleActionCreator = (title: string): UpdateTitleAction => ({
   type: UPDATE_TITLE,
   payload: title,
@@ -65,4 +78,18 @@ export const updateDescriptionActionCreator = (
 ): UpdateDescriptionAction => ({
   type: UPDATE_DESCRIPTION,
   payload: description,
+});
+
+export const updateIsPublicActionCreator = (
+  isPublic: boolean
+): UpdateIsPublicAction => ({
+  type: UPDATE_IS_PUBLIC,
+  payload: isPublic,
+});
+
+export const updateAttachmentActionCreator = (
+  attachment?: string
+): UpdateAttachmentAction => ({
+  type: UPDATE_ATTACHMENT,
+  payload: attachment,
 });
