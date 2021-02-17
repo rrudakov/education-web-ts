@@ -20,7 +20,7 @@ interface CreatePostResponse {
 }
 
 export const thunkCreatePost = (
-  history: History<History.UnknownFacade>
+  history: History<unknown>
 ): ThunkAction<void, AppStoreState, null, SystemActionTypes> => (
   dispatch,
   getState

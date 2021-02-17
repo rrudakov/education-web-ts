@@ -54,7 +54,7 @@ export const thunkGetDress = (
 
 export const thunkUpdateDress = (
   dressId: number,
-  history: History<History.UnknownFacade>
+  history: History<unknown>
 ): ThunkAction<
   void,
   AppStoreState,

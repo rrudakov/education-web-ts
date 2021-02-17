@@ -22,7 +22,7 @@ import { VideoLessonsActionType } from '../../types';
 // }
 
 export const thunkSubmitNewVideoLesson = (
-  history: History<History.UnknownFacade>
+  history: History<unknown>
 ): ThunkAction<
   void,
   AppStoreState,

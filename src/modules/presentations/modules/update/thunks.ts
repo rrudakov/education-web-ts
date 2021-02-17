@@ -72,7 +72,7 @@ export const thunkGetPresentation = (
 
 export const thunkUpdatePresentation = (
   presentationId: number,
-  history: History<History.UnknownFacade>
+  history: History<unknown>
 ): ThunkAction<
   void,
   AppStoreState,

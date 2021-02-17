@@ -61,7 +61,7 @@ export const thunkGetGymnastic = (
 
 export const thunkUpdateGymnastic = (
   gymnasticId: number,
-  history: History<History.UnknownFacade>
+  history: History<unknown>
 ): ThunkAction<
   void,
   AppStoreState,

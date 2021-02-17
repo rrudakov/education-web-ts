@@ -19,7 +19,7 @@ import { clearFormActionCreator } from '../../actions';
 import { PresentationsActionType } from '../../types';
 
 export const thunkSubmitNewPresentation = (
-  history: History<History.UnknownFacade>
+  history: History<unknown>
 ): ThunkAction<
   void,
   AppStoreState,

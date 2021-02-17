@@ -63,7 +63,7 @@ export const thunkGetLesson = (
 
 export const thunkUpdateLesson = (
   lessonId: number,
-  history: History<History.UnknownFacade>
+  history: History<unknown>
 ): ThunkAction<
   void,
   AppStoreState,
