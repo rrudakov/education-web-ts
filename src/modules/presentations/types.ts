@@ -12,6 +12,9 @@ export const UPDATE_URL = 'UPDATE_URL/PRESENTATIONS';
 export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION/PRESENTATIONS';
 export const UPDATE_IS_PUBLIC = 'UPDATE_IS_PUBLIC/PRESENTATIONS';
 export const UPDATE_ATTACHMENT = 'UPDATE_ATTACHMENT/PRESENTATIONS';
+export const UPDATE_PREVIEW = 'UPDATE_PREVIEW/PRESENTATIONS';
+export const UPDATE_IS_PREVIEW_DIALOG_OPEN =
+  'UPDATE_IS_PREVIEW_DIALOG_OPEN/PRESENTATIONS';
 
 export interface UpdatePresentationsAction {
   type: typeof UPDATE_PRESENTATIONS;
@@ -67,6 +70,16 @@ export interface UpdateAttachmentAction {
   payload?: string;
 }
 
+export interface UpdatePreviewAction {
+  type: typeof UPDATE_PREVIEW;
+  payload?: string;
+}
+
+export interface UpdateIsPreviewDialogOpenAction {
+  type: typeof UPDATE_IS_PREVIEW_DIALOG_OPEN;
+  payload: boolean;
+}
+
 export type PresentationsActionType =
   | UpdatePresentationsAction
   | DeletePresentationAction
@@ -78,4 +91,6 @@ export type PresentationsActionType =
   | UpdateUrlAction
   | UpdateDescriptionAction
   | UpdateIsPublicAction
-  | UpdateAttachmentAction;
+  | UpdateAttachmentAction
+  | UpdatePreviewAction
+  | UpdateIsPreviewDialogOpenAction;

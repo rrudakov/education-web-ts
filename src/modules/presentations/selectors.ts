@@ -40,3 +40,11 @@ export const getIsPublic: Selector<AppStoreState, boolean> = ({
 export const getAttachment: Selector<AppStoreState, string | undefined> = ({
   presentations,
 }) => presentations.form.attachment;
+
+export const getPreview: Selector<AppStoreState, string | undefined> = ({
+  presentations,
+}) => presentations.form.preview;
+
+export const getIsPreviewDialogOpen: Selector<AppStoreState, boolean> = ({
+  presentations,
+}) => presentations.isPreviewDialogOpen;

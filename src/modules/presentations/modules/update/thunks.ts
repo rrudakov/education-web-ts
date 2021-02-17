@@ -20,6 +20,7 @@ import {
   updateAttachmentActionCreator,
   updateDescriptionActionCreator,
   updateIsPublicActionCreator,
+  updatePreviewActionCreator,
   updateTitleActionCreator,
   updateUrlActionCreator,
 } from '../../actions';
@@ -32,6 +33,7 @@ interface PresentationAuthorizedResponse {
   description: string;
   is_public: boolean;
   attachment?: string;
+  preview?: string;
   created_on: string;
   updated_on: string;
 }
@@ -62,6 +64,7 @@ export const thunkGetPresentation = (
         dispatch(updateDescriptionActionCreator(presentation.description));
         dispatch(updateIsPublicActionCreator(presentation.is_public));
         dispatch(updateAttachmentActionCreator(presentation.attachment));
+        dispatch(updatePreviewActionCreator(presentation.preview));
       })
       .catch((err) => {
         dispatch(stopFetching());

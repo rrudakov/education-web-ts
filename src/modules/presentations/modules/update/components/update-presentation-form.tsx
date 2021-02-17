@@ -7,9 +7,11 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { AttachedPreviewComponent } from '../../../components/attached-preview-component';
 import { CloseFormButton } from '../../../components/close-form-button';
 import { DescriptionInputComponent } from '../../../components/description-input';
 import { IsPublicCheckboxComponent } from '../../../components/is-public-checkbox-component';
+import { OpenUploadPreviewDialogButtonComponent } from '../../../components/open-upload-preview-dialog-button-component';
 import { TitleInputComponent } from '../../../components/title-input';
 import { UrlInputComponent } from '../../../components/url-input';
 import { UpdatePresentationButtonComponent } from './update-button';
@@ -35,7 +37,9 @@ export const UpdatePresentationFormComponent: React.FC = () => {
         <UrlInputComponent />
         <DescriptionInputComponent />
         <IsPublicCheckboxComponent />
+        <AttachedPreviewComponent />
         <Grid container direction="row">
+          <OpenUploadPreviewDialogButtonComponent className={classes.button} />
           <CloseFormButton className={classes.button} />
           <UpdatePresentationButtonComponent
             className={classes.button}

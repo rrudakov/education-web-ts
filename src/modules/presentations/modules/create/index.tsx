@@ -1,5 +1,6 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
+import { UploadPreviewDialogComponent } from '../../components/upload-preview-dialog-component';
 import { CreatePresentationForm } from './components/create-presentation-form';
 
 export const NewPresentationPage: React.FC = () => {
@@ -9,6 +10,7 @@ export const NewPresentationPage: React.FC = () => {
         Добавить новую презентацию
       </Typography>
       <CreatePresentationForm />
+      <UploadPreviewDialogComponent />
     </React.Fragment>
   );
 };

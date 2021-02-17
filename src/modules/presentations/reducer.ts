@@ -10,6 +10,8 @@ import {
   UPDATE_DESCRIPTION,
   UPDATE_IS_PUBLIC,
   UPDATE_PRESENTATIONS,
+  UPDATE_PREVIEW,
+  UPDATE_IS_PREVIEW_DIALOG_OPEN,
   UPDATE_TITLE,
   UPDATE_URL,
 } from './types';
@@ -21,6 +23,7 @@ export interface Presentation {
   description: string;
   is_public: boolean;
   attachment?: string;
+  preview?: string;
   created_on: string;
   updated_on: string;
 }
@@ -31,6 +34,7 @@ export interface PresentationForm {
   description: string;
   is_public: boolean;
   attachment?: string;
+  preview?: string;
 }
 
 export const ITEMS_ON_PAGE = 6;
@@ -43,6 +47,7 @@ export interface PresentationsState {
   currentChunk: Presentation[];
   form: PresentationForm;
   currentPresentation?: Presentation;
+  isPreviewDialogOpen: boolean;
 }
 
 export const initialState: PresentationsState = {
@@ -57,6 +62,7 @@ export const initialState: PresentationsState = {
     description: '',
     is_public: true,
   },
+  isPreviewDialogOpen: false,
 };
 
 export const presentationsReducer = (
@@ -114,6 +120,10 @@ export const presentationsReducer = (
       return { ...state, form: { ...state.form, is_public: action.payload } };
     case UPDATE_ATTACHMENT:
       return { ...state, form: { ...state.form, attachment: action.payload } };
+    case UPDATE_PREVIEW:
+      return { ...state, form: { ...state.form, preview: action.payload } };
+    case UPDATE_IS_PREVIEW_DIALOG_OPEN:
+      return { ...state, isPreviewDialogOpen: action.payload };
     default:
       return state;
   }

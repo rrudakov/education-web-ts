@@ -9,8 +9,10 @@ import {
   UpdateCurrentPageAction,
   UpdateCurrentPresentationAction,
   UpdateDescriptionAction,
+  UpdateIsPreviewDialogOpenAction,
   UpdateIsPublicAction,
   UpdatePresentationsAction,
+  UpdatePreviewAction,
   UpdateTitleAction,
   UpdateUrlAction,
   UPDATE_ATTACHMENT,
@@ -18,8 +20,10 @@ import {
   UPDATE_CURRENT_PAGE,
   UPDATE_CURRENT_PRESENTATION,
   UPDATE_DESCRIPTION,
+  UPDATE_IS_PREVIEW_DIALOG_OPEN,
   UPDATE_IS_PUBLIC,
   UPDATE_PRESENTATIONS,
+  UPDATE_PREVIEW,
   UPDATE_TITLE,
   UPDATE_URL,
 } from './types';
@@ -92,4 +96,18 @@ export const updateAttachmentActionCreator = (
 ): UpdateAttachmentAction => ({
   type: UPDATE_ATTACHMENT,
   payload: attachment,
+});
+
+export const updatePreviewActionCreator = (
+  preview?: string
+): UpdatePreviewAction => ({
+  type: UPDATE_PREVIEW,
+  payload: preview,
+});
+
+export const updateIsPreviewDialogOpenActionCreator = (
+  open: boolean
+): UpdateIsPreviewDialogOpenAction => ({
+  type: UPDATE_IS_PREVIEW_DIALOG_OPEN,
+  payload: open,
 });

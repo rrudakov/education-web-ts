@@ -4,6 +4,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  CardMedia,
   Chip,
   Collapse,
   createStyles,
@@ -20,7 +21,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import clsx from 'clsx';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { WHATSAPP_LINK } from '../../../../../core/constants';
@@ -45,6 +46,9 @@ const useStyles = makeStyles(({ spacing, transitions }: Theme) =>
     expandOpen: {
       transform: 'rotate(180deg)',
     },
+    media: {
+      padding: spacing(4),
+    },
   })
 );
 
@@ -60,6 +64,8 @@ export const PresentationComponent: React.FC<Presentation> = (presentation) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const transitioning = useSelector(getTransitioning);
+  const [show, setShow] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const openMenu = (e: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(e.currentTarget);
@@ -83,9 +89,21 @@ export const PresentationComponent: React.FC<Presentation> = (presentation) => {
     setExpanded((prev) => !prev);
   };
 
+  const handleImageLoaded = (
+    _: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => setImageLoaded(true);
+
+  useEffect(
+    () =>
+      setShow(
+        !transitioning && (presentation.preview === undefined || imageLoaded)
+      ),
+    [transitioning, imageLoaded, presentation]
+  );
+
   return (
     <Grid item sm={12} md={6}>
-      <Grow in={!transitioning} timeout="auto">
+      <Grow in={show} timeout="auto">
         <Card className={classes.card}>
           <CardHeader
             title={presentation.title}
@@ -125,6 +143,15 @@ export const PresentationComponent: React.FC<Presentation> = (presentation) => {
             </MenuItem>
           </Menu>
           <CardContent>
+            {presentation.preview !== undefined && (
+              <CardMedia
+                className={classes.media}
+                component="img"
+                image={presentation.preview}
+                onLoad={handleImageLoaded}
+                height="100%"
+              />
+            )}
             <Collapse in={expanded} collapsedHeight={120}>
               <Typography
                 paragraph
