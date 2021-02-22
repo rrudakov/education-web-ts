@@ -48,3 +48,7 @@ export const getPreview: Selector<AppStoreState, string | undefined> = ({
 export const getIsPreviewDialogOpen: Selector<AppStoreState, boolean> = ({
   presentations,
 }) => presentations.isPreviewDialogOpen;
+
+export const getIsManualDialogOpen: Selector<AppStoreState, boolean> = ({
+  presentations,
+}) => presentations.isManualDialogOpen;

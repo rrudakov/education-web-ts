@@ -15,6 +15,8 @@ export const UPDATE_ATTACHMENT = 'UPDATE_ATTACHMENT/PRESENTATIONS';
 export const UPDATE_PREVIEW = 'UPDATE_PREVIEW/PRESENTATIONS';
 export const UPDATE_IS_PREVIEW_DIALOG_OPEN =
   'UPDATE_IS_PREVIEW_DIALOG_OPEN/PRESENTATIONS';
+export const UPDATE_IS_MANUAL_DIALOG_OPEN =
+  'UPDATE_IS_MANUAL_DIALOG_OPEN/PRESENTATIONS';
 
 export interface UpdatePresentationsAction {
   type: typeof UPDATE_PRESENTATIONS;
@@ -80,6 +82,11 @@ export interface UpdateIsPreviewDialogOpenAction {
   payload: boolean;
 }
 
+export interface UpdateIsManualDialogOpenAction {
+  type: typeof UPDATE_IS_MANUAL_DIALOG_OPEN;
+  payload: boolean;
+}
+
 export type PresentationsActionType =
   | UpdatePresentationsAction
   | DeletePresentationAction
@@ -93,4 +100,5 @@ export type PresentationsActionType =
   | UpdateIsPublicAction
   | UpdateAttachmentAction
   | UpdatePreviewAction
-  | UpdateIsPreviewDialogOpenAction;
+  | UpdateIsPreviewDialogOpenAction
+  | UpdateIsManualDialogOpenAction;

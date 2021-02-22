@@ -77,8 +77,8 @@ export const SignInDialog: React.FC = () => {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={closeAuth}>Close</Button>
-        <Button onClick={sendSignInRequest}>Sign in</Button>
+        <Button onClick={closeAuth}>Отмена</Button>
+        <Button onClick={sendSignInRequest}>Войти</Button>
       </DialogActions>
     </Dialog>
   );

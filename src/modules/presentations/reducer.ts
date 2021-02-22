@@ -8,10 +8,11 @@ import {
   UPDATE_CURRENT_PAGE,
   UPDATE_CURRENT_PRESENTATION,
   UPDATE_DESCRIPTION,
+  UPDATE_IS_MANUAL_DIALOG_OPEN,
+  UPDATE_IS_PREVIEW_DIALOG_OPEN,
   UPDATE_IS_PUBLIC,
   UPDATE_PRESENTATIONS,
   UPDATE_PREVIEW,
-  UPDATE_IS_PREVIEW_DIALOG_OPEN,
   UPDATE_TITLE,
   UPDATE_URL,
 } from './types';
@@ -48,6 +49,7 @@ export interface PresentationsState {
   form: PresentationForm;
   currentPresentation?: Presentation;
   isPreviewDialogOpen: boolean;
+  isManualDialogOpen: boolean;
 }
 
 export const initialState: PresentationsState = {
@@ -63,6 +65,7 @@ export const initialState: PresentationsState = {
     is_public: true,
   },
   isPreviewDialogOpen: false,
+  isManualDialogOpen: false,
 };
 
 export const presentationsReducer = (
@@ -124,6 +127,8 @@ export const presentationsReducer = (
       return { ...state, form: { ...state.form, preview: action.payload } };
     case UPDATE_IS_PREVIEW_DIALOG_OPEN:
       return { ...state, isPreviewDialogOpen: action.payload };
+    case UPDATE_IS_MANUAL_DIALOG_OPEN:
+      return { ...state, isManualDialogOpen: action.payload };
     default:
       return state;
   }

@@ -6,6 +6,8 @@ import { ErrorResponse } from '../../core/reducer';
 import { AppStoreState } from '../../core/store';
 import { SystemActionTypes } from '../../core/types';
 import {
+  updateAttachmentActionCreator,
+  updateIsManualDialogOpenActionCreator,
   updateIsPreviewDialogOpenActionCreator,
   updatePreviewActionCreator,
 } from './actions';
@@ -34,6 +36,37 @@ export const thunkUploadPreview = (
       .then((response) => {
         dispatch(
           updatePreviewActionCreator((response.body as UploadFileResponse).url)
+        );
+        dispatch(stopFetching());
+      })
+      .catch((err) => {
+        dispatch(stopFetching());
+        dispatch(updateErrorMessage((err as ErrorResponse).message));
+      });
+  }
+};
+
+export const thunkUploadManual = (
+  files: File[]
+): ThunkAction<
+  void,
+  AppStoreState,
+  null,
+  SystemActionTypes | PresentationsActionType
+> => (dispatch) => {
+  if (files.length !== 1) {
+    dispatch(updateErrorMessage('Только 1 инструкцию можно загрузить'));
+  } else {
+    dispatch(updateIsManualDialogOpenActionCreator(false));
+    dispatch(fetching());
+    request
+      .post(`${BASE_URL}/upload`)
+      .attach('file', files[0], files[0].name)
+      .then((response) => {
+        dispatch(
+          updateAttachmentActionCreator(
+            (response.body as UploadFileResponse).url
+          )
         );
         dispatch(stopFetching());
       })

@@ -19,6 +19,7 @@ import {
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import PictureAsPdfRoundedIcon from '@material-ui/icons/PictureAsPdfRounded';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import clsx from 'clsx';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -48,6 +49,9 @@ const useStyles = makeStyles(({ spacing, transitions }: Theme) =>
     },
     media: {
       padding: spacing(4),
+    },
+    chip: {
+      marginRight: spacing(1),
     },
   })
 );
@@ -109,7 +113,28 @@ export const PresentationComponent: React.FC<Presentation> = (presentation) => {
             title={presentation.title}
             subheader={
               presentation.is_public ? (
-                <Chip size="small" label="Бесплатно" color="secondary" />
+                <React.Fragment>
+                  <Chip
+                    className={classes.chip}
+                    size="small"
+                    label="Бесплатно"
+                    color="secondary"
+                  />
+                  {presentation.attachment !== undefined && (
+                    <Chip
+                      className={classes.chip}
+                      icon={<PictureAsPdfRoundedIcon />}
+                      size="small"
+                      label="Скачать инструкцию"
+                      color="secondary"
+                      clickable
+                      component="a"
+                      href={presentation.attachment}
+                      target="_blank"
+                      rel="noopener"
+                    />
+                  )}
+                </React.Fragment>
               ) : (
                 <Chip size="small" color="secondary" label="Платный контент" />
               )

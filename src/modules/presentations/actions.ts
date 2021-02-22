@@ -9,6 +9,7 @@ import {
   UpdateCurrentPageAction,
   UpdateCurrentPresentationAction,
   UpdateDescriptionAction,
+  UpdateIsManualDialogOpenAction,
   UpdateIsPreviewDialogOpenAction,
   UpdateIsPublicAction,
   UpdatePresentationsAction,
@@ -20,6 +21,7 @@ import {
   UPDATE_CURRENT_PAGE,
   UPDATE_CURRENT_PRESENTATION,
   UPDATE_DESCRIPTION,
+  UPDATE_IS_MANUAL_DIALOG_OPEN,
   UPDATE_IS_PREVIEW_DIALOG_OPEN,
   UPDATE_IS_PUBLIC,
   UPDATE_PRESENTATIONS,
@@ -109,5 +111,12 @@ export const updateIsPreviewDialogOpenActionCreator = (
   open: boolean
 ): UpdateIsPreviewDialogOpenAction => ({
   type: UPDATE_IS_PREVIEW_DIALOG_OPEN,
+  payload: open,
+});
+
+export const updateIsManualDialogOpenActionCreator = (
+  open: boolean
+): UpdateIsManualDialogOpenAction => ({
+  type: UPDATE_IS_MANUAL_DIALOG_OPEN,
   payload: open,
 });

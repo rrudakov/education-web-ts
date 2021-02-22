@@ -11,6 +11,8 @@ import { AttachedPreviewComponent } from '../../../components/attached-preview-c
 import { CloseFormButton } from '../../../components/close-form-button';
 import { DescriptionInputComponent } from '../../../components/description-input';
 import { IsPublicCheckboxComponent } from '../../../components/is-public-checkbox-component';
+import { AttachedManualComponent } from '../../../components/manual-preview-component';
+import { OpenUploadManualDialogButtonComponent } from '../../../components/open-upload-manual-dialog-button-component';
 import { OpenUploadPreviewDialogButtonComponent } from '../../../components/open-upload-preview-dialog-button-component';
 import { TitleInputComponent } from '../../../components/title-input';
 import { UrlInputComponent } from '../../../components/url-input';
@@ -38,8 +40,10 @@ export const UpdatePresentationFormComponent: React.FC = () => {
         <DescriptionInputComponent />
         <IsPublicCheckboxComponent />
         <AttachedPreviewComponent />
+        <AttachedManualComponent />
         <Grid container direction="row">
           <OpenUploadPreviewDialogButtonComponent className={classes.button} />
+          <OpenUploadManualDialogButtonComponent className={classes.button} />
           <CloseFormButton className={classes.button} />
           <UpdatePresentationButtonComponent
             className={classes.button}

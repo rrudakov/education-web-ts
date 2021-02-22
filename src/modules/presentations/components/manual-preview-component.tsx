@@ -1,60 +1,60 @@
 import {
   Card,
-  CardMedia,
+  CardContent,
   createStyles,
   Fab,
   Grid,
   makeStyles,
   Theme,
 } from '@material-ui/core';
+import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePreviewActionCreator } from '../actions';
-import { getPreview } from '../selectors';
+import { updateAttachmentActionCreator } from '../actions';
+import { getAttachment } from '../selectors';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
-    root: {
-      marginBottom: spacing(4),
-      marginTop: spacing(4),
-    },
     media: {
       maxWidth: 200,
+      width: 200,
+      height: 150,
     },
     fab: {
       top: spacing(-2),
       right: spacing(2),
     },
+    icon: {
+      width: 140,
+      height: 110,
+    },
   })
 );
 
-export const AttachedPreviewComponent: React.FC = () => {
+export const AttachedManualComponent: React.FC = () => {
   const classes = useStyles();
-  const preview = useSelector(getPreview);
+  const manual = useSelector(getAttachment);
   const dispatch = useDispatch();
-  const removePicture = useCallback(
-    () => dispatch(updatePreviewActionCreator(undefined)),
+  const removeAttachment = useCallback(
+    () => dispatch(updateAttachmentActionCreator(undefined)),
     [dispatch]
   );
 
   return (
-    <Grid className={classes.root} container direction="row">
-      {preview !== undefined && (
+    <Grid container>
+      {manual !== undefined && (
         <React.Fragment>
           <Card className={classes.media}>
-            <CardMedia
-              component="img"
-              alt="Attached picture"
-              image={preview}
-              title="Attached picture"
-            />
+            <CardContent>
+              <AttachFileOutlinedIcon className={classes.icon} />
+            </CardContent>
           </Card>
           <Fab
             aria-label="Delete"
             size="small"
             className={classes.fab}
-            onClick={removePicture}
+            onClick={removeAttachment}
           >
             <DeleteIcon />
           </Fab>
