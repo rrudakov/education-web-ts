@@ -95,7 +95,7 @@ export const TopBar: React.FC = () => {
             component={RouterLink}
             to="/"
           >
-            <img className={classes.image} src={Logo} />
+            <img className={classes.image} src={Logo} alt="Аленкина сказка" />
           </Link>
           {loggedIn ? (
             <Button color="inherit" onClick={logout}>
