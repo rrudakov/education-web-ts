@@ -51,34 +51,40 @@ export const SignInDialog: React.FC = () => {
       onClose={closeAuth}
       aria-labelledby="signin-dialog-title"
     >
-      <DialogTitle id="signin-dialog-title">Sign in</DialogTitle>
+      <DialogTitle id="signin-dialog-title">Вход</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          To sign in please enter your login and password below.
+          Заполните форму и нажмите Войти чтобы залогиниться.
         </DialogContentText>
         <TextField
-          autoFocus={true}
-          margin="dense"
+          autoFocus
           id="username"
-          fullWidth={true}
-          label="Username"
+          fullWidth
+          label="Логин"
           type="text"
           value={username}
           onChange={updateUsername}
+          variant="outlined"
+          margin="normal"
         />
         <TextField
-          margin="dense"
           id="password"
           fullWidth={true}
-          label="Password"
+          label="Пароль"
           type="password"
           value={password}
           onChange={updatePassword}
+          variant="outlined"
+          margin="normal"
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={closeAuth}>Отмена</Button>
-        <Button onClick={sendSignInRequest}>Войти</Button>
+        <Button variant="contained" color="primary" onClick={closeAuth}>
+          Отмена
+        </Button>
+        <Button variant="contained" color="primary" onClick={sendSignInRequest}>
+          Войти
+        </Button>
       </DialogActions>
     </Dialog>
   );

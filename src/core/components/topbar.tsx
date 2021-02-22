@@ -14,10 +14,10 @@ import {
   withStyles,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import SchoolIcon from '@material-ui/icons/School';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
+import Logo from '../img/logo.png';
 import { SiteMenuItem } from '../reducer';
 import { getLoggedIn, getMenuItems } from '../selector';
 import { thunkLogout } from '../thunks';
@@ -53,6 +53,9 @@ const useStyles = makeStyles(({ spacing, palette }: Theme) =>
       textDecoration: 'none',
       color: palette.text.primary,
     },
+    image: {
+      maxHeight: 80,
+    },
   })
 );
 
@@ -83,7 +86,6 @@ export const TopBar: React.FC = () => {
               <MenuIcon />
             </IconButton>
           </Hidden>
-          <SchoolIcon />
 
           <Link
             variant="h6"
@@ -93,7 +95,7 @@ export const TopBar: React.FC = () => {
             component={RouterLink}
             to="/"
           >
-            Аленкина сказка
+            <img className={classes.image} src={Logo} />
           </Link>
           {loggedIn ? (
             <Button color="inherit" onClick={logout}>
