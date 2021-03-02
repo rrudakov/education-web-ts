@@ -22,11 +22,13 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 export interface BonusVideoComponentProps {
   src: string;
   title: string;
+  poster: string;
 }
 
 export const BonusVideoComponent: React.FC<BonusVideoComponentProps> = ({
   src,
   title,
+  poster,
 }: BonusVideoComponentProps) => {
   const classes = useStyles();
   const transitioning = useSelector(getTransitioning);
@@ -44,6 +46,7 @@ export const BonusVideoComponent: React.FC<BonusVideoComponentProps> = ({
           src={src}
           controls
           title={title}
+          poster={poster}
           onLoadedData={handleVideoLoaded}
         />
       </Card>

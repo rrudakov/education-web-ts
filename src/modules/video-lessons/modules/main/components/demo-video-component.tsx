@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { BulletListItem } from '../../../../../core/components/list-text';
+import DemoPoster from '../../../img/demo-poster.png';
 
 export const useStyles = makeStyles(({ transitions, spacing }: Theme) =>
   createStyles({
@@ -54,6 +55,7 @@ export const DemoVideoComponent: React.FC = () => {
           src="https://alenkinaskazka.net/media/video_2020-10-27_08-55-05.webm"
           controls
           title="Demo video"
+          poster={DemoPoster}
           onLoadedData={handleVideoLoaded}
         />
         <CardContent>
