@@ -16,3 +16,16 @@ export const GYMNASTICS_SUBTYPES = [
     subtypeId: 5,
   },
 ];
+
+export const PRESENTATIONS_SUBTYPES = [
+  {
+    name: 'Интерактивные презентации',
+    url: '/presentations/interactive',
+    subtypeId: 1,
+  },
+  {
+    name: 'Упражнения и онлайн игры',
+    url: '/presentations/games',
+    subtypeId: 2,
+  },
+];

@@ -2,16 +2,18 @@ import { Button } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { clearFormActionCreator } from '../actions';
 
 export const CloseFormButton: React.FC<{ className: string }> = ({
   className,
 }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const clearForm = useCallback(() => dispatch(clearFormActionCreator()), [
-    dispatch,
-  ]);
+  const clearForm = useCallback(() => {
+    dispatch(clearFormActionCreator());
+    history.goBack();
+  }, [dispatch, history]);
 
   return (
     <Button
@@ -20,8 +22,6 @@ export const CloseFormButton: React.FC<{ className: string }> = ({
       color="primary"
       startIcon={<CancelIcon />}
       onClick={clearForm}
-      component={Link}
-      to="/presentations"
     >
       Отменить
     </Button>

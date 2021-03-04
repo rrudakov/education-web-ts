@@ -20,10 +20,13 @@ import {
   updateCurrentChunkActionCreator,
   updateCurrentPageActionCreator,
   updatePresentationsActionCreator,
+  updatePresentationsFilteredActionCreated,
 } from '../../actions';
 import { PresentationsActionType } from '../../types';
 
-export const thunkFetchPresentations = (): ThunkAction<
+export const thunkFetchPresentations = (
+  subtypeId: number
+): ThunkAction<
   void,
   AppStoreState,
   null,
@@ -33,9 +36,11 @@ export const thunkFetchPresentations = (): ThunkAction<
   request
     .get(`${BASE_URL}/presentations`)
     .query({ limit: 1000 })
+    .query({ subtype_id: subtypeId })
     .then((response) => {
       dispatch(stopFetching());
       dispatch(updatePresentationsActionCreator(response.body));
+      dispatch(updatePresentationsFilteredActionCreated(response.body));
     })
     .catch((err) => {
       dispatch(stopFetching());

@@ -1,18 +1,23 @@
 import { Presentation } from './reducer';
 
 export const UPDATE_PRESENTATIONS = 'UPDATE_PRESENTATIONS/PRESENTATIONS';
+export const UPDATE_PRESENTATIONS_FILTERED =
+  'UPDATE_PRESENTATIONS_FILTERED/PRESENTATIONS';
 export const DELETE_PRESENTATION = 'DELETE_PRESENTATION/PRESENTATIONS';
 export const UPDATE_CURRENT_PAGE = 'UPDATE_CURRENT_PAGE/PRESENTATIONS';
 export const UPDATE_CURRENT_CHUNK = 'UPDATE_CURRENT_CHUNK/PRESENTATIONS';
 export const CLEAR_FORM = 'CLEAR_FORM/PRESENTATIONS';
 export const UPDATE_CURRENT_PRESENTATION =
   'UPDATE_CURRENT_PRESENTATION/PRESENTATIONS';
+export const UPDATE_SUBTYPE_ID = 'UPDATE_SUBTYPE_ID/PRESENTATIONS';
 export const UPDATE_TITLE = 'UPDATE_TITLE/PRESENTATIONS';
 export const UPDATE_URL = 'UPDATE_URL/PRESENTATIONS';
 export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION/PRESENTATIONS';
 export const UPDATE_IS_PUBLIC = 'UPDATE_IS_PUBLIC/PRESENTATIONS';
 export const UPDATE_ATTACHMENT = 'UPDATE_ATTACHMENT/PRESENTATIONS';
 export const UPDATE_PREVIEW = 'UPDATE_PREVIEW/PRESENTATIONS';
+export const UPDATE_PRESENTATIONS_FILTER =
+  'UPDATE_PRESENTATIONS_FILTER/PRESENTATIONS';
 export const UPDATE_IS_PREVIEW_DIALOG_OPEN =
   'UPDATE_IS_PREVIEW_DIALOG_OPEN/PRESENTATIONS';
 export const UPDATE_IS_MANUAL_DIALOG_OPEN =
@@ -20,6 +25,11 @@ export const UPDATE_IS_MANUAL_DIALOG_OPEN =
 
 export interface UpdatePresentationsAction {
   type: typeof UPDATE_PRESENTATIONS;
+  payload: Presentation[];
+}
+
+export interface UpdatePresentationsFilteredAction {
+  type: typeof UPDATE_PRESENTATIONS_FILTERED;
   payload: Presentation[];
 }
 
@@ -45,6 +55,11 @@ export interface ClearFormAction {
 export interface UpdateCurrentPresentationAction {
   type: typeof UPDATE_CURRENT_PRESENTATION;
   payload?: Presentation;
+}
+
+export interface UpdateSubtypeIdAction {
+  type: typeof UPDATE_SUBTYPE_ID;
+  payload: number;
 }
 
 export interface UpdateTitleAction {
@@ -77,6 +92,11 @@ export interface UpdatePreviewAction {
   payload?: string;
 }
 
+export interface UpdatePresentationsFilterAction {
+  type: typeof UPDATE_PRESENTATIONS_FILTER;
+  payload: string;
+}
+
 export interface UpdateIsPreviewDialogOpenAction {
   type: typeof UPDATE_IS_PREVIEW_DIALOG_OPEN;
   payload: boolean;
@@ -89,16 +109,19 @@ export interface UpdateIsManualDialogOpenAction {
 
 export type PresentationsActionType =
   | UpdatePresentationsAction
+  | UpdatePresentationsFilteredAction
   | DeletePresentationAction
   | UpdateCurrentPageAction
   | UpdateCurrentChunkAction
   | ClearFormAction
   | UpdateCurrentPresentationAction
+  | UpdateSubtypeIdAction
   | UpdateTitleAction
   | UpdateUrlAction
   | UpdateDescriptionAction
   | UpdateIsPublicAction
   | UpdateAttachmentAction
+  | UpdatePresentationsFilterAction
   | UpdatePreviewAction
   | UpdateIsPreviewDialogOpenAction
   | UpdateIsManualDialogOpenAction;

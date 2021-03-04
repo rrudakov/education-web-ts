@@ -21,6 +21,7 @@ import {
   updateDescriptionActionCreator,
   updateIsPublicActionCreator,
   updatePreviewActionCreator,
+  updateSubtypeIdActionCreator,
   updateTitleActionCreator,
   updateUrlActionCreator,
 } from '../../actions';
@@ -28,6 +29,7 @@ import { PresentationsActionType } from '../../types';
 
 interface PresentationAuthorizedResponse {
   id: number;
+  subtype_id: number;
   title: string;
   url: string;
   description: string;
@@ -59,6 +61,7 @@ export const thunkGetPresentation = (
       .then((response) => {
         dispatch(stopFetching());
         const presentation = response.body as PresentationAuthorizedResponse;
+        dispatch(updateSubtypeIdActionCreator(presentation.subtype_id));
         dispatch(updateTitleActionCreator(presentation.title));
         dispatch(updateUrlActionCreator(presentation.url));
         dispatch(updateDescriptionActionCreator(presentation.description));
@@ -98,7 +101,7 @@ export const thunkUpdatePresentation = (
       .send(form)
       .then((_) => {
         dispatch(stopFetching());
-        history.push('/presentations');
+        history.goBack();
         dispatch(clearFormActionCreator());
         dispatch(updateSuccessMessage('Presentation was successfully updated'));
       })

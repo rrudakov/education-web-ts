@@ -23,6 +23,10 @@ export const getCurrentPresentation: Selector<
   Presentation | undefined
 > = ({ presentations }) => presentations.currentPresentation;
 
+export const getSubtypeId: Selector<AppStoreState, number> = ({
+  presentations,
+}) => presentations.form.subtype_id;
+
 export const getTitle: Selector<AppStoreState, string> = ({ presentations }) =>
   presentations.form.title;
 

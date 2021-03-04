@@ -7,8 +7,10 @@ import {
   getCurrentPage,
   getPagesCount,
 } from '../../selectors';
+import { OnlineGameComponent } from './components/online-game-component';
 import { PresentationComponent } from './components/presentation-component';
 import { PresentationModalComponent } from './components/presentation-modal-component';
+import { PresentationsFilterComponent } from './components/presentations-filter-component';
 import { thunkFetchPresentations, thunkSelectPage } from './thunks';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
@@ -20,12 +22,18 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
   })
 );
 
-export const PresentationsMainPage: React.FC = () => {
+interface PresentationsMainPageProps {
+  subtypeId: number;
+}
+
+export const PresentationsMainPage: React.FC<PresentationsMainPageProps> = ({
+  subtypeId,
+}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const fetchPresentations = useCallback(
-    () => dispatch(thunkFetchPresentations()),
-    [dispatch]
+    () => dispatch(thunkFetchPresentations(subtypeId)),
+    [dispatch, subtypeId]
   );
   const presentations = useSelector(getCurrentChunk);
   const pageCount = useSelector(getPagesCount);
@@ -43,6 +51,11 @@ export const PresentationsMainPage: React.FC = () => {
   return (
     <React.Fragment>
       <PresentationModalComponent />
+
+      {subtypeId === 2 && <OnlineGameComponent />}
+
+      <PresentationsFilterComponent />
+
       {pageCount > 1 && (
         <Grid
           className={classes.pagination}

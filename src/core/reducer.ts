@@ -1,4 +1,4 @@
-import { GYMNASTICS_SUBTYPES } from './constants';
+import { GYMNASTICS_SUBTYPES, PRESENTATIONS_SUBTYPES } from './constants';
 import {
   CLOSE_AUTH,
   DECREASE_FETCHING,
@@ -71,10 +71,12 @@ const initialState: SystemState = {
     },
     {
       name: 'Играем с мамой',
-      subitems: [
-        { name: 'Интерактивные презентации', url: '/presentations' },
-        // { name: 'Аудиосказки', url: '#' },
-      ].concat(GYMNASTICS_SUBTYPES.map((g) => ({ name: g.name, url: g.url }))),
+      subitems: GYMNASTICS_SUBTYPES.map((g) => ({
+        name: g.name,
+        url: g.url,
+      })).concat(
+        PRESENTATIONS_SUBTYPES.map((p) => ({ name: p.name, url: p.url }))
+      ),
     },
     // {
     //   name: 'Мероприятия',

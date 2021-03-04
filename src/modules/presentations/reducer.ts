@@ -12,13 +12,16 @@ import {
   UPDATE_IS_PREVIEW_DIALOG_OPEN,
   UPDATE_IS_PUBLIC,
   UPDATE_PRESENTATIONS,
+  UPDATE_PRESENTATIONS_FILTERED,
   UPDATE_PREVIEW,
+  UPDATE_SUBTYPE_ID,
   UPDATE_TITLE,
   UPDATE_URL,
 } from './types';
 
 export interface Presentation {
   id: number;
+  subtype_id: number;
   title: string;
   url?: string;
   description: string;
@@ -30,6 +33,7 @@ export interface Presentation {
 }
 
 export interface PresentationForm {
+  subtype_id: number;
   title: string;
   url: string;
   description: string;
@@ -42,6 +46,7 @@ export const ITEMS_ON_PAGE = 6;
 
 export interface PresentationsState {
   presentations: Presentation[];
+  presentationsFiltered: Presentation[];
   pagesCount: number;
   currentPage: number;
   chunks: Presentation[][];
@@ -54,11 +59,13 @@ export interface PresentationsState {
 
 export const initialState: PresentationsState = {
   presentations: [],
+  presentationsFiltered: [],
   pagesCount: 1,
   currentPage: 1,
   chunks: [],
   currentChunk: [],
   form: {
+    subtype_id: 1,
     title: '',
     url: '',
     description: '',
@@ -75,10 +82,15 @@ export const presentationsReducer = (
   let chunks = [];
   switch (action.type) {
     case UPDATE_PRESENTATIONS:
-      chunks = splitIntoChunks(action.payload, ITEMS_ON_PAGE);
       return {
         ...state,
         presentations: action.payload,
+      };
+    case UPDATE_PRESENTATIONS_FILTERED:
+      chunks = splitIntoChunks(action.payload, ITEMS_ON_PAGE);
+      return {
+        ...state,
+        presentationsFiltered: action.payload,
         pagesCount: Math.ceil(action.payload.length / ITEMS_ON_PAGE),
         currentPage: 1,
         chunks: chunks,
@@ -105,6 +117,7 @@ export const presentationsReducer = (
       return {
         ...state,
         form: {
+          subtype_id: 1,
           title: '',
           url: '',
           description: '',
@@ -113,6 +126,8 @@ export const presentationsReducer = (
       };
     case UPDATE_CURRENT_PRESENTATION:
       return { ...state, currentPresentation: action.payload };
+    case UPDATE_SUBTYPE_ID:
+      return { ...state, form: { ...state.form, subtype_id: action.payload } };
     case UPDATE_TITLE:
       return { ...state, form: { ...state.form, title: action.payload } };
     case UPDATE_URL:

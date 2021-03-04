@@ -13,7 +13,10 @@ import {
   UpdateIsPreviewDialogOpenAction,
   UpdateIsPublicAction,
   UpdatePresentationsAction,
+  UpdatePresentationsFilterAction,
+  UpdatePresentationsFilteredAction,
   UpdatePreviewAction,
+  UpdateSubtypeIdAction,
   UpdateTitleAction,
   UpdateUrlAction,
   UPDATE_ATTACHMENT,
@@ -25,7 +28,10 @@ import {
   UPDATE_IS_PREVIEW_DIALOG_OPEN,
   UPDATE_IS_PUBLIC,
   UPDATE_PRESENTATIONS,
+  UPDATE_PRESENTATIONS_FILTER,
+  UPDATE_PRESENTATIONS_FILTERED,
   UPDATE_PREVIEW,
+  UPDATE_SUBTYPE_ID,
   UPDATE_TITLE,
   UPDATE_URL,
 } from './types';
@@ -34,6 +40,13 @@ export const updatePresentationsActionCreator = (
   presentations: Presentation[]
 ): UpdatePresentationsAction => ({
   type: UPDATE_PRESENTATIONS,
+  payload: presentations,
+});
+
+export const updatePresentationsFilteredActionCreated = (
+  presentations: Presentation[]
+): UpdatePresentationsFilteredAction => ({
+  type: UPDATE_PRESENTATIONS_FILTERED,
   payload: presentations,
 });
 
@@ -67,6 +80,13 @@ export const updateCurrentPresentationActionCreator = (
 ): UpdateCurrentPresentationAction => ({
   type: UPDATE_CURRENT_PRESENTATION,
   payload: presentation,
+});
+
+export const updateSubtypeIdActionCreator = (
+  subtype_id: number
+): UpdateSubtypeIdAction => ({
+  type: UPDATE_SUBTYPE_ID,
+  payload: subtype_id,
 });
 
 export const updateTitleActionCreator = (title: string): UpdateTitleAction => ({
@@ -105,6 +125,13 @@ export const updatePreviewActionCreator = (
 ): UpdatePreviewAction => ({
   type: UPDATE_PREVIEW,
   payload: preview,
+});
+
+export const updatePresentationsFilterActionCreator = (
+  query: string
+): UpdatePresentationsFilterAction => ({
+  type: UPDATE_PRESENTATIONS_FILTER,
+  payload: query,
 });
 
 export const updateIsPreviewDialogOpenActionCreator = (
