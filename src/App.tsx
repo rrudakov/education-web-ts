@@ -1,7 +1,6 @@
 import {
   Backdrop,
   CircularProgress,
-  Container,
   createStyles,
   makeStyles,
   Theme,
@@ -16,13 +15,9 @@ import { ErrorMessage, SuccessMessage } from './core/components/message';
 import { TopBar } from './core/components/topbar';
 import { getFetching } from './core/selector';
 import { thunkCheckLogin } from './core/thunks';
-import { BirthdaysPage } from './modules/birthdays';
 import { ContactsPage } from './modules/contacts';
-import { DressesPage } from './modules/dresses';
-import { FairytailEvents } from './modules/fairytail-events';
 import { GymnasticsPage } from './modules/gymnastics';
 import { Home } from './modules/home';
-import { HomeBanner } from './modules/home/components/banner';
 import { OnlineOfflineLessonsPage } from './modules/online-offline-lessons';
 import { PresentationsPage } from './modules/presentations';
 import { VideoBonusPage } from './modules/video-bonus';
@@ -61,47 +56,40 @@ export const App: React.FC = () => {
       <SignInDialog />
       <TopBar />
       <MenuDrawer />
-      <Switch>
-        <Route path="/" exact>
-          <HomeBanner />
-        </Route>
-      </Switch>
-      <Container className={classes.content} maxWidth="lg">
-        <main>
-          <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route path="/video-lessons">
-              <VideoLessonsPage />
-            </Route>
-            <Route path="/online-offline-lessons" exact>
-              <OnlineOfflineLessonsPage />
-            </Route>
-            <Route path="/bonus-video" exact>
-              <VideoBonusPage />
-            </Route>
-            <Route path="/birthdays" exact>
+      <main>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/video-lessons">
+            <VideoLessonsPage />
+          </Route>
+          <Route path="/online-offline-lessons" exact>
+            <OnlineOfflineLessonsPage />
+          </Route>
+          <Route path="/bonus-video" exact>
+            <VideoBonusPage />
+          </Route>
+          {/* <Route path="/birthdays" exact>
               <BirthdaysPage />
-            </Route>
-            <Route path="/events" exact>
+              </Route>
+              <Route path="/events" exact>
               <FairytailEvents />
-            </Route>
-            <Route path="/dresses">
+              </Route>
+              <Route path="/dresses">
               <DressesPage />
-            </Route>
-            <Route path="/contacts" exact>
-              <ContactsPage />
-            </Route>
-            <Route path="/presentations">
-              <PresentationsPage />
-            </Route>
-            <Route path="/gymnastics">
-              <GymnasticsPage />
-            </Route>
-          </Switch>
-        </main>
-      </Container>
+              </Route> */}
+          <Route path="/contacts" exact>
+            <ContactsPage />
+          </Route>
+          <Route path="/presentations">
+            <PresentationsPage />
+          </Route>
+          <Route path="/gymnastics">
+            <GymnasticsPage />
+          </Route>
+        </Switch>
+      </main>
       <Footer />
     </BrowserRouter>
   );

@@ -13,6 +13,8 @@ export const UPDATE_SCREENSHOTS = 'UPDATE_SCREENSHOTS/VIDEO_LESSONS';
 export const UPDATE_PRICE = 'UPDATE_PRICE/VIDEO_LESSONS';
 export const CLEAR_FORM = 'CLEAR_FORM/VIDEO_LESSONS';
 export const SET_UPLOAD_DIALOG_OPEN = 'SET_UPLOAD_DIALOG_OPEN/VIDEO_LESSONS';
+export const UPDATE_FREE_LESSON_EMAIL =
+  'UPDATE_FREE_LESSON_EMAIL/VIDEO_LESSONS';
 
 export interface UpdateLessonsAction {
   type: typeof UPDATE_LESSONS;
@@ -78,6 +80,11 @@ export interface SetUploadDialogOpenAction {
   payload: boolean;
 }
 
+export interface UpdateFreeLessonEmailAction {
+  type: typeof UPDATE_FREE_LESSON_EMAIL;
+  payload: string;
+}
+
 export type VideoLessonsActionType =
   | UpdateLessonsAction
   | DeleteLessonAction
@@ -91,4 +98,5 @@ export type VideoLessonsActionType =
   | UpdateScreenshotsAction
   | UpdatePriceAction
   | ClearFormAction
-  | SetUploadDialogOpenAction;
+  | SetUploadDialogOpenAction
+  | UpdateFreeLessonEmailAction;

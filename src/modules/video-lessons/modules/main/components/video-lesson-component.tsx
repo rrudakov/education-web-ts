@@ -15,7 +15,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
@@ -134,14 +133,24 @@ export const VideoLessonComponent: React.FC<VideoLessonComponentProps> = ({
           <Button
             variant="contained"
             color="primary"
-            startIcon={<WhatsAppIcon />}
             component="a"
             href={WHATSAPP_LINK}
             target="_blank"
             rel="noopener"
           >
-            WhatsApp
+            {`Купить € ${videoLesson.price}`}
           </Button>
+          {/* <Button
+              variant="contained"
+              color="primary"
+              startIcon={<WhatsAppIcon />}
+              component="a"
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener"
+              >
+              WhatsApp
+              </Button> */}
         </CardActions>
       </Card>
     </Grow>

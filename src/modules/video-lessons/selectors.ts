@@ -39,3 +39,7 @@ export const getPrice: Selector<AppStoreState, string> = ({ videoLessons }) =>
 export const getUploadDialogOpen: Selector<AppStoreState, boolean> = ({
   videoLessons,
 }) => videoLessons.form.uploadDialogOpen;
+
+export const getFreeLessonEmail: Selector<AppStoreState, string> = ({
+  videoLessons,
+}) => videoLessons.freeLessonForm.email;

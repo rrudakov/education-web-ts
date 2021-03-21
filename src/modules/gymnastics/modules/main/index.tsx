@@ -1,4 +1,10 @@
-import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import {
+  Container,
+  createStyles,
+  Grid,
+  makeStyles,
+  Theme,
+} from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import React, { ChangeEvent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +18,10 @@ import { thunkFetchGymnastics, thunkSelectPage } from './thunks';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
+    root: {
+      marginTop: spacing(2),
+      marginBottom: spacing(2),
+    },
     pagination: {
       marginBottom: spacing(2),
       marginTop: spacing(2),
@@ -45,7 +55,7 @@ export const GymnasticsMainPage: React.FC<GymnasticsMainPageProps> = ({
   }, [fetchGymnastics]);
 
   return (
-    <React.Fragment>
+    <Container className={classes.root} maxWidth="lg">
       {pageCount > 1 && (
         <Grid
           className={classes.pagination}
@@ -67,7 +77,7 @@ export const GymnasticsMainPage: React.FC<GymnasticsMainPageProps> = ({
           <Pagination count={pageCount} page={page} onChange={selectPage} />
         </Grid>
       )}
-    </React.Fragment>
+    </Container>
   );
 };
 

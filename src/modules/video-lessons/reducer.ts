@@ -8,6 +8,7 @@ import {
   UPDATE_CURRENT_CHUNK,
   UPDATE_CURRENT_PAGE,
   UPDATE_DESCRIPTION,
+  UPDATE_FREE_LESSON_EMAIL,
   UPDATE_LESSONS,
   UPDATE_PRICE,
   UPDATE_SCREENSHOTS,
@@ -36,6 +37,10 @@ export interface VideoLessonForm {
   uploadDialogOpen: boolean;
 }
 
+export interface FreeLessonForm {
+  email: string;
+}
+
 export const ITEMS_ON_PAGE = 5;
 
 export interface VideoLessonsState {
@@ -45,6 +50,7 @@ export interface VideoLessonsState {
   chunks: VideoLesson[][];
   currentChunk: VideoLesson[];
   form: VideoLessonForm;
+  freeLessonForm: FreeLessonForm;
 }
 
 export const initialState: VideoLessonsState = {
@@ -60,6 +66,9 @@ export const initialState: VideoLessonsState = {
     screenshots: [],
     price: '',
     uploadDialogOpen: false,
+  },
+  freeLessonForm: {
+    email: '',
   },
 };
 
@@ -140,6 +149,11 @@ export const videoLessonsReducer = (
       return {
         ...state,
         form: { ...state.form, uploadDialogOpen: action.payload },
+      };
+    case UPDATE_FREE_LESSON_EMAIL:
+      return {
+        ...state,
+        freeLessonForm: { ...state.freeLessonForm, email: action.payload },
       };
     default:
       return state;

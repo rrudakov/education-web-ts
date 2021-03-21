@@ -1,4 +1,10 @@
-import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import {
+  Container,
+  createStyles,
+  Grid,
+  makeStyles,
+  Theme,
+} from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import React, { ChangeEvent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +21,10 @@ import { thunkFetchPresentations, thunkSelectPage } from './thunks';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
+    root: {
+      marginBottom: spacing(2),
+      marginTop: spacing(2),
+    },
     pagination: {
       marginBottom: spacing(2),
       marginTop: spacing(2),
@@ -49,7 +59,7 @@ export const PresentationsMainPage: React.FC<PresentationsMainPageProps> = ({
   }, [fetchPresentations]);
 
   return (
-    <React.Fragment>
+    <Container className={classes.root} maxWidth="lg">
       <PresentationModalComponent />
 
       {subtypeId === 2 && <OnlineGameComponent />}
@@ -90,6 +100,6 @@ export const PresentationsMainPage: React.FC<PresentationsMainPageProps> = ({
           />
         </Grid>
       )}
-    </React.Fragment>
+    </Container>
   );
 };

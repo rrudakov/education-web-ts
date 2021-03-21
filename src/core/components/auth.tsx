@@ -52,40 +52,49 @@ export const SignInDialog: React.FC = () => {
       aria-labelledby="signin-dialog-title"
     >
       <DialogTitle id="signin-dialog-title">Вход</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          Заполните форму и нажмите Войти чтобы залогиниться.
-        </DialogContentText>
-        <TextField
-          autoFocus
-          id="username"
-          fullWidth
-          label="Логин"
-          type="text"
-          value={username}
-          onChange={updateUsername}
-          variant="outlined"
-          margin="normal"
-        />
-        <TextField
-          id="password"
-          fullWidth={true}
-          label="Пароль"
-          type="password"
-          value={password}
-          onChange={updatePassword}
-          variant="outlined"
-          margin="normal"
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button variant="contained" color="primary" onClick={closeAuth}>
-          Отмена
-        </Button>
-        <Button variant="contained" color="primary" onClick={sendSignInRequest}>
-          Войти
-        </Button>
-      </DialogActions>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          sendSignInRequest();
+        }}
+        noValidate
+      >
+        <DialogContent>
+          <DialogContentText>
+            Заполните форму и нажмите Войти чтобы залогиниться.
+          </DialogContentText>
+
+          <TextField
+            autoFocus
+            id="username"
+            fullWidth
+            label="Логин"
+            type="text"
+            value={username}
+            onChange={updateUsername}
+            variant="outlined"
+            margin="normal"
+          />
+          <TextField
+            id="password"
+            fullWidth={true}
+            label="Пароль"
+            type="password"
+            value={password}
+            onChange={updatePassword}
+            variant="outlined"
+            margin="normal"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button variant="contained" color="primary" onClick={closeAuth}>
+            Отмена
+          </Button>
+          <Button variant="contained" color="primary" type="submit">
+            Войти
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 };

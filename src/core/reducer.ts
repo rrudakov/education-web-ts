@@ -85,7 +85,7 @@ const initialState: SystemState = {
     //     { name: 'Сказочные встречи', url: '/events' },
     //   ],
     // },
-    { name: 'Прокат детских платьев', url: '/dresses' },
+    // { name: 'Прокат детских платьев', url: '/dresses' },
     { name: 'Контакты', url: '/contacts' },
   ],
   menuDrawerOpen: false,

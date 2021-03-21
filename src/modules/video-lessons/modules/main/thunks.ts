@@ -91,3 +91,26 @@ export const thunkDeleteVideoLessonById = (
       });
   }
 };
+
+export const thunkRequestFreeLesson = (): ThunkAction<
+  void,
+  AppStoreState,
+  null,
+  SystemActionTypes | VideoLessonsActionType
+> => (dispatch, getState) => {
+  const {
+    videoLessons: { freeLessonForm },
+  } = getState();
+  dispatch(fetching());
+  request
+    .post(`${BASE_URL}/lessons/free-lesson`)
+    .send(freeLessonForm)
+    .then((_) => {
+      dispatch(stopFetching());
+      dispatch(updateSuccessMessage('Спасибо! Запрос успешно отправлен.'));
+    })
+    .catch((err) => {
+      dispatch(stopFetching());
+      dispatch(updateErrorMessage((err as ErrorResponse).message));
+    });
+};

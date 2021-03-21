@@ -1,4 +1,10 @@
-import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import {
+  Container,
+  createStyles,
+  Grid,
+  makeStyles,
+  Theme,
+} from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import React, { ChangeEvent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +14,7 @@ import {
   getPagesCount,
 } from '../../selectors';
 import { DemoVideoComponent } from './components/demo-video-component';
+import { FreeLessonHeroComponent } from './components/free-lesson-hero-component';
 import { VideoLessonComponent } from './components/video-lesson-component';
 import { thunkFetchVideoLessons, thunkSelectPage } from './thunks';
 
@@ -42,38 +49,44 @@ export const VideoLessonsMainPage: React.FC = () => {
 
   return (
     <React.Fragment>
-      <DemoVideoComponent />
-      {pageCount > 1 && (
-        <Grid
-          className={classes.pagination}
-          container
-          direction="row"
-          justify="center"
-        >
-          <Pagination
-            count={pageCount}
-            page={page}
-            onChange={handlePageSelect}
+      <FreeLessonHeroComponent />
+      <Container maxWidth="lg">
+        <DemoVideoComponent />
+        {pageCount > 1 && (
+          <Grid
+            className={classes.pagination}
+            container
+            direction="row"
+            justify="center"
+          >
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={handlePageSelect}
+            />
+          </Grid>
+        )}
+        {videoLessons.map((videoLesson) => (
+          <VideoLessonComponent
+            key={videoLesson.id}
+            videoLesson={videoLesson}
           />
-        </Grid>
-      )}
-      {videoLessons.map((videoLesson) => (
-        <VideoLessonComponent key={videoLesson.id} videoLesson={videoLesson} />
-      ))}
-      {pageCount > 1 && (
-        <Grid
-          className={classes.pagination}
-          container
-          direction="row"
-          justify="center"
-        >
-          <Pagination
-            count={pageCount}
-            page={page}
-            onChange={handlePageSelect}
-          />
-        </Grid>
-      )}
+        ))}
+        {pageCount > 1 && (
+          <Grid
+            className={classes.pagination}
+            container
+            direction="row"
+            justify="center"
+          >
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={handlePageSelect}
+            />
+          </Grid>
+        )}
+      </Container>
     </React.Fragment>
   );
 };

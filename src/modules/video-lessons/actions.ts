@@ -13,6 +13,7 @@ import {
   UpdateCurrentChunkAction,
   UpdateCurrentPageAction,
   UpdateDescriptionAction,
+  UpdateFreeLessonEmailAction,
   UpdateLessonsAction,
   UpdatePriceAction,
   UpdateScreenshotsAction,
@@ -21,6 +22,7 @@ import {
   UPDATE_CURRENT_CHUNK,
   UPDATE_CURRENT_PAGE,
   UPDATE_DESCRIPTION,
+  UPDATE_FREE_LESSON_EMAIL,
   UPDATE_LESSONS,
   UPDATE_PRICE,
   UPDATE_SCREENSHOTS,
@@ -110,4 +112,11 @@ export const clearFormActionCreator = (): ClearFormAction => ({
 export const updatePriceActionCreator = (price: string): UpdatePriceAction => ({
   type: UPDATE_PRICE,
   payload: price,
+});
+
+export const updateFreeLessonEmailActionCreator = (
+  email: string
+): UpdateFreeLessonEmailAction => ({
+  type: UPDATE_FREE_LESSON_EMAIL,
+  payload: email,
 });
