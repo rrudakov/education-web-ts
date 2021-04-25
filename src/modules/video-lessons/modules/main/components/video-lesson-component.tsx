@@ -3,25 +3,20 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
   CardMedia,
   createStyles,
   Grow,
-  IconButton,
   makeStyles,
-  Menu,
-  MenuItem,
   Theme,
   Typography,
 } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
+import { CardHeaderWithMenuComponent } from '../../../../../core/components/card-header-with-menu';
 import { WHATSAPP_LINK } from '../../../../../core/constants';
-import { getTransitioning, getUser } from '../../../../../core/selector';
-import { isAdmin, isModerator } from '../../../../../core/utils/user';
+import { getTransitioning } from '../../../../../core/selector';
 import { VideoLesson } from '../../../reducer';
 import { thunkDeleteVideoLessonById } from '../thunks';
 
@@ -41,63 +36,24 @@ export const VideoLessonComponent: React.FC<VideoLessonComponentProps> = ({
   videoLesson,
 }: VideoLessonComponentProps) => {
   const classes = useStyles();
-  const user = useSelector(getUser);
   const { url } = useRouteMatch();
   const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
   const transitioning = useSelector(getTransitioning);
 
-  const openMenu = (e: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(e.currentTarget);
-  };
-
-  const closeMenu = () => {
-    setAnchorEl(null);
-  };
-
   const deleteVideoLesson = useCallback(
-    (lessonId: number) => {
-      dispatch(thunkDeleteVideoLessonById(lessonId));
-      closeMenu();
-    },
-    [dispatch]
+    () => dispatch(thunkDeleteVideoLessonById(videoLesson.id)),
+    [dispatch, videoLesson.id]
   );
 
   return (
     <Grow in={!transitioning} timeout="auto">
       <Card className={classes.root}>
-        <CardHeader
+        <CardHeaderWithMenuComponent
           title={videoLesson.title}
-          subheader={videoLesson.subtitle}
-          action={
-            user !== undefined &&
-            (isAdmin(user) || isModerator(user)) && (
-              <IconButton
-                aria-label="settings"
-                aria-controls="video-lesson-menu"
-                aria-haspopup={true}
-                onClick={openMenu}
-              >
-                <MoreVertIcon />
-              </IconButton>
-            )
-          }
+          subtitle={videoLesson.subtitle}
+          editPath={`${url}/${videoLesson.id}`}
+          deleteFunc={deleteVideoLesson}
         />
-        <Menu
-          id="video-lesson-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={open}
-          onClose={closeMenu}
-        >
-          <MenuItem component={Link} to={`${url}/${videoLesson.id}`}>
-            Редактировать
-          </MenuItem>
-          <MenuItem onClick={() => deleteVideoLesson(videoLesson.id)}>
-            Удалить
-          </MenuItem>
-        </Menu>
         <Carousel
           showStatus={false}
           showThumbs={false}
@@ -140,17 +96,6 @@ export const VideoLessonComponent: React.FC<VideoLessonComponentProps> = ({
           >
             {`Купить € ${videoLesson.price}`}
           </Button>
-          {/* <Button
-              variant="contained"
-              color="primary"
-              startIcon={<WhatsAppIcon />}
-              component="a"
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener"
-              >
-              WhatsApp
-              </Button> */}
         </CardActions>
       </Card>
     </Grow>

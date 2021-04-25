@@ -1,13 +1,7 @@
-import {
-  Container,
-  createStyles,
-  Grid,
-  makeStyles,
-  Theme,
-} from '@material-ui/core';
-import { Pagination } from '@material-ui/lab';
+import { Container } from '@material-ui/core';
 import React, { ChangeEvent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { PaginationComponent } from '../../../../core/components/pagination';
 import {
   getCurrentChunk,
   getCurrentPage,
@@ -18,17 +12,7 @@ import { FreeLessonHeroComponent } from './components/free-lesson-hero-component
 import { VideoLessonComponent } from './components/video-lesson-component';
 import { thunkFetchVideoLessons, thunkSelectPage } from './thunks';
 
-const useStyles = makeStyles(({ spacing }: Theme) =>
-  createStyles({
-    pagination: {
-      marginBottom: spacing(2),
-      marginTop: spacing(2),
-    },
-  })
-);
-
 export const VideoLessonsMainPage: React.FC = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const fetchVideoLessons = useCallback(
     () => dispatch(thunkFetchVideoLessons()),
@@ -53,19 +37,13 @@ export const VideoLessonsMainPage: React.FC = () => {
       <Container maxWidth="lg">
         <DemoVideoComponent />
         {pageCount > 1 && (
-          <Grid
-            className={classes.pagination}
-            container
-            direction="row"
-            justify="center"
-          >
-            <Pagination
-              count={pageCount}
-              page={page}
-              onChange={handlePageSelect}
-            />
-          </Grid>
+          <PaginationComponent
+            pageCount={pageCount}
+            page={page}
+            handleChange={handlePageSelect}
+          />
         )}
+
         {videoLessons.map((videoLesson) => (
           <VideoLessonComponent
             key={videoLesson.id}
@@ -73,18 +51,11 @@ export const VideoLessonsMainPage: React.FC = () => {
           />
         ))}
         {pageCount > 1 && (
-          <Grid
-            className={classes.pagination}
-            container
-            direction="row"
-            justify="center"
-          >
-            <Pagination
-              count={pageCount}
-              page={page}
-              onChange={handlePageSelect}
-            />
-          </Grid>
+          <PaginationComponent
+            pageCount={pageCount}
+            page={page}
+            handleChange={handlePageSelect}
+          />
         )}
       </Container>
     </React.Fragment>

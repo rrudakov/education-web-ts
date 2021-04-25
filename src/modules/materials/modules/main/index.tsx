@@ -8,25 +8,16 @@ import {
   getCurrentPage,
   getPagesCount,
 } from '../../selectors';
-import { OnlineGameComponent } from './components/online-game-component';
-import { PresentationComponent } from './components/presentation-component';
-import { PresentationModalComponent } from './components/presentation-modal-component';
-import { PresentationsFilterComponent } from './components/presentations-filter-component';
-import { thunkFetchPresentations, thunkSelectPage } from './thunks';
+import { DownloadMaterialComponent } from './components/download-material-component';
+import { thunkFetchDownloadMaterials, thunkSelectPage } from './thunks';
 
-interface PresentationsMainPageProps {
-  subtypeId: number;
-}
-
-export const PresentationsMainPage: React.FC<PresentationsMainPageProps> = ({
-  subtypeId,
-}) => {
+export const DownloadMatirialsMainPage: React.FC = () => {
   const dispatch = useDispatch();
-  const fetchPresentations = useCallback(
-    () => dispatch(thunkFetchPresentations(subtypeId)),
-    [dispatch, subtypeId]
+  const fetchDownloadMaterials = useCallback(
+    () => dispatch(thunkFetchDownloadMaterials()),
+    [dispatch]
   );
-  const presentations = useSelector(getCurrentChunk);
+  const downloadMaterials = useSelector(getCurrentChunk);
   const pageCount = useSelector(getPagesCount);
   const page = useSelector(getCurrentPage);
   const handlePageSelect = useCallback(
@@ -36,17 +27,11 @@ export const PresentationsMainPage: React.FC<PresentationsMainPageProps> = ({
   );
 
   useEffect(() => {
-    fetchPresentations();
-  }, [fetchPresentations]);
+    fetchDownloadMaterials();
+  }, [fetchDownloadMaterials]);
 
   return (
     <Content>
-      <PresentationModalComponent />
-
-      {subtypeId === 2 && <OnlineGameComponent />}
-
-      <PresentationsFilterComponent />
-
       {pageCount > 1 && (
         <PaginationComponent
           pageCount={pageCount}
@@ -54,10 +39,9 @@ export const PresentationsMainPage: React.FC<PresentationsMainPageProps> = ({
           handleChange={handlePageSelect}
         />
       )}
-
       <Grid container direction="row" spacing={3}>
-        {presentations.map((presentation) => (
-          <PresentationComponent key={presentation.id} {...presentation} />
+        {downloadMaterials.map((material, i) => (
+          <DownloadMaterialComponent key={i} downloadMaterial={material} />
         ))}
       </Grid>
       {pageCount > 1 && (

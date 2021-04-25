@@ -78,6 +78,10 @@ const initialState: SystemState = {
         PRESENTATIONS_SUBTYPES.map((p) => ({ name: p.name, url: p.url }))
       ),
     },
+    {
+      name: 'Материалы для скачивания',
+      url: '/materials',
+    },
     // {
     //   name: 'Мероприятия',
     //   subitems: [

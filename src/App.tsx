@@ -18,10 +18,12 @@ import { thunkCheckLogin } from './core/thunks';
 import { ContactsPage } from './modules/contacts';
 import { GymnasticsPage } from './modules/gymnastics';
 import { Home } from './modules/home';
+import { DownloadMaterialsPage } from './modules/materials';
 import { OnlineOfflineLessonsPage } from './modules/online-offline-lessons';
 import { PresentationsPage } from './modules/presentations';
 import { VideoBonusPage } from './modules/video-bonus';
 import { VideoLessonsPage } from './modules/video-lessons';
+import { FreeVideoLessonComponent } from './modules/video-lessons/modules/free-lesson';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -79,6 +81,9 @@ export const App: React.FC = () => {
               <Route path="/dresses">
               <DressesPage />
               </Route> */}
+          <Route path="/materials">
+            <DownloadMaterialsPage />
+          </Route>
           <Route path="/contacts" exact>
             <ContactsPage />
           </Route>
@@ -87,6 +92,9 @@ export const App: React.FC = () => {
           </Route>
           <Route path="/gymnastics">
             <GymnasticsPage />
+          </Route>
+          <Route path="/free-video-lesson" exact>
+            <FreeVideoLessonComponent />
           </Route>
         </Switch>
       </main>

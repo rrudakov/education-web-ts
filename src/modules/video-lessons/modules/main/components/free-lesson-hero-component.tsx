@@ -1,23 +1,27 @@
 import {
   Button,
   Card,
+  Container,
   createStyles,
+  FormGroup,
   Grid,
   makeStyles,
   TextField,
   Theme,
-  Typography,
 } from '@material-ui/core';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateFreeLessonEmailActionCreator } from '../../../actions';
+import Banner from '../../../img/free-banner.png';
 import { getFreeLessonEmail } from '../../../selectors';
 import { thunkRequestFreeLesson } from '../thunks';
 
 const useStyles = makeStyles(({ spacing, palette }: Theme) =>
   createStyles({
     root: {
-      backgroundColor: palette.grey[200],
+      backgroundImage: `url(${Banner})`,
+      backgroundRepeat: 'repeat',
+      backgroundSize: '20%',
       padding: spacing(8),
       marginBottom: spacing(2),
     },
@@ -28,7 +32,7 @@ const useStyles = makeStyles(({ spacing, palette }: Theme) =>
       backgroundColor: palette.grey[50],
     },
     button: {
-      marginLeft: spacing(2),
+      marginTop: spacing(2),
     },
   })
 );
@@ -49,39 +53,40 @@ export const FreeLessonHeroComponent: React.FC = () => {
 
   return (
     <Card className={classes.root} square elevation={0}>
-      <Grid direction="row" alignItems="center">
-        <Typography variant="h2">Бесплатный видео-урок</Typography>
-        <Typography variant="body1" color="textSecondary">
-          Получите уже сегодня!
-        </Typography>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            requestFreeLesson();
-          }}
-          className={classes.form}
-          noValidate
-        >
-          <TextField
-            className={classes.email}
-            id="email"
-            label="Email"
-            variant="outlined"
-            size="small"
-            value={email}
-            onChange={updateEmail}
-          />
-          <Button
-            className={classes.button}
-            type="submit"
-            variant="contained"
-            color="primary"
-            size="medium"
-          >
-            Получить бесплатный видео-урок
-          </Button>
-        </form>
-      </Grid>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestFreeLesson();
+        }}
+        className={classes.form}
+        noValidate
+      >
+        <Container maxWidth="sm">
+          <FormGroup row>
+            <TextField
+              className={classes.email}
+              id="email"
+              label="Email"
+              variant="outlined"
+              fullWidth
+              value={email}
+              onChange={updateEmail}
+            />
+            <Grid container direction="row">
+              <Button
+                className={classes.button}
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                size="large"
+              >
+                Получить бесплатный видео-урок
+              </Button>
+            </Grid>
+          </FormGroup>
+        </Container>
+      </form>
     </Card>
   );
 };

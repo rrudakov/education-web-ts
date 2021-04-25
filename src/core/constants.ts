@@ -1,9 +1,10 @@
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
+// export const BASE_URL = 'http://localhost:3001/api';
 export const EMAIL_LINK = 'mailto:singerofnight@gmail.com';
 export const WHATSAPP_LINK = 'https://wa.me/31640718680';
 export const TELEGRAM_LINK = 'https://t.me/alionarudakova';
 export const INSTAGRAM_LINK =
-  'https://www.instagram.com/alionarudakova?r=nametag';
+  'https://www.instagram.com/alenkinaskazzka';
 
 export const GYMNASTICS_SUBTYPES = [
   { name: 'Пальчиковая гимнастика', url: '/gymnastics/fingers', subtypeId: 1 },

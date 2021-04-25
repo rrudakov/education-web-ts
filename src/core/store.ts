@@ -14,6 +14,10 @@ import {
 } from '../modules/gymnastics/reducer';
 import { homeReducer, HomeState } from '../modules/home/reducer';
 import {
+  DownloadMaterialsState,
+  downloadMaterlalsReducer,
+} from '../modules/materials/reducer';
+import {
   presentationsReducer,
   PresentationsState,
 } from '../modules/presentations/reducer';
@@ -30,6 +34,7 @@ export interface AppStoreState {
   dresses: DressesState;
   gymnastics: GymnasticsState;
   presentations: PresentationsState;
+  downloadMaterials: DownloadMaterialsState;
 }
 
 const rootReducer = combineReducers({
@@ -39,6 +44,7 @@ const rootReducer = combineReducers({
   dresses: dressesReducer,
   gymnastics: gymnasticsReducer,
   presentations: presentationsReducer,
+  downloadMaterials: downloadMaterlalsReducer,
 });
 
 export const configureStore = (): Store<

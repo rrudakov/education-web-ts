@@ -15,26 +15,26 @@ import { AppStoreState } from '../../../../core/store';
 import { SystemActionTypes } from '../../../../core/types';
 import { getToken } from '../../../../core/utils/storage';
 import {
-  deleteLessonActionCreator,
+  deleteDownloadMaterialActionCreator,
   updateCurrentChunkActionCreator,
   updateCurrentPageActionCreator,
-  updateLessonsActionCreator,
+  updateDownloadMaterialsActionCreator,
 } from '../../actions';
-import { VideoLessonsActionType } from '../../types';
+import { DownloadMaterialsActionType } from '../../types';
 
-export const thunkFetchVideoLessons = (): ThunkAction<
+export const thunkFetchDownloadMaterials = (): ThunkAction<
   void,
   AppStoreState,
   null,
-  SystemActionTypes | VideoLessonsActionType
+  SystemActionTypes | DownloadMaterialsActionType
 > => (dispatch) => {
   dispatch(fetching());
   request
-    .get(`${BASE_URL}/lessons`)
+    .get(`${BASE_URL}/materials`)
     .query({ limit: 1000 })
     .then((response) => {
       dispatch(stopFetching());
-      dispatch(updateLessonsActionCreator(response.body));
+      dispatch(updateDownloadMaterialsActionCreator(response.body));
     })
     .catch((err) => {
       dispatch(stopFetching());
@@ -48,27 +48,27 @@ export const thunkSelectPage = (
   void,
   AppStoreState,
   null,
-  SystemActionTypes | VideoLessonsActionType
+  SystemActionTypes | DownloadMaterialsActionType
 > => (dispatch, getState) => {
-  const { videoLessons } = getState();
+  const { downloadMaterials } = getState();
   dispatch(startTransitioning());
   dispatch(updateCurrentChunkActionCreator([]));
   dispatch(updateCurrentPageActionCreator(page));
   setTimeout(() => {
     dispatch(
-      updateCurrentChunkActionCreator(videoLessons.chunks[page - 1] || [])
+      updateCurrentChunkActionCreator(downloadMaterials.chunks[page - 1] || [])
     );
     dispatch(stopTransitioning());
   }, 500);
 };
 
-export const thunkDeleteVideoLessonById = (
-  lessonId: number
+export const thunkDeleteDownloadMaterialById = (
+  materialId: number
 ): ThunkAction<
   void,
   AppStoreState,
   null,
-  SystemActionTypes | VideoLessonsActionType
+  SystemActionTypes | DownloadMaterialsActionType
 > => (dispatch) => {
   const authToken = getToken();
 
@@ -78,39 +78,16 @@ export const thunkDeleteVideoLessonById = (
   } else {
     dispatch(fetching());
     request
-      .delete(`${BASE_URL}/lessons/${lessonId}`)
+      .delete(`${BASE_URL}/materials/${materialId}`)
       .set('Authorization', `Token ${authToken}`)
       .then((_) => {
         dispatch(stopFetching());
-        dispatch(deleteLessonActionCreator(lessonId));
-        dispatch(updateSuccessMessage('Video lesson was deleted successfully'));
+        dispatch(deleteDownloadMaterialActionCreator(materialId));
+        dispatch(updateSuccessMessage('Material was deleted successfully'));
       })
       .catch((err) => {
         dispatch(stopFetching());
         dispatch(updateErrorMessage((err as ErrorResponse).message));
       });
   }
-};
-
-export const thunkRequestFreeLesson = (): ThunkAction<
-  void,
-  AppStoreState,
-  null,
-  SystemActionTypes | VideoLessonsActionType
-> => (dispatch, getState) => {
-  const {
-    videoLessons: { freeLessonForm },
-  } = getState();
-  dispatch(fetching());
-  request
-    .post(`${BASE_URL}/free-lesson`)
-    .send(freeLessonForm)
-    .then((_) => {
-      dispatch(stopFetching());
-      dispatch(updateSuccessMessage('Спасибо! Запрос успешно отправлен.'));
-    })
-    .catch((err) => {
-      dispatch(stopFetching());
-      dispatch(updateErrorMessage((err as ErrorResponse).message));
-    });
 };
