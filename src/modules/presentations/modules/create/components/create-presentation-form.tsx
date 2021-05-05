@@ -12,6 +12,7 @@ import { DescriptionInputComponent } from '../../../components/description-input
 import { IsPublicCheckboxComponent } from '../../../components/is-public-checkbox-component';
 import { OpenUploadManualDialogButtonComponent } from '../../../components/open-upload-manual-dialog-button-component';
 import { OpenUploadPreviewDialogButtonComponent } from '../../../components/open-upload-preview-dialog-button-component';
+import { SubtypeIdSelectComponent } from '../../../components/subtype-select-component';
 import { TitleInputComponent } from '../../../components/title-input';
 import { UrlInputComponent } from '../../../components/url-input';
 import { CreateButton } from './create-button';
@@ -32,6 +33,7 @@ export const CreatePresentationForm: React.FC = () => {
   return (
     <React.Fragment>
       <FormGroup row>
+        <SubtypeIdSelectComponent />
         <TitleInputComponent />
         <UrlInputComponent />
         <DescriptionInputComponent />
