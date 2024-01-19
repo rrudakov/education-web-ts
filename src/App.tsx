@@ -3,8 +3,8 @@ import {
   CircularProgress,
   createStyles,
   makeStyles,
-  Theme,
 } from '@material-ui/core';
+import type { Theme } from '@material-ui/core';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(2),
     },
-  })
+  }),
 );
 
 export const App: React.FC = () => {

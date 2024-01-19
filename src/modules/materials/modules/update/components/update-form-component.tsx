@@ -28,7 +28,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 
 export const UpdateDownloadMaterialFormComponent: React.FC = () => {
   const classes = useStyles();
-  const { materialId } = useParams();
+  const { materialId } = useParams<{ materialId: string }>();
 
   return (
     <FormGroup row>
@@ -42,7 +42,7 @@ export const UpdateDownloadMaterialFormComponent: React.FC = () => {
         <CloseFormButton className={classes.button} />
         <UpdateButtonComponent
           className={classes.button}
-          materialId={materialId}
+          materialId={Number(materialId)}
         />
       </Grid>
     </FormGroup>

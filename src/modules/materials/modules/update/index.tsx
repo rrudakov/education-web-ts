@@ -8,7 +8,7 @@ import { UpdateDownloadMaterialFormComponent } from './components/update-form-co
 import { thunkGetDownloadMaterial } from './thunks';
 
 export const UpdateDownloadMaterialPage: React.FC = () => {
-  const { materialId } = useParams();
+  const { materialId } = useParams<{ materialId: string }>();
   const dispatch = useDispatch();
   const fetchMaterial = useCallback(
     (id: number) => dispatch(thunkGetDownloadMaterial(id)),
@@ -16,7 +16,7 @@ export const UpdateDownloadMaterialPage: React.FC = () => {
   );
 
   useEffect(() => {
-    fetchMaterial(materialId);
+    fetchMaterial(Number(materialId));
   }, [fetchMaterial, materialId]);
 
   return (

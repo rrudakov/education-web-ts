@@ -23,7 +23,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 
 export const UpdateGymnasticPage: React.FC = () => {
   const classes = useStyles();
-  const { gymnasticId } = useParams();
+  const { gymnasticId } = useParams<{ gymnasticId: string }>();
   const dispatch = useDispatch();
   const fetchGymnastic = useCallback(
     (id: number) => dispatch(thunkGetGymnastic(id)),
@@ -31,7 +31,7 @@ export const UpdateGymnasticPage: React.FC = () => {
   );
 
   useEffect(() => {
-    fetchGymnastic(gymnasticId);
+    fetchGymnastic(Number(gymnasticId));
   }, [fetchGymnastic, gymnasticId]);
 
   return (

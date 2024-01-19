@@ -7,14 +7,14 @@ import { UpdateDressForm } from './components/update-dress-form';
 import { thunkGetDress } from './thunks';
 
 export const UpdateDressPage: React.FC = () => {
-  const { dressId } = useParams();
+  const { dressId } = useParams<{ dressId: string }>();
   const dispatch = useDispatch();
   const fetchDress = useCallback((id: number) => dispatch(thunkGetDress(id)), [
     dispatch,
   ]);
 
   useEffect(() => {
-    fetchDress(dressId);
+    fetchDress(Number(dressId));
   }, [fetchDress, dressId]);
 
   return (

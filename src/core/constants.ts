@@ -1,5 +1,5 @@
-export const BASE_URL = process.env.REACT_APP_BASE_URL;
-// export const BASE_URL = 'http://localhost:3001/api';
+// export const BASE_URL = process.env.REACT_APP_BASE_URL;
+export const BASE_URL = 'http://alenkinaskazka.nl/api';
 export const EMAIL_LINK = 'mailto:singerofnight@gmail.com';
 export const WHATSAPP_LINK = 'https://wa.me/31640718680';
 export const TELEGRAM_LINK = 'https://t.me/alionarudakova';
@@ -29,4 +29,9 @@ export const PRESENTATIONS_SUBTYPES = [
     url: '/presentations/games',
     subtypeId: 2,
   },
+  {
+    name: 'Буквы',
+    url: '/presentations/letters',
+    subtypeId: 3,
+  }
 ];

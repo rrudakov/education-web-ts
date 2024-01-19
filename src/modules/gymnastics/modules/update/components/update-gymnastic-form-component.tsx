@@ -21,7 +21,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 
 export const UpdateGymnasticFormComponent: React.FC = () => {
   const classes = useStyles();
-  const { gymnasticId } = useParams();
+  const { gymnasticId } = useParams<{ gymnasticId: string }>();
 
   return (
     <React.Fragment>
@@ -34,7 +34,7 @@ export const UpdateGymnasticFormComponent: React.FC = () => {
         <CloseFormButtonComponent className={classes.button} />
         <UpdateGymnasticButtonComponent
           className={classes.button}
-          gymnasticId={gymnasticId}
+          gymnasticId={Number(gymnasticId)}
         />
       </FormGroup>
     </React.Fragment>

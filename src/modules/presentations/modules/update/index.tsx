@@ -9,7 +9,7 @@ import { UpdatePresentationFormComponent } from './components/update-presentatio
 import { thunkGetPresentation } from './thunks';
 
 export const UpdatePresentationPage: React.FC = () => {
-  const { presentationId } = useParams();
+  const { presentationId } = useParams<{ presentationId: string }>();
   const dispatch = useDispatch();
   const fetchPresentation = useCallback(
     (id: number) => dispatch(thunkGetPresentation(id)),
@@ -17,7 +17,7 @@ export const UpdatePresentationPage: React.FC = () => {
   );
 
   useEffect(() => {
-    fetchPresentation(presentationId);
+    fetchPresentation(Number(presentationId));
   }, [fetchPresentation, presentationId]);
 
   return (

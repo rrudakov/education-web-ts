@@ -28,7 +28,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 
 export const UpdateDressForm: React.FC = () => {
   const classes = useStyles();
-  const { dressId } = useParams();
+  const { dressId } = useParams<{ dressId: string }>();
 
   return (
     <React.Fragment>
@@ -39,7 +39,7 @@ export const UpdateDressForm: React.FC = () => {
         <PriceInputComponent />
         <OpenUploadPicturesDialogButton className={classes.button} />
         <CloseFormButton className={classes.button} />
-        <UpdateButton className={classes.button} dressId={dressId} />
+        <UpdateButton className={classes.button} dressId={Number(dressId)} />
       </FormGroup>
       <Typography variant="h4">Прикрепленные фото</Typography>
       <DressesSingleLinePictures />

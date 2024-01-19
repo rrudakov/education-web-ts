@@ -1,8 +1,8 @@
 import React from 'react';
-import NumberFormat from 'react-number-format';
+import {default as NumberFormat} from 'react-number-format';
 
 interface PriceNumberFormatProps {
-  inputRef: (instance: NumberFormat | null) => void;
+  inputRef: (instance: NumberFormat<any> | null) => void;
   onChange: (e: { target: { name: string; value: string } }) => void;
   name: string;
 }

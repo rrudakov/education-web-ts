@@ -2,7 +2,7 @@ import React from 'react';
 import NumberFormat from 'react-number-format';
 
 interface SizeNumberFormatProps {
-  inputRef: (instance: NumberFormat | null) => void;
+  inputRef: (instance: NumberFormat<any> | null) => void;
   onChange: (e: { target: { name: string; value: string } }) => void;
   name: string;
 }
@@ -26,7 +26,7 @@ export const SizeNumberFormatComponent: React.FC<SizeNumberFormatProps> = ({
         });
       }}
       isNumericString
-      decimalSeparator={false}
+      decimalSeparator={"."}
     />
   );
 };

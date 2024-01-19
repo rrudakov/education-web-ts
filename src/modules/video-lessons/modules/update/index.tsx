@@ -8,7 +8,7 @@ import { UpdateVideoLessonForm } from './components/update-video-lesson-form';
 import { thunkGetLesson } from './thunks';
 
 export const UpdateVideoLessonPage: React.FC = () => {
-  const { lessonId } = useParams();
+  const { lessonId } = useParams<{ lessonId: string }>();
   const dispatch = useDispatch();
   const fetchVideoLesson = useCallback(
     (id: number) => dispatch(thunkGetLesson(id)),
@@ -16,7 +16,7 @@ export const UpdateVideoLessonPage: React.FC = () => {
   );
 
   useEffect(() => {
-    fetchVideoLesson(lessonId);
+    fetchVideoLesson(Number(lessonId));
   }, [fetchVideoLesson, lessonId]);
 
   return (

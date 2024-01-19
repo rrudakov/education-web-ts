@@ -28,7 +28,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 
 export const UpdateVideoLessonForm: React.FC = () => {
   const classes = useStyles();
-  const { lessonId } = useParams();
+  const { lessonId } = useParams<{ lessonId: string }>();
 
   return (
     <React.Fragment>
@@ -39,7 +39,7 @@ export const UpdateVideoLessonForm: React.FC = () => {
         <PriceInputComponent />
         <OpenUploadScreenshotsDialogButton className={classes.button} />
         <CloseFormButton className={classes.button} />
-        <UpdateButton className={classes.button} lessonId={lessonId} />
+        <UpdateButton className={classes.button} lessonId={Number(lessonId)} />
       </FormGroup>
       <Typography variant="h4">Прикрепленные скриншоты</Typography>
       <VideoLessonsSingleLineScreenshots />

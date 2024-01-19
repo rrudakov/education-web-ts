@@ -1,6 +1,8 @@
-import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, Grid, makeStyles } from '@material-ui/core';
+import type { Theme } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
-import React, { ChangeEvent } from 'react';
+import React from 'react';
+import type { ChangeEvent } from 'react';
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -8,7 +10,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
       marginBottom: spacing(2),
       marginTop: spacing(2),
     },
-  })
+  }),
 );
 
 interface PaginationComponentProps {
@@ -25,7 +27,12 @@ export const PaginationComponent: React.FC<PaginationComponentProps> = ({
   const classes = useStyles();
 
   return (
-    <Grid className={classes.root} container direction="row" justify="center">
+    <Grid
+      className={classes.root}
+      container
+      direction="row"
+      justifyContent="center"
+    >
       <Pagination count={pageCount} page={page} onChange={handleChange} />
     </Grid>
   );

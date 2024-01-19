@@ -31,7 +31,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 
 export const UpdatePresentationFormComponent: React.FC = () => {
   const classes = useStyles();
-  const { presentationId } = useParams();
+  const { presentationId } = useParams<{ presentationId: string }>();
 
   return (
     <React.Fragment>
@@ -49,7 +49,7 @@ export const UpdatePresentationFormComponent: React.FC = () => {
           <CloseFormButton className={classes.button} />
           <UpdatePresentationButtonComponent
             className={classes.button}
-            presentationId={presentationId}
+            presentationId={Number(presentationId)}
           />
         </Grid>
       </FormGroup>
